@@ -4,7 +4,7 @@ server:
         uri-encoding: UTF-8
     port: 8080
     servlet:
-        context-path: /springboot7iio7
+        context-path: /springboot123456
 
 
 spring:
@@ -15,7 +15,7 @@ spring:
         password: 123456
 
 #        driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
-#        url: jdbc:sqlserver://127.0.0.1:1433;DatabaseName=springboot7iio7
+#        url: jdbc:sqlserver://127.0.0.1:1433;DatabaseName=springboot123456
 #        username: sa
 #        password: 123456
 

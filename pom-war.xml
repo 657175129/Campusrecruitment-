@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.jlwl</groupId>
 	<!-- 导入项目的名称 -->
-	<artifactId>springboot7iio7</artifactId>
+	<artifactId>springboot123456</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>springboot-schema</name>
 	<description>springboot学习框架(war包对应的pom，打war包，执行【mvn clean package -f pom-war.xml】)</description>
@@ -135,7 +135,7 @@
 
 	
 	<build>
-		<finalName>springboot7iio7</finalName>
+		<finalName>springboot123456</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

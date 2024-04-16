@@ -4,7 +4,7 @@
 	<div class="container" :style='{"minHeight":"100vh","alignItems":"center","background":"url(http://codegen.caihongy.cn/20221119/e47b609472f14bba85fbe4ea38b2ec99.jpg) no-repeat","display":"flex","width":"100%","backgroundSize":"cover","backgroundPosition":"center center","backgroundRepeat":"no-repeat","justifyContent":"center"}'>
 		<el-form class='rgs-form' v-if="pageFlag=='register'" :style='{"padding":"30px 40px 40px 40px","boxShadow":"0px 0px 0px #ccc,inset 0px 0px 0px 0px #e0f8e8","margin":"20px 0 0 40%","borderColor":"#1170d2 #08b344 #08b344 #1170d2","borderRadius":"10% 10%","background":"rgba(255,255,255,.8)","borderWidth":"4px","width":"auto","minWidth":"800px","borderStyle":"solid double solid double","height":"auto"}' ref="registerForm" :model="registerForm" :rules="rules">
 			<div v-if="true" :style='{"width":"100%","margin":"0 0 4px 0","fontSize":"20px","color":"#08b344","textAlign":"center","fontWeight":"bold"}'>USER / REGISTER</div>
-			<div v-if="true" :style='{"width":"100%","margin":"0 0 20px 0","fontSize":"20px","color":"#08b344","textAlign":"center","fontWeight":"bold"}'>校园招聘平台与岗位推荐系统的设计与实现注册</p></div>
+			<div v-if="true" :style='{"width":"100%","margin":"0 0 20px 0","fontSize":"20px","color":"#08b344","textAlign":"center","fontWeight":"bold"}'>校园招聘系统注册</p></div>
 			<el-form-item :style='{"width":"80%","padding":"0","margin":"0px auto 24px","height":"auto"}' v-if="tableName=='xuesheng'" prop="zhanghao">
 				<div v-if="false" :style='{"width":"64px","lineHeight":"44px","fontSize":"14px","color":"rgba(64, 158, 255, 1)"}'>账号：</div>
 				<el-input v-model="registerForm.zhanghao"  placeholder="请输入账号" />

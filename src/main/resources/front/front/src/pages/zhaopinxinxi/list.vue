@@ -8,7 +8,8 @@
 	</div>
 	
 	<div class="list-preview" :style='{"margin":"0px auto","flexWrap":"wrap","background":"none","display":"flex","width":"1200px","position":"relative","justifyContent":"space-between"}'>
-		
+
+<!--    调整1 -->
 		<div class="category-2" :style='{"top":"20px","left":"-110px","flexDirection":"column","display":"flex","width":"100px","position":"absolute","height":"auto"}'>
 			<div class="item" :class="swiperIndex == '-1' ? 'active' : ''" @click="getList(1, '全部')" :plain="isPlain">全部</div>
 			<div class="item" :class="swiperIndex == index ? 'active' : ''" v-for="(item, index) in fenlei" :key="index" @click="getList(1, item, 'btn' + index)" :ref="'btn' + index" plain>{{item}}</div>
@@ -16,8 +17,8 @@
 	
     <el-form :inline="true" :model="formSearch" class="list-form-pv" :style='{"padding":"10px","margin":"20px auto 0","borderColor":"#9cc0e4","alignItems":"center","display":"flex","borderRadius":"4px","flexWrap":"wrap","background":"#e6eff8","borderWidth":"1px","width":"1200px","borderStyle":"solid","height":"auto","order":"2"}'>
       <el-form-item :style='{"margin":"0 10px"}'>
-	    <div class="lable" v-if="true" :style='{"width":"auto","padding":"0 10px","lineHeight":"42px","display":"inline-block"}'>招聘名称</div>
-        <el-input v-model="formSearch.zhaopinmingcheng" placeholder="招聘名称" clearable></el-input>
+	    <div class="lable" v-if="true" :style='{"width":"auto","padding":"0 10px","lineHeight":"42px","display":"inline-block"}'>招聘企业</div>
+        <el-input v-model="formSearch.zhaopinmingcheng" placeholder="招聘企业" clearable></el-input>
       </el-form-item>
       <el-form-item :style='{"margin":"0 10px"}'>
 		<div class="lable" v-if="true" :style='{"width":"auto","padding":"0 10px","lineHeight":"42px","display":"inline-block"}'>职位名称</div>
@@ -41,16 +42,24 @@
 	  <el-button v-if="isAuth('zhaopinxinxi','新增')" :style='{"cursor":"pointer","border":"0px solid #db961f","padding":"0px 15px","boxShadow":"0px 0px 0px #f8a412","margin":"0px 10px 0 0","color":"#fff","outline":"none","borderRadius":"4px","background":"#08b344","width":"auto","fontSize":"14px","lineHeight":"40px","height":"40px"}' type="primary" @click="add('/index/zhaopinxinxiAdd')"><i v-if="true" :style='{"color":"#fff","margin":"0 10px 0 0","fontSize":"14px"}' class="el-icon-circle-plus-outline"></i>添加</el-button>
     </el-form>
 
+<!--    调整2 -->
+<!--    <div class="category-2" :style='{"top":"20px","left":"-110px","flexDirection":"column","display":"flex","width":"100px","position":"absolute","height":"auto"}'>-->
+<!--    <div class="category-2" :style='{"top":"105px","width":"100px","position":"absolute","height":"auto"}'>-->
+<!--      <div class="item" :class="swiperIndex == '-1' ? 'active' : ''" @click="getList(1, '全部')" :plain="isPlain">全部</div>-->
+<!--      <div class="item" :class="swiperIndex == index ? 'active' : ''" v-for="(item, index) in fenlei" :key="index" @click="getList(1, item, 'btn' + index)" :ref="'btn' + index" plain>{{item}}</div>-->
+<!--    </div>-->
+
 	<div class="list" :style='{"width":"100%","margin":"0","background":"none","order":"3"}'>
 		<!-- 样式一 -->
-		
+
+<!--  调整3 margin":"20px 改成70  -->
 		<!-- 样式二 -->
 		<div class="list2 index-pv1" :style='{"border":"1px solid #9ce3b5","padding":"20px","boxShadow":"0px 0px 0px #ddd,inset 0px 0px 600px 0px #e0f8e8","margin":"20px 0 0","borderRadius":"4px","flexWrap":"wrap","background":"#fff","display":"flex","width":"100%","justifyContent":"space-between","height":"auto"}'>
 			<div :style='{"border":"1px solid #ccc","padding":"8px","margin":"0 0 20px","borderRadius":"4px","flexWrap":"wrap","background":"#fff","display":"flex","width":"49%","fontSize":"0","position":"relative","justifyContent":"space-between","height":"auto"}' v-for="(item, index) in dataList" :key="index" @click="toDetail(item)" class="list-item animation-box">
 				<img :style='{"cursor":"pointer","padding":"16px","objectFit":"cover","borderRadius":"25%","display":"inline-block","width":"50%","height":"240px"}' v-if="item.zhaopintupian && item.zhaopintupian.substr(0,4)=='http'" :src="item.zhaopintupian" class="image" />
 				<img :style='{"cursor":"pointer","padding":"16px","objectFit":"cover","borderRadius":"25%","display":"inline-block","width":"50%","height":"240px"}' v-else :src="baseUrl + (item.zhaopintupian?item.zhaopintupian.split(',')[0]:'')" class="image" />
 				<div class="item-info" :style='{"width":"50%","padding":"20px 20px 0","overflow":"hidden","background":"rgba(255,255,255,1)","display":"inline-block","height":"240px"}'>
-					<div :style='{"borderColor":"#08b344","color":"#333","background":"none","borderWidth":"0 0 1px","lineHeight":"32px","fontSize":"14px","borderStyle":"solid"}' class="name ">招聘名称:{{item.zhaopinmingcheng}}</div>
+					<div :style='{"borderColor":"#08b344","color":"#333","background":"none","borderWidth":"0 0 1px","lineHeight":"32px","fontSize":"14px","borderStyle":"solid"}' class="name ">招聘企业:{{item.zhaopinmingcheng}}</div>
 					<div :style='{"borderColor":"#08b344","color":"#333","background":"none","borderWidth":"0 0 1px","lineHeight":"32px","fontSize":"14px","borderStyle":"solid"}' class="name ">{{item.zhiweimingcheng}}</div>
 					<div :style='{"borderColor":"#08b344","color":"#333","background":"none","borderWidth":"0 0 1px","lineHeight":"32px","fontSize":"14px","borderStyle":"solid"}' class="name ">{{item.xinchoudaiyu}}</div>
 					<div v-if="item.price" :style='{"padding":"10px","lineHeight":"24px","fontSize":"14px","color":"#c00"}' class="price"><span :style='{"fontSize":"12px"}'>￥</span>{{item.price}}</div>
@@ -265,6 +274,8 @@
 		font-size: 14px;
 		line-height: 36px;
 		text-align: center;
+    display: inline-block;
+    float: left;
 	}
 	
 	.category-2 .item:hover {

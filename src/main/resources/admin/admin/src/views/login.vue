@@ -3,7 +3,7 @@
     <div class="container" :style='{"minHeight":"100vh","alignItems":"center","background":"url(http://codegen.caihongy.cn/20220804/122aadd2e96d4d5aa6a265bbd560a18d.gif)","display":"flex","width":"100%","backgroundSize":"cover","backgroundPosition":"center center","backgroundRepeat":"no-repeat","justifyContent":"center"}'>
 
       <el-form :style='{"border":"3px solid rgba(64, 75, 95, 1)","padding":"100px 50px 200px","margin":"0","borderRadius":"350px","background":"rgba(255, 255, 255, 0.5000)","width":"450px","height":"800px"}'>
-        <div v-if="true" :style='{"margin":"0 auto 20px","color":"#000","textAlign":"center","width":"90%","lineHeight":"44px","fontSize":"24px","fontWeight":"600","height":"auto"}' class="title-container">校园招聘平台与岗位推荐系统的设计与实现登录</div>
+        <div v-if="true" :style='{"margin":"0 auto 20px","color":"#000","textAlign":"center","width":"90%","lineHeight":"44px","fontSize":"24px","fontWeight":"600","height":"auto"}' class="title-container">校园招聘系统登录</div>
         <div v-if="loginType==1" class="list-item" :style='{"width":"90%","margin":"0 auto 10px","alignItems":"center","flexWrap":"wrap","display":"flex"}'>
           <div v-if="false" class="lable" :style='{"width":"64px","lineHeight":"44px","fontSize":"14px","color":"rgba(64, 158, 255, 1)"}'>用户名</div>
           <input :style='{"border":"0px solid rgba(64, 158, 255, 1)","padding":"0 10px","boxShadow":"0px 4px 10px 0px rgba(0,0,0,0.3020)","color":"#333","outlineOffset":"4px","width":"100%","fontSize":"14px","height":"44px"}' placeholder="请输入用户名" name="username" type="text" v-model="rulesForm.username">
@@ -18,6 +18,7 @@
         <div :style='{"width":"100%","margin":"20px auto","alignItems":"center","flexWrap":"wrap","justifyContent":"flex-start","display":"flex"}'>
           <el-button v-if="loginType==1" :style='{"border":"0","cursor":"pointer","padding":"0 24px","margin":"7px 15px 7px","outline":"none","color":"#fff","borderRadius":"0","background":"linear-gradient(137deg, #879A6C 0%, #CEF32B 100%)","width":"90%","fontSize":"16px","fontWeight":"600","height":"50px"}' type="primary" @click="login()" class="loginInBt">登录</el-button>
           <el-button :style='{"border":"0px solid rgba(64, 158, 255, 1)","cursor":"pointer","padding":"0 15px","margin":"7px 15px 7px","outline":"none","color":"rgba(150, 150, 150, 1)","borderRadius":"0","background":"rgba(223, 223, 223, 1)","width":"40%","fontSize":"14px","fontWeight":"600","height":"50px"}' type="primary" @click="register('qiye')" class="register">注册企业</el-button>
+          <el-button :style='{"border":"0px solid rgba(64, 158, 255, 1)","cursor":"pointer","padding":"0 15px","margin":"7px 15px 7px","outline":"none","color":"rgba(150, 150, 150, 1)","borderRadius":"0","background":"rgba(223, 223, 223, 1)","width":"40%","fontSize":"14px","fontWeight":"600","height":"50px"}' type="primary" @click="register('xuesheng')" class="register">注册学生</el-button>
         </div>
       </el-form>
 

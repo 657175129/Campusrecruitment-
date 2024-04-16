@@ -142,14 +142,15 @@
 							<span style="margin-right:10px" v-if="scope.row.sfsh=='待审核'">待审核</span>
 						</template>
 					</el-table-column>
-					<el-table-column :resizable='true' :sortable='false' v-if="isAuth('toudixinxi','审核')" prop="sfsh" label="审核">
-						<template slot-scope="scope">
-							<el-button  type="text" size="small" @click="shDialog(scope.row)">审核</el-button>
-						</template>
-					</el-table-column>
+<!--					<el-table-column :resizable='true' :sortable='false' v-if="isAuth('toudixinxi','审核')" prop="sfsh" label="审核">-->
+<!--						<template slot-scope="scope">-->
+<!--							<el-button  type="text" size="small" @click="shDialog(scope.row)">审核</el-button>-->
+<!--						</template>-->
+<!--					</el-table-column>-->
 					<el-table-column width="300" label="操作">
 						<template slot-scope="scope">
 							<el-button :style='{"border":"2px solid","cursor":"pointer","padding":"0 24px","margin":"0 10px 5px 0","outline":"none","color":"rgba(135, 154, 108, 1)","borderRadius":"4px","background":"#fff","borderImage":"linear-gradient(180deg, rgba(135.00000715255737, 154.00000602006912, 108.00000116229057, 1), rgba(226.0000017285347, 226.0000017285347, 226.0000017285347, 0.3799999952316284)) 1 1","width":"auto","fontSize":"14px","height":"32px"}' v-if=" isAuth('toudixinxi','查看')" type="success" size="mini" @click="addOrUpdateHandler(scope.row.id,'info')">详情</el-button>
+							<el-button :style='{"border":"2px solid","cursor":"pointer","padding":"0 24px","margin":"0 10px 5px 0","outline":"none","color":"rgba(135, 154, 108, 1)","borderRadius":"4px","background":"#fff","borderImage":"linear-gradient(180deg, rgba(135.00000715255737, 154.00000602006912, 108.00000116229057, 1), rgba(226.0000017285347, 226.0000017285347, 226.0000017285347, 0.3799999952316284)) 1 1","width":"auto","fontSize":"14px","height":"32px"}' v-if=" isAuth('toudixinxi','审核')" type="success" size="mini" @click="shDialog(scope.row)">审核</el-button>
 							<el-button :style='{"border":"2px solid","cursor":"pointer","padding":"0 24px","margin":"0 10px 5px 0","outline":"none","color":"rgba(135, 154, 108, 1)","borderRadius":"4px","background":"#fff","borderImage":"linear-gradient(180deg, rgba(135.00000715255737, 154.00000602006912, 108.00000116229057, 1), rgba(226.0000017285347, 226.0000017285347, 226.0000017285347, 0.3799999952316284)) 1 1","width":"auto","fontSize":"14px","height":"32px"}' v-if="isAuth('toudixinxi','通知')" type="success" size="mini" @click="tongzhixinxiCrossAddOrUpdateHandler(scope.row,'cross','是','','')">通知</el-button>
 							<el-button :style='{"border":"2px solid","cursor":"pointer","padding":"0 24px","margin":"0 10px 5px 0","outline":"none","color":"rgba(135, 154, 108, 1)","borderRadius":"4px","background":"#fff","borderImage":"linear-gradient(180deg, rgba(135.00000715255737, 154.00000602006912, 108.00000116229057, 1), rgba(226.0000017285347, 226.0000017285347, 226.0000017285347, 0.3799999952316284)) 1 1","width":"auto","fontSize":"14px","height":"32px"}' v-if=" isAuth('toudixinxi','修改')" type="primary" size="mini" @click="addOrUpdateHandler(scope.row.id)">修改</el-button>
 

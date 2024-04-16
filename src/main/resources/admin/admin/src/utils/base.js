@@ -1,15 +1,15 @@
 const base = {
     get() {
         return {
-            url : "http://localhost:8080/springboot7iio7/",
-            name: "springboot7iio7",
+            url : "http://localhost:8080/springboot123456/",
+            name: "springboot123456",
             // 退出到首页链接
-            indexUrl: 'http://localhost:8080/springboot7iio7/front/dist/index.html'
+            indexUrl: 'http://localhost:8080/springboot123456/front/dist/index.html'
         };
     },
     getProjectName(){
         return {
-            projectName: "校园招聘平台与岗位推荐系统的设计与实现"
+            projectName: "校园招聘系统"
         } 
     }
 }
