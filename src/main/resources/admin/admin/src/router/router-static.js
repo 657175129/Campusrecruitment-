@@ -22,6 +22,7 @@ import center from '@/views/center'
     import systemintro from '@/views/modules/systemintro/list'
     import tongzhixinxi from '@/views/modules/tongzhixinxi/list'
     import qiuzhixinxi from '@/views/modules/qiuzhixinxi/list'
+    import luqutongzhi from '@/views/modules/luqutongzhi/list'
     import zaixianzixun from '@/views/modules/zaixianzixun/list'
     import config from '@/views/modules/config/list'
 
@@ -62,6 +63,11 @@ const routes = [{
 	path: '/zhaopinyiyuan',
         name: '招聘意愿',
         component: zhaopinyiyuan
+      }
+      ,
+    {path: '/luqutongzhi',
+        name: '录取通知',
+        component: luqutongzhi
       }
       ,{
 	path: '/xuesheng',

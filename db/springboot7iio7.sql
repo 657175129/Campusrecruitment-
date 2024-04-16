@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.31, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.32, for Win64 (x86_64)
 --
--- Host: localhost    Database: springboot7iio7
+-- Host: 127.0.0.1    Database: springboot7iio7
 -- ------------------------------------------------------
--- Server version	5.7.31
+-- Server version	5.7.32-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -14,16 +14,6 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
---
--- Current Database: `springboot7iio7`
---
-
-/*!40000 DROP DATABASE IF EXISTS `springboot7iio7`*/;
-
-CREATE DATABASE /*!32312 IF NOT EXISTS*/ `springboot7iio7` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
-
-USE `springboot7iio7`;
 
 --
 -- Table structure for table `aboutus`
@@ -110,6 +100,38 @@ LOCK TABLES `discusszhaopinxinxi` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `luqutongzhi`
+--
+
+DROP TABLE IF EXISTS `luqutongzhi`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `luqutongzhi` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `addtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `zhanghao` varchar(200) DEFAULT NULL COMMENT '账号',
+  `xingming` varchar(200) DEFAULT NULL COMMENT '姓名',
+  `shoujihaoma` varchar(200) DEFAULT NULL COMMENT '手机号码',
+  `yaoqingneirong` varchar(200) DEFAULT NULL COMMENT '录取内容',
+  `yaoqingriqi` date DEFAULT NULL COMMENT '录取日期',
+  `qiyezhanghao` varchar(200) DEFAULT NULL COMMENT '企业账号',
+  `qiyemingcheng` varchar(200) DEFAULT NULL COMMENT '企业名称',
+  `lianxishouji` varchar(200) DEFAULT NULL COMMENT '联系手机',
+  `shhf` longtext COMMENT '回复内容',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='录取通知';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `luqutongzhi`
+--
+
+LOCK TABLES `luqutongzhi` WRITE;
+/*!40000 ALTER TABLE `luqutongzhi` DISABLE KEYS */;
+/*!40000 ALTER TABLE `luqutongzhi` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `qiuzhixinxi`
 --
 
@@ -129,7 +151,7 @@ CREATE TABLE `qiuzhixinxi` (
   `biyexuexiao` varchar(200) DEFAULT NULL COMMENT '毕业学校',
   `gongzuojingli` longtext COMMENT '工作经历',
   `shanzhang` varchar(200) DEFAULT NULL COMMENT '擅长',
-    `qzzt` varchar(200) DEFAULT NULL COMMENT '求职状态',
+  `qzzt` varchar(200) DEFAULT NULL COMMENT '求职状态',
   `gzdd` varchar(200) DEFAULT NULL COMMENT '工作地点',
   `jianlifujian` longtext COMMENT '简历附件',
   `xunzhaozhiwei` varchar(200) NOT NULL COMMENT '寻找职位',
@@ -145,7 +167,6 @@ CREATE TABLE `qiuzhixinxi` (
 
 LOCK TABLES `qiuzhixinxi` WRITE;
 /*!40000 ALTER TABLE `qiuzhixinxi` DISABLE KEYS */;
-INSERT INTO `qiuzhixinxi` VALUES (51,'2023-04-08 05:46:03','账号1','姓名1','性别1','手机号码1','upload/qiuzhixinxi_touxiang1.jpg,upload/qiuzhixinxi_touxiang2.jpg,upload/qiuzhixinxi_touxiang3.jpg',1,'学历1','毕业学校1','工作经历1','擅长1','','寻找职位1','待遇薪酬1','2023-04-08'),(52,'2023-04-08 05:46:03','账号2','姓名2','性别2','手机号码2','upload/qiuzhixinxi_touxiang2.jpg,upload/qiuzhixinxi_touxiang3.jpg,upload/qiuzhixinxi_touxiang4.jpg',2,'学历2','毕业学校2','工作经历2','擅长2','','寻找职位2','待遇薪酬2','2023-04-08'),(53,'2023-04-08 05:46:03','账号3','姓名3','性别3','手机号码3','upload/qiuzhixinxi_touxiang3.jpg,upload/qiuzhixinxi_touxiang4.jpg,upload/qiuzhixinxi_touxiang5.jpg',3,'学历3','毕业学校3','工作经历3','擅长3','','寻找职位3','待遇薪酬3','2023-04-08'),(54,'2023-04-08 05:46:03','账号4','姓名4','性别4','手机号码4','upload/qiuzhixinxi_touxiang4.jpg,upload/qiuzhixinxi_touxiang5.jpg,upload/qiuzhixinxi_touxiang6.jpg',4,'学历4','毕业学校4','工作经历4','擅长4','','寻找职位4','待遇薪酬4','2023-04-08'),(55,'2023-04-08 05:46:03','账号5','姓名5','性别5','手机号码5','upload/qiuzhixinxi_touxiang5.jpg,upload/qiuzhixinxi_touxiang6.jpg,upload/qiuzhixinxi_touxiang7.jpg',5,'学历5','毕业学校5','工作经历5','擅长5','','寻找职位5','待遇薪酬5','2023-04-08'),(56,'2023-04-08 05:46:03','账号6','姓名6','性别6','手机号码6','upload/qiuzhixinxi_touxiang6.jpg,upload/qiuzhixinxi_touxiang7.jpg,upload/qiuzhixinxi_touxiang8.jpg',6,'学历6','毕业学校6','工作经历6','擅长6','','寻找职位6','待遇薪酬6','2023-04-08'),(57,'2023-04-08 05:46:03','账号7','姓名7','性别7','手机号码7','upload/qiuzhixinxi_touxiang7.jpg,upload/qiuzhixinxi_touxiang8.jpg,upload/qiuzhixinxi_touxiang9.jpg',7,'学历7','毕业学校7','工作经历7','擅长7','','寻找职位7','待遇薪酬7','2023-04-08'),(58,'2023-04-08 05:46:03','账号8','姓名8','性别8','手机号码8','upload/qiuzhixinxi_touxiang8.jpg,upload/qiuzhixinxi_touxiang9.jpg,upload/qiuzhixinxi_touxiang10.jpg',8,'学历8','毕业学校8','工作经历8','擅长8','','寻找职位8','待遇薪酬8','2023-04-08');
 /*!40000 ALTER TABLE `qiuzhixinxi` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -260,7 +281,7 @@ CREATE TABLE `token` (
   `addtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '新增时间',
   `expiratedtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '过期时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='token表';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='token表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -269,6 +290,7 @@ CREATE TABLE `token` (
 
 LOCK TABLES `token` WRITE;
 /*!40000 ALTER TABLE `token` DISABLE KEYS */;
+INSERT INTO `token` VALUES (1,1,'admin','users','管理员','l86soh77kgmvx9s866w6dao8fth4xhy9','2024-04-16 14:22:56','2024-04-16 16:10:45'),(2,11,'账号1','xuesheng','学生','omqygh98ebbiqu1m5v3p4zds4pzm5q55','2024-04-16 14:50:16','2024-04-16 16:47:37'),(3,21,'企业账号1','qiye','企业','m1uco565a316i0b4edvwvel4cicw48gi','2024-04-16 15:12:16','2024-04-16 16:25:05');
 /*!40000 ALTER TABLE `token` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -390,7 +412,7 @@ CREATE TABLE `xuesheng` (
   `touxiang` longtext COMMENT '头像',
   PRIMARY KEY (`id`),
   UNIQUE KEY `zhanghao` (`zhanghao`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COMMENT='学生';
+) ENGINE=InnoDB AUTO_INCREMENT=1713279516264 DEFAULT CHARSET=utf8 COMMENT='学生';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -399,7 +421,7 @@ CREATE TABLE `xuesheng` (
 
 LOCK TABLES `xuesheng` WRITE;
 /*!40000 ALTER TABLE `xuesheng` DISABLE KEYS */;
-INSERT INTO `xuesheng` VALUES (11,'2023-04-08 05:46:03','账号1','e10adc3949ba59abbe56e057f20f883e','姓名1','男',1,'13823888881','初中','upload/xuesheng_touxiang1.jpg'),(12,'2023-04-08 05:46:03','账号2','e10adc3949ba59abbe56e057f20f883e','姓名2','男',2,'13823888882','初中','upload/xuesheng_touxiang2.jpg'),(13,'2023-04-08 05:46:03','账号3','e10adc3949ba59abbe56e057f20f883e','姓名3','男',3,'13823888883','初中','upload/xuesheng_touxiang3.jpg'),(14,'2023-04-08 05:46:03','账号4','e10adc3949ba59abbe56e057f20f883e','姓名4','男',4,'13823888884','初中','upload/xuesheng_touxiang4.jpg'),(15,'2023-04-08 05:46:03','账号5','e10adc3949ba59abbe56e057f20f883e','姓名5','男',5,'13823888885','初中','upload/xuesheng_touxiang5.jpg'),(16,'2023-04-08 05:46:03','账号6','e10adc3949ba59abbe56e057f20f883e','姓名6','男',6,'13823888886','初中','upload/xuesheng_touxiang6.jpg'),(17,'2023-04-08 05:46:03','账号7','e10adc3949ba59abbe56e057f20f883e','姓名7','男',7,'13823888887','初中','upload/xuesheng_touxiang7.jpg'),(18,'2023-04-08 05:46:03','账号8','e10adc3949ba59abbe56e057f20f883e','姓名8','男',8,'13823888888','初中','upload/xuesheng_touxiang8.jpg');
+INSERT INTO `xuesheng` VALUES (11,'2023-04-08 05:46:03','账号1','e10adc3949ba59abbe56e057f20f883e','姓名1','男',1,'13823888881','初中','upload/xuesheng_touxiang1.jpg'),(12,'2023-04-08 05:46:03','账号2','e10adc3949ba59abbe56e057f20f883e','姓名2','男',2,'13823888882','初中','upload/xuesheng_touxiang2.jpg'),(13,'2023-04-08 05:46:03','账号3','e10adc3949ba59abbe56e057f20f883e','姓名3','男',3,'13823888883','初中','upload/xuesheng_touxiang3.jpg'),(14,'2023-04-08 05:46:03','账号4','e10adc3949ba59abbe56e057f20f883e','姓名4','男',4,'13823888884','初中','upload/xuesheng_touxiang4.jpg'),(15,'2023-04-08 05:46:03','账号5','e10adc3949ba59abbe56e057f20f883e','姓名5','男',5,'13823888885','初中','upload/xuesheng_touxiang5.jpg'),(16,'2023-04-08 05:46:03','账号6','e10adc3949ba59abbe56e057f20f883e','姓名6','男',6,'13823888886','初中','upload/xuesheng_touxiang6.jpg'),(17,'2023-04-08 05:46:03','账号7','e10adc3949ba59abbe56e057f20f883e','姓名7','男',7,'13823888887','初中','upload/xuesheng_touxiang7.jpg'),(18,'2023-04-08 05:46:03','账号8','e10adc3949ba59abbe56e057f20f883e','姓名8','男',8,'13823888888','初中','upload/xuesheng_touxiang8.jpg'),(1713279516263,'2024-04-16 14:58:36','账号9','e10adc3949ba59abbe56e057f20f883e','姓名9','男',12,'15838661234','初中',NULL);
 /*!40000 ALTER TABLE `xuesheng` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -501,7 +523,7 @@ CREATE TABLE `zhaopinyiyuan` (
 
 LOCK TABLES `zhaopinyiyuan` WRITE;
 /*!40000 ALTER TABLE `zhaopinyiyuan` DISABLE KEYS */;
-INSERT INTO `zhaopinyiyuan` VALUES (71,'2023-04-08 05:46:03','账号1','姓名1','手机号码1','邀请内容1','2023-04-08','企业账号1','企业名称1','联系手机1',''),(72,'2023-04-08 05:46:03','账号2','姓名2','手机号码2','邀请内容2','2023-04-08','企业账号2','企业名称2','联系手机2',''),(73,'2023-04-08 05:46:03','账号3','姓名3','手机号码3','邀请内容3','2023-04-08','企业账号3','企业名称3','联系手机3',''),(74,'2023-04-08 05:46:03','账号4','姓名4','手机号码4','邀请内容4','2023-04-08','企业账号4','企业名称4','联系手机4',''),(75,'2023-04-08 05:46:03','账号5','姓名5','手机号码5','邀请内容5','2023-04-08','企业账号5','企业名称5','联系手机5',''),(76,'2023-04-08 05:46:03','账号6','姓名6','手机号码6','邀请内容6','2023-04-08','企业账号6','企业名称6','联系手机6',''),(77,'2023-04-08 05:46:03','账号7','姓名7','手机号码7','邀请内容7','2023-04-08','企业账号7','企业名称7','联系手机7',''),(78,'2023-04-08 05:46:03','账号8','姓名8','手机号码8','邀请内容8','2023-04-08','企业账号8','企业名称8','联系手机8','');
+INSERT INTO `zhaopinyiyuan` VALUES (71,'2023-04-08 05:46:03','账号1','姓名1','手机号码1','邀请内容1','2023-04-08','企业账号1','企业名称1','联系手机1','拒绝'),(72,'2023-04-08 05:46:03','账号2','姓名2','手机号码2','邀请内容2','2023-04-08','企业账号2','企业名称2','联系手机2',''),(73,'2023-04-08 05:46:03','账号3','姓名3','手机号码3','邀请内容3','2023-04-08','企业账号3','企业名称3','联系手机3',''),(74,'2023-04-08 05:46:03','账号4','姓名4','手机号码4','邀请内容4','2023-04-08','企业账号4','企业名称4','联系手机4',''),(75,'2023-04-08 05:46:03','账号5','姓名5','手机号码5','邀请内容5','2023-04-08','企业账号5','企业名称5','联系手机5',''),(76,'2023-04-08 05:46:03','账号6','姓名6','手机号码6','邀请内容6','2023-04-08','企业账号6','企业名称6','联系手机6',''),(77,'2023-04-08 05:46:03','账号7','姓名7','手机号码7','邀请内容7','2023-04-08','企业账号7','企业名称7','联系手机7',''),(78,'2023-04-08 05:46:03','账号8','姓名8','手机号码8','邀请内容8','2023-04-08','企业账号8','企业名称8','联系手机8','');
 /*!40000 ALTER TABLE `zhaopinyiyuan` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -539,4 +561,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-04-11 13:10:37
+-- Dump completed on 2024-04-17  0:16:35
