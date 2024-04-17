@@ -10,12 +10,12 @@
 	<div class="list-preview" :style='{"margin":"0px auto","flexWrap":"wrap","background":"none","display":"flex","width":"1200px","position":"relative","justifyContent":"space-between"}'>
 
 <!--    调整1 -->
-		<div class="category-2" :style='{"top":"20px","left":"-110px","flexDirection":"column","display":"flex","width":"100px","position":"absolute","height":"auto"}'>
-			<div class="item" :class="swiperIndex == '-1' ? 'active' : ''" @click="getList(1, '全部')" :plain="isPlain">全部</div>
-			<div class="item" :class="swiperIndex == index ? 'active' : ''" v-for="(item, index) in fenlei" :key="index" @click="getList(1, item, 'btn' + index)" :ref="'btn' + index" plain>{{item}}</div>
-		</div>
+<!--		<div class="category-2" :style='{"top":"20px","left":"-110px","flexDirection":"column","display":"flex","width":"100px","position":"absolute","height":"auto"}'>-->
+<!--			<div class="item" :class="swiperIndex == '-1' ? 'active' : ''" @click="getList(1, '全部')" :plain="isPlain">全部</div>-->
+<!--			<div class="item" :class="swiperIndex == index ? 'active' : ''" v-for="(item, index) in fenlei" :key="index" @click="getList(1, item, 'btn' + index)" :ref="'btn' + index" plain>{{item}}</div>-->
+<!--		</div>-->
 	
-    <el-form :inline="true" :model="formSearch" class="list-form-pv" :style='{"padding":"10px","margin":"20px auto 0","borderColor":"#9cc0e4","alignItems":"center","display":"flex","borderRadius":"4px","flexWrap":"wrap","background":"#e6eff8","borderWidth":"1px","width":"1200px","borderStyle":"solid","height":"auto","order":"2"}'>
+    <el-form :inline="true" :model="formSearch" class="list-form-pv" :style='{"padding":"10px","margin":"-40px auto 0","borderColor":"#9cc0e4","alignItems":"center","display":"flex","borderRadius":"4px","flexWrap":"wrap","background":"#e6eff8","borderWidth":"1px","width":"1200px","borderStyle":"solid","height":"auto","order":"2"}'>
       <el-form-item :style='{"margin":"0 10px"}'>
 	    <div class="lable" v-if="true" :style='{"width":"auto","padding":"0 10px","lineHeight":"42px","display":"inline-block"}'>招聘企业</div>
         <el-input v-model="formSearch.zhaopinmingcheng" placeholder="招聘企业" clearable></el-input>
@@ -43,18 +43,18 @@
     </el-form>
 
 <!--    调整2 -->
-<!--    <div class="category-2" :style='{"top":"20px","left":"-110px","flexDirection":"column","display":"flex","width":"100px","position":"absolute","height":"auto"}'>-->
-<!--    <div class="category-2" :style='{"top":"105px","width":"100px","position":"absolute","height":"auto"}'>-->
-<!--      <div class="item" :class="swiperIndex == '-1' ? 'active' : ''" @click="getList(1, '全部')" :plain="isPlain">全部</div>-->
-<!--      <div class="item" :class="swiperIndex == index ? 'active' : ''" v-for="(item, index) in fenlei" :key="index" @click="getList(1, item, 'btn' + index)" :ref="'btn' + index" plain>{{item}}</div>-->
-<!--    </div>-->
+<!--  这一行不用放开注释  <div class="category-2" :style='{"top":"20px","left":"-110px","flexDirection":"column","display":"flex","width":"100px","position":"absolute","height":"auto"}'>-->
+    <div class="category-2" :style='{"width":"100%","position":"relative", "display": "inline-block","top":"100px"}'>
+      <div class="item" :class="swiperIndex == '-1' ? 'active' : ''" @click="getList(1, '全部')" :plain="isPlain">全部</div>
+      <div class="item" :class="swiperIndex == index ? 'active' : ''" v-for="(item, index) in fenlei" :key="index" @click="getList(1, item, 'btn' + index)" :ref="'btn' + index" plain>{{item}}</div>
+    </div>
 
 	<div class="list" :style='{"width":"100%","margin":"0","background":"none","order":"3"}'>
 		<!-- 样式一 -->
 
 <!--  调整3 margin":"20px 改成70  -->
 		<!-- 样式二 -->
-		<div class="list2 index-pv1" :style='{"border":"1px solid #9ce3b5","padding":"20px","boxShadow":"0px 0px 0px #ddd,inset 0px 0px 600px 0px #e0f8e8","margin":"20px 0 0","borderRadius":"4px","flexWrap":"wrap","background":"#fff","display":"flex","width":"100%","justifyContent":"space-between","height":"auto"}'>
+		<div class="list2 index-pv1" :style='{"border":"1px solid #9ce3b5","padding":"20px","boxShadow":"0px 0px 0px #ddd,inset 0px 0px 600px 0px #e0f8e8","margin":"80px 0 0","borderRadius":"4px","flexWrap":"wrap","background":"#fff","display":"flex","width":"100%","justifyContent":"space-between","height":"auto"}'>
 			<div :style='{"border":"1px solid #ccc","padding":"8px","margin":"0 0 20px","borderRadius":"4px","flexWrap":"wrap","background":"#fff","display":"flex","width":"49%","fontSize":"0","position":"relative","justifyContent":"space-between","height":"auto"}' v-for="(item, index) in dataList" :key="index" @click="toDetail(item)" class="list-item animation-box">
 				<img :style='{"cursor":"pointer","padding":"16px","objectFit":"cover","borderRadius":"25%","display":"inline-block","width":"50%","height":"240px"}' v-if="item.zhaopintupian && item.zhaopintupian.substr(0,4)=='http'" :src="item.zhaopintupian" class="image" />
 				<img :style='{"cursor":"pointer","padding":"16px","objectFit":"cover","borderRadius":"25%","display":"inline-block","width":"50%","height":"240px"}' v-else :src="baseUrl + (item.zhaopintupian?item.zhaopintupian.split(',')[0]:'')" class="image" />
@@ -264,17 +264,17 @@
 	}
 	
 	.category-2 .item {
-		cursor: pointer;
-		border-radius: 4px;
-		box-shadow: 0;
-		margin: 0 0 10px 0;
-		color: #fff;
-		background: linear-gradient(135deg, rgba(17,112,210,1) 0%, rgba(8,179,68,1) 100%);
-		width: 100%;
-		font-size: 14px;
-		line-height: 36px;
-		text-align: center;
-    display: inline-block;
+    cursor: pointer;
+    border-radius: 4px;
+    box-shadow: 0;
+    margin: 10px 10px 10px 0;
+    color: #fff;
+    background: linear-gradient(135deg, #1170d2 0%, #08b344 100%);
+    width: 10%;
+    font-size: 14px;
+    line-height: 36px;
+    text-align: center;
+    position: flex;
     float: left;
 	}
 	
@@ -283,10 +283,9 @@
 		border: 1px solid #1170d2;
 		border-radius: 4px;
 		box-shadow: 0;
-		margin: 0 0 10px 0;
 		color: #fff;
 		background: linear-gradient(135deg, rgba(8,179,68,1) 0%, rgba(17,112,210,1) 100%);
-		width: 100%;
+		width: 10%;
 		font-size: 14px;
 		line-height: 36px;
 		text-align: center;
@@ -297,10 +296,9 @@
 		border: 1px solid #1170d2;
 		border-radius: 4px;
 		box-shadow: 0;
-		margin: 0 0 10px 0;
 		color: #fff;
 		background: linear-gradient(135deg, rgba(8,179,68,1) 0%, rgba(17,112,210,1) 100%);
-		width: 100%;
+		width: 10%;
 		font-size: 14px;
 		line-height: 36px;
 		text-align: center;
