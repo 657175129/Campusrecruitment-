@@ -312,7 +312,7 @@ export default {
 
     info(id) {
       this.$http({
-        url: `luqutontzhi/info/${id}`,
+        url: `luqutongzhi/info/${id}`,
         method: "get"
       }).then(({ data }) => {
         if (data && data.code === 0) {
@@ -390,7 +390,7 @@ var objcross = this.$storage.getObj('crossObj');
 				crossrefid:this.ruleForm.crossrefid,
 			} 
 			this.$http({ 
-				url: "luqutontzhi/page",
+				url: "luqutongzhi/page",
 				method: "get", 
 				params: params 
 			}).then(({ 
@@ -402,7 +402,7 @@ var objcross = this.$storage.getObj('crossObj');
 					       return false;
 				       } else {
 					 this.$http({
-					   url: `luqutontzhi/${!this.ruleForm.id ? "save" : "update"}`,
+					   url: `luqutongzhi/${!this.ruleForm.id ? "save" : "update"}`,
 					   method: "post",
 					   data: this.ruleForm
 					 }).then(({ data }) => {
@@ -414,7 +414,7 @@ var objcross = this.$storage.getObj('crossObj');
 					       onClose: () => {
 						 this.parent.showFlag = true;
 						 this.parent.addOrUpdateFlag = false;
-						 this.parent.luqutontzhiCrossAddOrUpdateFlag = false;
+						 this.parent.luqutongzhiCrossAddOrUpdateFlag = false;
 						 this.parent.search();
 						 this.parent.contentStyleChange();
 					       }
@@ -430,7 +430,7 @@ var objcross = this.$storage.getObj('crossObj');
 			});
 		 } else {
 			 this.$http({
-			   url: `luqutontzhi/${!this.ruleForm.id ? "save" : "update"}`,
+			   url: `luqutongzhi/${!this.ruleForm.id ? "save" : "update"}`,
 			   method: "post",
 			   data: this.ruleForm
 			 }).then(({ data }) => {
@@ -442,7 +442,7 @@ var objcross = this.$storage.getObj('crossObj');
 			       onClose: () => {
 				 this.parent.showFlag = true;
 				 this.parent.addOrUpdateFlag = false;
-				 this.parent.luqutontzhiCrossAddOrUpdateFlag = false;
+				 this.parent.luqutongzhiCrossAddOrUpdateFlag = false;
 				 this.parent.search();
 				 this.parent.contentStyleChange();
 			       }
@@ -463,7 +463,7 @@ var objcross = this.$storage.getObj('crossObj');
     back() {
       this.parent.showFlag = true;
       this.parent.addOrUpdateFlag = false;
-      this.parent.luqutontzhiCrossAddOrUpdateFlag = false;
+      this.parent.luqutongzhiCrossAddOrUpdateFlag = false;
       this.parent.contentStyleChange();
     },
   }
