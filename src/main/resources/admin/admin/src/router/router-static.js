@@ -81,7 +81,7 @@ const routes = [{
       }
       ,{
 	path: '/zhiweimingcheng',
-        name: '职位名称',
+        name: '岗位分类',
         component: zhiweimingcheng
       }
       ,{

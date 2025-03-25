@@ -1,6 +1,14 @@
 <template>
 <div class="content" :style='{"padding":"30px"}'>
-	<div class="text" :style='{"margin":"50px auto","fontSize":"24px","color":"rgb(51, 51, 51)","textAlign":"center","fontWeight":"bold"}'>欢迎使用 {{this.$project.projectName}}</div>
+
+
+
+	<div class="text" :style='{"margin":"50px auto","fontSize":"24px","color":"rgb(51, 51, 51)","textAlign":"center","fontWeight":"bold"}'>欢迎使用 {{this.$project.projectName}}
+<!--    <img src="D:\Campusrecruitment\springboot123456\upload\6.png">-->
+  </div>
+
+  <img :src="require('../assets/img/6.png')" alt="" style="display: block; margin: 0 auto;">
+
     <div class="cardView">
         <div class="cards" :style='{"margin":"0 0 20px 0","alignItems":"center","justifyContent":"center","display":"flex"}'>
 			<div :style='{"boxShadow":"0 1px 6px rgba(0,0,0,.3)","margin":"0 10px","borderRadius":"40px","display":"flex"}' v-if="isAuth('zhaopinxinxi','首页总数')">
@@ -99,7 +107,7 @@ export default {
                 var option = {};
                 option = {
                         title: {
-                            text: '职位统计',
+                            text: '招聘信息统计',
                             left: 'center'
                         },
                         tooltip: {

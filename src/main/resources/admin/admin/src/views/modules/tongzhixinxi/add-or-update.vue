@@ -39,20 +39,60 @@
 				<el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' v-else class="input" label="企业名称" prop="qiyemingcheng">
 					<el-input v-model="ruleForm.qiyemingcheng" placeholder="企业名称" readonly></el-input>
 				</el-form-item>
-				<el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' class="date" v-if="type!='info'" label="通知日期" prop="tongzhiriqi">
+
+
+        <el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' class="input" v-if="type!='info'"  label="面试结果" prop="result">
+          <el-input v-model="ruleForm.result" placeholder="面试结果" clearable  :readonly="ro.result"></el-input>
+        </el-form-item>
+        <el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' v-else class="input" label="面试结果" prop="result">
+          <el-input v-model="ruleForm.result" placeholder="面试结果" readonly></el-input>
+        </el-form-item>
+
+
+        <el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' class="input" v-if="type!='info'"  label="面试地点" prop="place">
+          <el-input v-model="ruleForm.place" placeholder="面试地点" clearable  :readonly="ro.place"></el-input>
+        </el-form-item>
+        <el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' v-else class="input" label="面试地点" prop="place">
+          <el-input v-model="ruleForm.place" placeholder="面试地点" readonly></el-input>
+        </el-form-item>
+
+        <el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' class="input" v-if="type!='info'"  label="薪资待遇" prop="salary">
+          <el-input v-model="ruleForm.salary" placeholder="薪资待遇" clearable  :readonly="ro.salary"></el-input>
+        </el-form-item>
+        <el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' v-else class="input" label="薪资待遇" prop="salary">
+          <el-input v-model="ruleForm.salary" placeholder="薪资待遇" readonly></el-input>
+        </el-form-item>
+
+
+        <el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' class="date" v-if="type!='info'" label="通知日期" prop="tongzhiriqi">
 					<el-date-picker
 						format="yyyy 年 MM 月 dd 日"
 						value-format="yyyy-MM-dd"
-						v-model="ruleForm.tongzhiriqi" 
+						v-model="ruleForm.tongzhiriqi"
 						type="date"
 						:readonly="ro.tongzhiriqi"
 						placeholder="通知日期"
-					></el-date-picker> 
+					></el-date-picker>
 				</el-form-item>
-				<el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' class="input" v-else-if="ruleForm.tongzhiriqi" label="通知日期" prop="tongzhiriqi">
-					<el-input v-model="ruleForm.tongzhiriqi" placeholder="通知日期" readonly></el-input>
+        <el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' class="input" v-else-if="ruleForm.tongzhiriqi" label="通知日期" prop="tongzhiriqi">
+          <el-input v-model="ruleForm.tongzhiriqi" placeholder="通知日期" readonly></el-input>
+        </el-form-item>
+
+        <el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' class="date" v-if="type!='info'" label="面试时间" prop="interviewtime">
+          <el-date-picker
+              format="yyyy 年 MM 月 dd 日"
+              value-format="yyyy-MM-dd"
+              v-model="ruleForm.interviewtime"
+              type="date"
+              :readonly="ro.interviewtime"
+              placeholder="面试时间"
+          ></el-date-picker>
+        </el-form-item>
+				<el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' class="input" v-else-if="ruleForm.tongzhiriqi" label="面试时间" prop="interviewtime">
+					<el-input v-model="ruleForm.interviewtime" placeholder="面试时间" readonly></el-input>
 				</el-form-item>
 			</template>
+
 				<el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' class="textarea" v-if="type!='info'" label="通知内容" prop="tongzhineirong">
 					<el-input
 					  style="min-width: 200px; max-width: 600px;"
@@ -65,6 +105,7 @@
 				<el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' v-else-if="ruleForm.tongzhineirong" label="通知内容" prop="tongzhineirong">
 					<span :style='{"fontSize":"14px","lineHeight":"40px","color":"#333","fontWeight":"500","display":"inline-block"}'>{{ruleForm.tongzhineirong}}</span>
 				</el-form-item>
+
 			<el-form-item :style='{"padding":"0","margin":"0"}' class="btn">
 				<el-button :style='{"border":"0","cursor":"pointer","padding":"0","margin":"0 20px 0 0","outline":"none","color":"rgba(255, 255, 255, 1)","borderRadius":"4px","background":"rgba(135, 154, 108, 1)","width":"128px","lineHeight":"40px","fontSize":"14px","height":"40px"}'  v-if="type!='info'" type="primary" class="btn-success" @click="onSubmit">提交</el-button>
 				<el-button :style='{"border":"1px solid rgba(135, 154, 108, 1)","cursor":"pointer","padding":"0","margin":"0","outline":"none","color":"rgba(135, 154, 108, 1)","borderRadius":"4px","background":"rgba(255, 255, 255, 1)","width":"128px","lineHeight":"40px","fontSize":"14px","height":"40px"}' v-if="type!='info'" class="btn-close" @click="back()">取消</el-button>
@@ -158,6 +199,10 @@ export default {
 				qiyemingcheng : false,
 				tongzhiriqi : false,
 				shhf : false,
+        interviewtime: false,
+        result: false,
+        place: false,
+        salary: false,
 			},
 			
 			
@@ -170,6 +215,10 @@ export default {
 				qiyemingcheng: '',
 				tongzhiriqi: '',
 				shhf: '',
+        interviewtime:'',
+        result: '',
+        place: '',
+        salary: '',
 			},
 		
 			
@@ -182,6 +231,7 @@ export default {
 				xingming: [
 				],
 				tongzhineirong: [
+          { required: true, message: '通知内容不能为空', trigger: 'blur' },
 				],
 				qiyezhanghao: [
 				],
@@ -191,6 +241,16 @@ export default {
 				],
 				shhf: [
 				],
+        interviewtime: [
+        ],
+        result:[
+        ],
+        place: [
+          { required: true, message: '面试地点不能为空', trigger: 'blur' },
+        ],
+        salary: [
+          { required: true, message: '薪资待遇不能为空', trigger: 'blur' },
+        ],
 			}
 		};
 	},
@@ -204,6 +264,7 @@ export default {
     },
 	created() {
 		this.ruleForm.tongzhiriqi = this.getCurDate()
+    this.ruleForm.mianshishijian = this.getCurDate()
 	},
 	methods: {
 		
@@ -260,6 +321,16 @@ export default {
 							this.ro.tongzhiriqi = true;
 							continue;
 						}
+            if(o=='interviewtime'){
+              this.ruleForm.interviewtime = obj[o];
+              this.ro.interviewtime = true;
+             continue;
+           }
+            if(o=='result'){
+              this.ruleForm.result = obj[o];
+              this.ro.result = true;
+              continue;
+           }
 				}
 				
 

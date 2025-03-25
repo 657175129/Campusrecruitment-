@@ -50,7 +50,7 @@ public class UsersController{
 	 */
 	@IgnoreAuth
 	@RequestMapping(value = "/login")
-	public R login(String username, String password, String captcha, HttpServletRequest request) {
+	public R login(String username, String password, String captcha) {
 		UsersEntity user = userService.selectOne(new EntityWrapper<UsersEntity>().eq("username", username));
 		if(user==null || !user.getPassword().equals(password)) {
 			return R.error("账号或密码不正确");

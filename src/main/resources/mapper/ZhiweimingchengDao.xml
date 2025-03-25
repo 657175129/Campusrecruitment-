@@ -5,32 +5,32 @@
 
 	<!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="com.entity.ZhiweimingchengEntity" id="zhiweimingchengMap">
-        <result property="zhiweimingcheng" column="zhiweimingcheng"/>
+        <result property="zhiweimingcheng" column="position_name"/>
     </resultMap>
 
 	<select id="selectListVO"
 		resultType="com.entity.vo.ZhiweimingchengVO" >
-		SELECT * FROM zhiweimingcheng  zhiweimingcheng         
+		SELECT * FROM zhiweimingcheng  zhiweimingcheng
         <where> 1=1 ${ew.sqlSegment}</where>
 	</select>
-	
+
 	<select id="selectVO"
 		resultType="com.entity.vo.ZhiweimingchengVO" >
-		SELECT  zhiweimingcheng.* FROM zhiweimingcheng  zhiweimingcheng 	
+		SELECT  zhiweimingcheng.* FROM zhiweimingcheng  zhiweimingcheng
  		<where> 1=1 ${ew.sqlSegment}</where>
 	</select>
 
     <select id="selectListView"
-		resultType="com.entity.view.ZhiweimingchengView" >
+		resultMap="zhiweimingchengMap" >
 
-		SELECT  zhiweimingcheng.* FROM zhiweimingcheng  zhiweimingcheng 	        
+		SELECT  position.* FROM position  position
         <where> 1=1 ${ew.sqlSegment}</where>
 	</select>
-	
+
 	<select id="selectView"
 		resultType="com.entity.view.ZhiweimingchengView" >
 		SELECT * FROM zhiweimingcheng  zhiweimingcheng <where> 1=1 ${ew.sqlSegment}</where>
 	</select>
-	
+
 
 </mapper>

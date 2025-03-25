@@ -3,9 +3,14 @@ package com.controller;
 import com.annotation.IgnoreAuth;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
+import com.dao.TongzhixinxiDao;
+import com.dao.ZhaopinyiyuanDao;
 import com.entity.LuqutongzhiEntity;
+import com.entity.TongzhixinxiEntity;
+import com.entity.ZhaopinyiyuanEntity;
 import com.entity.view.LuqutongzhiView;
 import com.service.LuqutongzhiService;
+import com.service.ZhaopinyiyuanService;
 import com.utils.MPUtil;
 import com.utils.PageUtils;
 import com.utils.R;
@@ -24,8 +29,8 @@ import java.util.Map;
 /**
  * 招聘意愿
  * 后端接口
- * @author 
- * @email 
+ * @author
+ * @email
  * @date 2023-04-08 13:45:44
  */
 @RestController
@@ -35,7 +40,7 @@ public class LuqutongzhiController {
     private LuqutongzhiService luqutongzhiService;
 
 
-    
+
 
 
     /**
@@ -48,26 +53,27 @@ public class LuqutongzhiController {
 		HttpServletRequest request){
 		String tableName = request.getSession().getAttribute("tableName").toString();
 		if(tableName.equals("xuesheng")) {
-			luqutongzhi.setZhanghao((String)request.getSession().getAttribute("username"));
+			luqutongzhi.setAccount((String)request.getSession().getAttribute("username"));
 		}
 		if(tableName.equals("qiye")) {
-			luqutongzhi.setQiyezhanghao((String)request.getSession().getAttribute("username"));
+//			luqutongzhi.setQiyezhanghao((String)request.getSession().getAttribute("username"));
+            luqutongzhi.setEnterpriseAccount((String)request.getSession().getAttribute("username"));
 		}
         EntityWrapper<LuqutongzhiEntity> ew = new EntityWrapper<LuqutongzhiEntity>();
-                if(yaoqingriqistart!=null) ew.ge("yaoqingriqi", yaoqingriqistart);
-                if(yaoqingriqiend!=null) ew.le("yaoqingriqi", yaoqingriqiend);
+                if(yaoqingriqistart!=null) ew.ge("offer_time", yaoqingriqistart);
+                if(yaoqingriqiend!=null) ew.le("offer_time", yaoqingriqiend);
 
 		PageUtils page = luqutongzhiService.queryPage(params, MPUtil.sort(MPUtil.between(MPUtil.likeOrEq(ew, luqutongzhi), params), params));
 
         return R.ok().put("data", page);
     }
-    
+
     /**
      * 前端列表
      */
 	@IgnoreAuth
     @RequestMapping("/list")
-    public R list(@RequestParam Map<String, Object> params,LuqutongzhiEntity luqutongzhi, 
+    public R list(@RequestParam Map<String, Object> params,LuqutongzhiEntity luqutongzhi,
                 @RequestParam(required = false) @DateTimeFormat(pattern="yyyy-MM-dd") Date yaoqingriqistart,
                 @RequestParam(required = false) @DateTimeFormat(pattern="yyyy-MM-dd") Date yaoqingriqiend,
 		HttpServletRequest request){
@@ -85,7 +91,7 @@ public class LuqutongzhiController {
     @RequestMapping("/lists")
     public R list( LuqutongzhiEntity luqutongzhi){
        	EntityWrapper<LuqutongzhiEntity> ew = new EntityWrapper<LuqutongzhiEntity>();
-      	ew.allEq(MPUtil.allEQMapPre( luqutongzhi, "luqutongzhi")); 
+      	ew.allEq(MPUtil.allEQMapPre( luqutongzhi, "luqutongzhi"));
         return R.ok().put("data", luqutongzhiService.selectListView(ew));
     }
 
@@ -95,11 +101,11 @@ public class LuqutongzhiController {
     @RequestMapping("/query")
     public R query(LuqutongzhiEntity luqutongzhi){
         EntityWrapper< LuqutongzhiEntity> ew = new EntityWrapper< LuqutongzhiEntity>();
- 		ew.allEq(MPUtil.allEQMapPre( luqutongzhi, "luqutongzhi")); 
+ 		ew.allEq(MPUtil.allEQMapPre( luqutongzhi, "luqutongzhi"));
 		LuqutongzhiView luqutongzhiView =  luqutongzhiService.selectView(ew);
 		return R.ok("查询招聘意愿成功").put("data", luqutongzhiView);
     }
-	
+
     /**
      * 后端详情
      */
@@ -118,7 +124,7 @@ public class LuqutongzhiController {
         LuqutongzhiEntity luqutongzhi = luqutongzhiService.selectById(id);
         return R.ok().put("data", luqutongzhi);
     }
-    
+
 
 
 
@@ -132,7 +138,7 @@ public class LuqutongzhiController {
         luqutongzhiService.insert(luqutongzhi);
         return R.ok();
     }
-    
+
     /**
      * 前端保存
      */
@@ -144,6 +150,11 @@ public class LuqutongzhiController {
         return R.ok();
     }
 
+    @Autowired
+    private ZhaopinyiyuanDao zhaopinyiyuanDao;
+
+    @Autowired
+    private TongzhixinxiDao tongzhixinxiDao;
 
 
     /**
@@ -154,11 +165,27 @@ public class LuqutongzhiController {
     public R update(@RequestBody LuqutongzhiEntity luqutongzhi, HttpServletRequest request){
         //ValidatorUtils.validateEntity(luqutongzhi);
         luqutongzhiService.updateById(luqutongzhi);//全部更新
+
+        //  更新inform
+        if (luqutongzhi.getOfferType()==1){
+            TongzhixinxiEntity tongzhixinxiEntity = new TongzhixinxiEntity();
+            tongzhixinxiEntity.setId(luqutongzhi.getId());
+            tongzhixinxiEntity.setStatus(luqutongzhi.getShhf());
+            tongzhixinxiDao.updateById(tongzhixinxiEntity);
+            return R.ok();
+        }
+        ZhaopinyiyuanEntity zhaopinyiyuanEntity = new ZhaopinyiyuanEntity();
+        zhaopinyiyuanEntity.setId(luqutongzhi.getId());
+        zhaopinyiyuanEntity.setStatus(luqutongzhi.getShhf());
+        zhaopinyiyuanDao.updateById(zhaopinyiyuanEntity);
+        // 更新interview
+
+
         return R.ok();
     }
 
 
-    
+
 
     /**
      * 删除
@@ -168,16 +195,16 @@ public class LuqutongzhiController {
         luqutongzhiService.deleteBatchIds(Arrays.asList(ids));
         return R.ok();
     }
-    
+
     /**
      * 提醒接口
      */
 	@RequestMapping("/remind/{columnName}/{type}")
-	public R remindCount(@PathVariable("columnName") String columnName, HttpServletRequest request, 
+	public R remindCount(@PathVariable("columnName") String columnName, HttpServletRequest request,
 						 @PathVariable("type") String type,@RequestParam Map<String, Object> map) {
 		map.put("column", columnName);
 		map.put("type", type);
-		
+
 		if(type.equals("2")) {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			Calendar c = Calendar.getInstance();
@@ -185,7 +212,7 @@ public class LuqutongzhiController {
 			Date remindEndDate = null;
 			if(map.get("remindstart")!=null) {
 				Integer remindStart = Integer.parseInt(map.get("remindstart").toString());
-				c.setTime(new Date()); 
+				c.setTime(new Date());
 				c.add(Calendar.DAY_OF_MONTH,remindStart);
 				remindStartDate = c.getTime();
 				map.put("remindstart", sdf.format(remindStartDate));
@@ -198,7 +225,7 @@ public class LuqutongzhiController {
 				map.put("remindend", sdf.format(remindEndDate));
 			}
 		}
-		
+
 		Wrapper<LuqutongzhiEntity> wrapper = new EntityWrapper<LuqutongzhiEntity>();
 		if(map.get("remindstart")!=null) {
 			wrapper.ge(columnName, map.get("remindstart"));
@@ -218,7 +245,7 @@ public class LuqutongzhiController {
 		int count = luqutongzhiService.selectCount(wrapper);
 		return R.ok().put("count", count);
 	}
-	
+
 
 
 

@@ -9,11 +9,11 @@
 			label-width="140px"
 		>
 			<template >
-				<el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' class="input" v-if="type!='info'"  label="职位名称" prop="zhiweimingcheng">
-					<el-input v-model="ruleForm.zhiweimingcheng" placeholder="职位名称" clearable  :readonly="ro.zhiweimingcheng"></el-input>
+				<el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' class="input" v-if="type!='info'"  label="岗位分类" prop="zhiweimingcheng">
+					<el-input v-model="ruleForm.zhiweimingcheng" placeholder="岗位分类" clearable  :readonly="ro.zhiweimingcheng"></el-input>
 				</el-form-item>
-				<el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' v-else class="input" label="职位名称" prop="zhiweimingcheng">
-					<el-input v-model="ruleForm.zhiweimingcheng" placeholder="职位名称" readonly></el-input>
+				<el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' v-else class="input" label="岗位分类" prop="zhiweimingcheng">
+					<el-input v-model="ruleForm.zhiweimingcheng" placeholder="岗位分类" readonly></el-input>
 				</el-form-item>
 			</template>
 			<el-form-item :style='{"padding":"0","margin":"0"}' class="btn">
@@ -112,7 +112,7 @@ export default {
 			
 			rules: {
 				zhiweimingcheng: [
-					{ required: true, message: '职位名称不能为空', trigger: 'blur' },
+					{ required: true, message: '岗位分类不能为空', trigger: 'blur' },
 				],
 			}
 		};

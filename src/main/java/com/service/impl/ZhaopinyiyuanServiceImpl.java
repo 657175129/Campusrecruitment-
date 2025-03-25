@@ -20,8 +20,8 @@ import com.entity.view.ZhaopinyiyuanView;
 
 @Service("zhaopinyiyuanService")
 public class ZhaopinyiyuanServiceImpl extends ServiceImpl<ZhaopinyiyuanDao, ZhaopinyiyuanEntity> implements ZhaopinyiyuanService {
-	
-	
+
+
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
         Page<ZhaopinyiyuanEntity> page = this.selectPage(
@@ -30,25 +30,25 @@ public class ZhaopinyiyuanServiceImpl extends ServiceImpl<ZhaopinyiyuanDao, Zhao
         );
         return new PageUtils(page);
     }
-    
+
     @Override
 	public PageUtils queryPage(Map<String, Object> params, Wrapper<ZhaopinyiyuanEntity> wrapper) {
-		  Page<ZhaopinyiyuanView> page =new Query<ZhaopinyiyuanView>(params).getPage();
+		  Page<Map<String,String>> page =new Query<Map<String,String>>(params).getPage();
 	        page.setRecords(baseMapper.selectListView(page,wrapper));
 	    	PageUtils pageUtil = new PageUtils(page);
 	    	return pageUtil;
  	}
-    
+
     @Override
 	public List<ZhaopinyiyuanVO> selectListVO(Wrapper<ZhaopinyiyuanEntity> wrapper) {
  		return baseMapper.selectListVO(wrapper);
 	}
-	
+
 	@Override
 	public ZhaopinyiyuanVO selectVO(Wrapper<ZhaopinyiyuanEntity> wrapper) {
  		return baseMapper.selectVO(wrapper);
 	}
-	
+
 	@Override
 	public List<ZhaopinyiyuanView> selectListView(Wrapper<ZhaopinyiyuanEntity> wrapper) {
 		return baseMapper.selectListView(wrapper);

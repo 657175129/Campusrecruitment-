@@ -17,7 +17,7 @@
 
 				<el-row :style='{"margin":"20px 0 0 0px","flexWrap":"wrap","flexDirection":"column","background":"none","justifyContent":"center","display":"flex"}'>
 					<el-button :style='{"border":"2px solid","cursor":"pointer","padding":"0 24px","margin":"0 auto 10px","outline":"none","color":"rgba(135, 154, 108, 1)","borderRadius":"4px","background":"#fff","borderImage":"linear-gradient(180deg, rgba(135.00000715255737, 154.00000602006912, 108.00000116229057, 1), rgba(226.0000017285347, 226.0000017285347, 226.0000017285347, 0.3799999952316284)) 1 1","width":"100%","fontSize":"14px","height":"40px"}' v-if="isAuth('zaixianzixun','新增')" type="success" @click="addOrUpdateHandler()">新增</el-button>
-					<el-button :style='{"border":"2px solid","cursor":"pointer","padding":"0 24px","margin":"0 auto 10px","outline":"none","color":"rgba(135, 154, 108, 1)","borderRadius":"4px","background":"#fff","borderImage":"linear-gradient(180deg, rgba(135.00000715255737, 154.00000602006912, 108.00000116229057, 1), rgba(226.0000017285347, 226.0000017285347, 226.0000017285347, 0.3799999952316284)) 1 1","width":"100%","fontSize":"14px","height":"40px"}' v-if="isAuth('zaixianzixun','删除')" :disabled="dataListSelections.length <= 0" type="danger" @click="deleteHandler()">删除</el-button>
+<!--					<el-button :style='{"border":"2px solid","cursor":"pointer","padding":"0 24px","margin":"0 auto 10px","outline":"none","color":"rgba(135, 154, 108, 1)","borderRadius":"4px","background":"#fff","borderImage":"linear-gradient(180deg, rgba(135.00000715255737, 154.00000602006912, 108.00000116229057, 1), rgba(226.0000017285347, 226.0000017285347, 226.0000017285347, 0.3799999952316284)) 1 1","width":"100%","fontSize":"14px","height":"40px"}' v-if="isAuth('zaixianzixun','删除')" :disabled="dataListSelections.length <= 0" type="danger" @click="deleteHandler()">删除</el-button>-->
 
 
 
@@ -34,21 +34,24 @@
 					v-loading="dataListLoading"
 				@selection-change="selectionChangeHandler">
 					<el-table-column :resizable='true' type="selection" align="center" width="50"></el-table-column>
-					<el-table-column :resizable='true' :sortable='false' label="索引" type="index" width="50" />
-					<el-table-column :resizable='true' :sortable='false'  
-						prop="zixunbianhao"
-					label="咨询编号">
-						<template slot-scope="scope">
-							{{scope.row.zixunbianhao}}
-						</template>
-					</el-table-column>
-					<el-table-column :resizable='true' :sortable='false'  
-						prop="qiyezhanghao"
-					label="企业账号">
-						<template slot-scope="scope">
-							{{scope.row.qiyezhanghao}}
-						</template>
-					</el-table-column>
+					<el-table-column :resizable='true' :sortable='false' label="编号" type="index" width="50" />
+
+<!--          <el-table-column :resizable='true' :sortable='false'-->
+<!--						prop="zixunbianhao"-->
+<!--					label="咨询编号">-->
+<!--						<template slot-scope="scope">-->
+<!--							{{scope.row.zixunbianhao}}-->
+<!--						</template>-->
+<!--					</el-table-column>-->
+
+<!--					<el-table-column :resizable='true' :sortable='false'-->
+<!--						prop="qiyezhanghao"-->
+<!--					label="企业账号">-->
+<!--						<template slot-scope="scope">-->
+<!--							{{scope.row.qiyezhanghao}}-->
+<!--						</template>-->
+<!--					</el-table-column>-->
+
 					<el-table-column :resizable='true' :sortable='false'  
 						prop="qiyemingcheng"
 					label="企业名称">
@@ -56,13 +59,15 @@
 							{{scope.row.qiyemingcheng}}
 						</template>
 					</el-table-column>
-					<el-table-column :resizable='true' :sortable='false'  
-						prop="zhanghao"
-					label="账号">
-						<template slot-scope="scope">
-							{{scope.row.zhanghao}}
-						</template>
-					</el-table-column>
+
+<!--					<el-table-column :resizable='true' :sortable='false'  -->
+<!--						prop="zhanghao"-->
+<!--					label="账号">-->
+<!--						<template slot-scope="scope">-->
+<!--							{{scope.row.zhanghao}}-->
+<!--						</template>-->
+<!--					</el-table-column>-->
+
 					<el-table-column :resizable='true' :sortable='false'  
 						prop="xingming"
 					label="姓名">
@@ -77,22 +82,27 @@
 							{{scope.row.zixunriqi}}
 						</template>
 					</el-table-column>
-					<el-table-column :resizable='true' :sortable='false' prop="shhf" label="回复"></el-table-column>
-					<el-table-column :resizable='true' :sortable='false' v-if="isAuth('zaixianzixun','审核')" prop="sfsh" label="回复">
-						<template slot-scope="scope">
-							<el-button  type="text" size="small" @click="shDialog(scope.row)">回复</el-button>
-						</template>
-					</el-table-column>
+					<el-table-column :resizable='true' :sortable='false' prop="shhf" label="企业回复内容"></el-table-column>
+<!--					<el-table-column :resizable='true' :sortable='false' v-if="isAuth('zaixianzixun','审核')" prop="sfsh" label="回复">-->
+
+<!--           绿色小文本回复-->
+<!--						<template slot-scope="scope">-->
+<!--							<el-button  type="text" size="small" @click="shDialog(scope.row)">回复</el-button>-->
+<!--						</template>-->
+
+<!--				    	</el-table-column>-->
+
 					<el-table-column width="300" label="操作">
 						<template slot-scope="scope">
-							<el-button :style='{"border":"2px solid","cursor":"pointer","padding":"0 24px","margin":"0 10px 5px 0","outline":"none","color":"rgba(135, 154, 108, 1)","borderRadius":"4px","background":"#fff","borderImage":"linear-gradient(180deg, rgba(135.00000715255737, 154.00000602006912, 108.00000116229057, 1), rgba(226.0000017285347, 226.0000017285347, 226.0000017285347, 0.3799999952316284)) 1 1","width":"auto","fontSize":"14px","height":"32px"}' v-if=" isAuth('zaixianzixun','查看')" type="success" size="mini" @click="addOrUpdateHandler(scope.row.id,'info')">详情</el-button>
-							<el-button :style='{"border":"2px solid","cursor":"pointer","padding":"0 24px","margin":"0 10px 5px 0","outline":"none","color":"rgba(135, 154, 108, 1)","borderRadius":"4px","background":"#fff","borderImage":"linear-gradient(180deg, rgba(135.00000715255737, 154.00000602006912, 108.00000116229057, 1), rgba(226.0000017285347, 226.0000017285347, 226.0000017285347, 0.3799999952316284)) 1 1","width":"auto","fontSize":"14px","height":"32px"}' v-if=" isAuth('zaixianzixun','修改')" type="primary" size="mini" @click="addOrUpdateHandler(scope.row.id)">修改</el-button>
+							<el-button :style='{"border":"2px solid","cursor":"pointer","padding":"0 24px","margin":"0 10px 5px 0","outline":"none","color":"rgba(135, 154, 108, 1)","borderRadius":"4px","background":"#fff","borderImage":"linear-gradient(180deg, rgba(135.00000715255737, 154.00000602006912, 108.00000116229057, 1), rgba(226.0000017285347, 226.0000017285347, 226.0000017285347, 0.3799999952316284)) 1 1","width":"auto","fontSize":"14px","height":"32px"}' v-if=" isAuth('zaixianzixun','查看')" type="success" size="mini" @click="addOrUpdateHandler(scope.row.id,'info')">咨询详情</el-button>
+<!--							<el-button :style='{"border":"2px solid","cursor":"pointer","padding":"0 24px","margin":"0 10px 5px 0","outline":"none","color":"rgba(135, 154, 108, 1)","borderRadius":"4px","background":"#fff","borderImage":"linear-gradient(180deg, rgba(135.00000715255737, 154.00000602006912, 108.00000116229057, 1), rgba(226.0000017285347, 226.0000017285347, 226.0000017285347, 0.3799999952316284)) 1 1","width":"auto","fontSize":"14px","height":"32px"}' v-if=" isAuth('zaixianzixun','修改')" type="primary" size="mini" @click="addOrUpdateHandler(scope.row.id)">修改</el-button>-->
+              <el-button :style='{"border":"2px solid","cursor":"pointer","padding":"0 24px","margin":"0 10px 5px 0","outline":"none","color":"rgba(135, 154, 108, 1)","borderRadius":"4px","background":"#fff","borderImage":"linear-gradient(180deg, rgba(135.00000715255737, 154.00000602006912, 108.00000116229057, 1), rgba(226.0000017285347, 226.0000017285347, 226.0000017285347, 0.3799999952316284)) 1 1","width":"auto","fontSize":"14px","height":"32px"}' v-if=" isAuth('zaixianzixun','回复')" type="success" size="mini" @click="shDialog(scope.row)">回复</el-button>
 
 
 
 
 
-							<el-button :style='{"border":"2px solid","cursor":"pointer","padding":"0 24px","margin":"0 10px 5px 0","outline":"none","color":"rgba(135, 154, 108, 1)","borderRadius":"4px","background":"#fff","borderImage":"linear-gradient(180deg, rgba(135.00000715255737, 154.00000602006912, 108.00000116229057, 1), rgba(226.0000017285347, 226.0000017285347, 226.0000017285347, 0.3799999952316284)) 1 1","width":"auto","fontSize":"14px","height":"32px"}' v-if="isAuth('zaixianzixun','删除') " type="danger" size="mini" @click="deleteHandler(scope.row.id)">删除</el-button>
+<!--							<el-button :style='{"border":"2px solid","cursor":"pointer","padding":"0 24px","margin":"0 10px 5px 0","outline":"none","color":"rgba(135, 154, 108, 1)","borderRadius":"4px","background":"#fff","borderImage":"linear-gradient(180deg, rgba(135.00000715255737, 154.00000602006912, 108.00000116229057, 1), rgba(226.0000017285347, 226.0000017285347, 226.0000017285347, 0.3799999952316284)) 1 1","width":"auto","fontSize":"14px","height":"32px"}' v-if="isAuth('zaixianzixun','删除') " type="danger" size="mini" @click="deleteHandler(scope.row.id)">删除</el-button>-->
 						</template>
 					</el-table-column>
 				</el-table>

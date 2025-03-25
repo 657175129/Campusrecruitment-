@@ -20,8 +20,8 @@ import com.entity.view.XueshengView;
 
 @Service("xueshengService")
 public class XueshengServiceImpl extends ServiceImpl<XueshengDao, XueshengEntity> implements XueshengService {
-	
-	
+
+
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
         Page<XueshengEntity> page = this.selectPage(
@@ -30,25 +30,25 @@ public class XueshengServiceImpl extends ServiceImpl<XueshengDao, XueshengEntity
         );
         return new PageUtils(page);
     }
-    
+
     @Override
 	public PageUtils queryPage(Map<String, Object> params, Wrapper<XueshengEntity> wrapper) {
-		  Page<XueshengView> page =new Query<XueshengView>(params).getPage();
+		  Page<Map<String,String>> page =new Query<Map<String,String>>(params).getPage();
 	        page.setRecords(baseMapper.selectListView(page,wrapper));
 	    	PageUtils pageUtil = new PageUtils(page);
 	    	return pageUtil;
  	}
-    
+
     @Override
 	public List<XueshengVO> selectListVO(Wrapper<XueshengEntity> wrapper) {
  		return baseMapper.selectListVO(wrapper);
 	}
-	
+
 	@Override
 	public XueshengVO selectVO(Wrapper<XueshengEntity> wrapper) {
  		return baseMapper.selectVO(wrapper);
 	}
-	
+
 	@Override
 	public List<XueshengView> selectListView(Wrapper<XueshengEntity> wrapper) {
 		return baseMapper.selectListView(wrapper);

@@ -42,8 +42,8 @@ import java.io.IOException;
 /**
  * 企业
  * 后端接口
- * @author 
- * @email 
+ * @author
+ * @email
  * @date 2023-04-08 13:45:44
  */
 @RestController
@@ -53,25 +53,26 @@ public class QiyeController {
     private QiyeService qiyeService;
 
 
-    
+
 	@Autowired
 	private TokenService tokenService;
-	
+
 	/**
 	 * 登录
 	 */
 	@IgnoreAuth
 	@RequestMapping(value = "/login")
-	public R login(String username, String password, String captcha, HttpServletRequest request) {
-		QiyeEntity u = qiyeService.selectOne(new EntityWrapper<QiyeEntity>().eq("qiyezhanghao", username));
+	public R login(String username, String password) {
+		QiyeEntity u = qiyeService.selectOne(new EntityWrapper<QiyeEntity>().eq("number", username));
 		if(u==null || !u.getMima().equals(MD5Util.md5(password))) {
 			return R.error("账号或密码不正确");
 		}
+		//生成token，放到浏览器提示登录成功
 		String token = tokenService.generateToken(u.getId(), username,"qiye",  "企业" );
 		return R.ok().put("token", token);
 	}
 
-	
+
 	/**
      * 注册
      */
@@ -79,9 +80,9 @@ public class QiyeController {
     @RequestMapping("/register")
     public R register(@RequestBody QiyeEntity qiye){
     	//ValidatorUtils.validateEntity(qiye);
-    	QiyeEntity u = qiyeService.selectOne(new EntityWrapper<QiyeEntity>().eq("qiyezhanghao", qiye.getQiyezhanghao()));
+    	QiyeEntity u = qiyeService.selectOne(new EntityWrapper<QiyeEntity>().eq("number", qiye.getQiyezhanghao()));
 		if(u!=null) {
-			return R.error("注册用户已存在");
+			return R.error("注册用户已存在，注册失败！");
 		}
 		Long uId = new Date().getTime();
 		qiye.setId(uId);
@@ -90,16 +91,17 @@ public class QiyeController {
         return R.ok();
     }
 
-	
+
 	/**
 	 * 退出
 	 */
 	@RequestMapping("/logout")
 	public R logout(HttpServletRequest request) {
+		//把session滞销，没有企业的用户信息
 		request.getSession().invalidate();
 		return R.ok("退出成功");
 	}
-	
+
 	/**
      * 获取用户的session用户信息
      */
@@ -109,7 +111,7 @@ public class QiyeController {
         QiyeEntity u = qiyeService.selectById(id);
         return R.ok().put("data", u);
     }
-    
+
     /**
      * 密码重置
      */
@@ -130,21 +132,19 @@ public class QiyeController {
      * 后端列表
      */
     @RequestMapping("/page")
-    public R page(@RequestParam Map<String, Object> params,QiyeEntity qiye,
-		HttpServletRequest request){
+    public R page(@RequestParam Map<String, Object> params,QiyeEntity qiye){
         EntityWrapper<QiyeEntity> ew = new EntityWrapper<QiyeEntity>();
-
 		PageUtils page = qiyeService.queryPage(params, MPUtil.sort(MPUtil.between(MPUtil.likeOrEq(ew, qiye), params), params));
 
         return R.ok().put("data", page);
     }
-    
+
     /**
      * 前端列表
      */
 	@IgnoreAuth
     @RequestMapping("/list")
-    public R list(@RequestParam Map<String, Object> params,QiyeEntity qiye, 
+    public R list(@RequestParam Map<String, Object> params,QiyeEntity qiye,
 		HttpServletRequest request){
         EntityWrapper<QiyeEntity> ew = new EntityWrapper<QiyeEntity>();
 
@@ -158,7 +158,7 @@ public class QiyeController {
     @RequestMapping("/lists")
     public R list( QiyeEntity qiye){
        	EntityWrapper<QiyeEntity> ew = new EntityWrapper<QiyeEntity>();
-      	ew.allEq(MPUtil.allEQMapPre( qiye, "qiye")); 
+      	ew.allEq(MPUtil.allEQMapPre( qiye, "qiye"));
         return R.ok().put("data", qiyeService.selectListView(ew));
     }
 
@@ -168,11 +168,11 @@ public class QiyeController {
     @RequestMapping("/query")
     public R query(QiyeEntity qiye){
         EntityWrapper< QiyeEntity> ew = new EntityWrapper< QiyeEntity>();
- 		ew.allEq(MPUtil.allEQMapPre( qiye, "qiye")); 
+ 		ew.allEq(MPUtil.allEQMapPre( qiye, "qiye"));
 		QiyeView qiyeView =  qiyeService.selectView(ew);
 		return R.ok("查询企业成功").put("data", qiyeView);
     }
-	
+
     /**
      * 后端详情
      */
@@ -191,7 +191,7 @@ public class QiyeController {
         QiyeEntity qiye = qiyeService.selectById(id);
         return R.ok().put("data", qiye);
     }
-    
+
 
 
 
@@ -202,16 +202,18 @@ public class QiyeController {
     public R save(@RequestBody QiyeEntity qiye, HttpServletRequest request){
     	qiye.setId(new Date().getTime()+new Double(Math.floor(Math.random()*1000)).longValue());
     	//ValidatorUtils.validateEntity(qiye);
+		//看看数据库有没有该数据   select * from qiye where qiyezhanghao = ？
     	QiyeEntity u = qiyeService.selectOne(new EntityWrapper<QiyeEntity>().eq("qiyezhanghao", qiye.getQiyezhanghao()));
 		if(u!=null) {
 			return R.error("用户已存在");
 		}
 		qiye.setId(new Date().getTime());
-                qiye.setMima(MD5Util.md5(qiye.getMima())); 
-        qiyeService.insert(qiye);
+                qiye.setMima(MD5Util.md5(qiye.getMima()));
+        //mybatis-plus 源码层面
+				qiyeService.insert(qiye);
         return R.ok();
     }
-    
+
     /**
      * 前端保存
      */
@@ -247,26 +249,27 @@ public class QiyeController {
     }
 
 
-    
+
 
     /**
-     * 删除
+     * 删除  delete qiye where id in（1,2,3）
      */
     @RequestMapping("/delete")
+	//批量删除接口
     public R delete(@RequestBody Long[] ids){
         qiyeService.deleteBatchIds(Arrays.asList(ids));
         return R.ok();
     }
-    
+
     /**
      * 提醒接口
      */
 	@RequestMapping("/remind/{columnName}/{type}")
-	public R remindCount(@PathVariable("columnName") String columnName, HttpServletRequest request, 
+	public R remindCount(@PathVariable("columnName") String columnName, HttpServletRequest request,
 						 @PathVariable("type") String type,@RequestParam Map<String, Object> map) {
 		map.put("column", columnName);
 		map.put("type", type);
-		
+
 		if(type.equals("2")) {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			Calendar c = Calendar.getInstance();
@@ -274,7 +277,7 @@ public class QiyeController {
 			Date remindEndDate = null;
 			if(map.get("remindstart")!=null) {
 				Integer remindStart = Integer.parseInt(map.get("remindstart").toString());
-				c.setTime(new Date()); 
+				c.setTime(new Date());
 				c.add(Calendar.DAY_OF_MONTH,remindStart);
 				remindStartDate = c.getTime();
 				map.put("remindstart", sdf.format(remindStartDate));
@@ -287,7 +290,7 @@ public class QiyeController {
 				map.put("remindend", sdf.format(remindEndDate));
 			}
 		}
-		
+
 		Wrapper<QiyeEntity> wrapper = new EntityWrapper<QiyeEntity>();
 		if(map.get("remindstart")!=null) {
 			wrapper.ge(columnName, map.get("remindstart"));
@@ -300,7 +303,7 @@ public class QiyeController {
 		int count = qiyeService.selectCount(wrapper);
 		return R.ok().put("count", count);
 	}
-	
+
 
 
 

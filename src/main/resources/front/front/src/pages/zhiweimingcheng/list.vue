@@ -12,8 +12,8 @@
 	
     <el-form :inline="true" :model="formSearch" class="list-form-pv" :style='{"padding":"10px","margin":"20px auto 0","borderColor":"#9cc0e4","alignItems":"center","display":"flex","borderRadius":"4px","flexWrap":"wrap","background":"#e6eff8","borderWidth":"1px","width":"1200px","borderStyle":"solid","height":"auto","order":"2"}'>
       <el-form-item :style='{"margin":"0 10px"}'>
-	    <div class="lable" v-if="true" :style='{"width":"auto","padding":"0 10px","lineHeight":"42px","display":"inline-block"}'>职位名称</div>
-        <el-input v-model="formSearch.zhiweimingcheng" placeholder="职位名称" clearable></el-input>
+	    <div class="lable" v-if="true" :style='{"width":"auto","padding":"0 10px","lineHeight":"42px","display":"inline-block"}'>岗位分类</div>
+        <el-input v-model="formSearch.zhiweimingcheng" placeholder="岗位分类" clearable></el-input>
       </el-form-item>
 	  <el-button v-if=" true " :style='{"cursor":"pointer","border":"0px solid #fcbc45","padding":"0px 15px","boxShadow":"0px 0px 0px #d2992f","margin":"0px 10px 0 0","color":"#fff","outline":"none","borderRadius":"4px","background":"#1170d2","width":"auto","fontSize":"14px","lineHeight":"40px","height":"40px"}' type="primary" @click="getList(1, curFenlei)"><i v-if="true" :style='{"color":"#fff","margin":"0 10px 0 0","fontSize":"14px"}' class="el-icon-search"></i>查询</el-button>
 	  <el-button v-if="isAuth('zhiweimingcheng','新增')" :style='{"cursor":"pointer","border":"0px solid #db961f","padding":"0px 15px","boxShadow":"0px 0px 0px #f8a412","margin":"0px 10px 0 0","color":"#fff","outline":"none","borderRadius":"4px","background":"#08b344","width":"auto","fontSize":"14px","lineHeight":"40px","height":"40px"}' type="primary" @click="add('/index/zhiweimingchengAdd')"><i v-if="true" :style='{"color":"#fff","margin":"0 10px 0 0","fontSize":"14px"}' class="el-icon-circle-plus-outline"></i>添加</el-button>
@@ -65,7 +65,7 @@
         baseUrl: '',
         breadcrumbItem: [
           {
-            name: '职位名称'
+            name: '岗位分类'
           }
         ],
         formSearch: {

@@ -1,0 +1,91 @@
+<!--<?xml version="1.0" encoding="UTF-8" ?>-->
+<!--<!DOCTYPE mapper-->
+<!--        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"-->
+<!--        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">-->
+<!--<mapper namespace="com.newFile.mapper.EnterprisesMapper">-->
+
+<!--    <resultMap type="Enterprises" id="EnterprisesResult">-->
+<!--        <result property="id"    column="id"    />-->
+<!--        <result property="number"    column="number"    />-->
+<!--        <result property="password"    column="password"    />-->
+<!--        <result property="name"    column="name"    />-->
+<!--        <result property="contact"    column="contact"    />-->
+<!--        <result property="logo"    column="logo"    />-->
+<!--        <result property="introduction"    column="introduction"    />-->
+<!--        <result property="phone"    column="phone"    />-->
+<!--        <result property="e-mail"    column="e-mail"    />-->
+<!--    </resultMap>-->
+
+<!--    <sql id="selectEnterprisesVo">-->
+<!--        select id, number, password, name, contact, logo, introduction, phone, e-mail from enterprises-->
+<!--    </sql>-->
+
+<!--    <select id="selectEnterprisesList" parameterType="Enterprises" resultMap="EnterprisesResult">-->
+<!--        <include refid="selectEnterprisesVo"/>-->
+<!--        <where>-->
+<!--            <if test="number != null  and number != ''"> and number = #{number}</if>-->
+<!--            <if test="password != null  and password != ''"> and password = #{password}</if>-->
+<!--            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>-->
+<!--            <if test="contact != null  and contact != ''"> and contact = #{contact}</if>-->
+<!--            <if test="logo != null  and logo != ''"> and logo = #{logo}</if>-->
+<!--            <if test="introduction != null  and introduction != ''"> and introduction = #{introduction}</if>-->
+<!--            <if test="phone != null  and phone != ''"> and phone = #{phone}</if>-->
+<!--            <if test="e-mail != null  and e-mail != ''"> and e-mail = #{e-mail}</if>-->
+<!--        </where>-->
+<!--    </select>-->
+
+<!--    <select id="selectEnterprisesById" parameterType="Long" resultMap="EnterprisesResult">-->
+<!--        <include refid="selectEnterprisesVo"/>-->
+<!--        where id = #{id}-->
+<!--    </select>-->
+
+<!--    <insert id="insertEnterprises" parameterType="Enterprises" useGeneratedKeys="true" keyProperty="id">-->
+<!--        insert into enterprises-->
+<!--        <trim prefix="(" suffix=")" suffixOverrides=",">-->
+<!--            <if test="number != null and number != ''">number,</if>-->
+<!--            <if test="password != null and password != ''">password,</if>-->
+<!--            <if test="name != null">name,</if>-->
+<!--            <if test="contact != null">contact,</if>-->
+<!--            <if test="logo != null">logo,</if>-->
+<!--            <if test="introduction != null">introduction,</if>-->
+<!--            <if test="phone != null">phone,</if>-->
+<!--            <if test="e-mail != null">e-mail,</if>-->
+<!--        </trim>-->
+<!--        <trim prefix="values (" suffix=")" suffixOverrides=",">-->
+<!--            <if test="number != null and number != ''">#{number},</if>-->
+<!--            <if test="password != null and password != ''">#{password},</if>-->
+<!--            <if test="name != null">#{name},</if>-->
+<!--            <if test="contact != null">#{contact},</if>-->
+<!--            <if test="logo != null">#{logo},</if>-->
+<!--            <if test="introduction != null">#{introduction},</if>-->
+<!--            <if test="phone != null">#{phone},</if>-->
+<!--            <if test="e-mail != null">#{e-mail},</if>-->
+<!--        </trim>-->
+<!--    </insert>-->
+
+<!--    <update id="updateEnterprises" parameterType="Enterprises">-->
+<!--        update enterprises-->
+<!--        <trim prefix="SET" suffixOverrides=",">-->
+<!--            <if test="number != null and number != ''">number = #{number},</if>-->
+<!--            <if test="password != null and password != ''">password = #{password},</if>-->
+<!--            <if test="name != null">name = #{name},</if>-->
+<!--            <if test="contact != null">contact = #{contact},</if>-->
+<!--            <if test="logo != null">logo = #{logo},</if>-->
+<!--            <if test="introduction != null">introduction = #{introduction},</if>-->
+<!--            <if test="phone != null">phone = #{phone},</if>-->
+<!--            <if test="e-mail != null">e-mail = #{e-mail},</if>-->
+<!--        </trim>-->
+<!--        where id = #{id}-->
+<!--    </update>-->
+
+<!--    <delete id="deleteEnterprisesById" parameterType="Long">-->
+<!--        delete from enterprises where id = #{id}-->
+<!--    </delete>-->
+
+<!--    <delete id="deleteEnterprisesByIds" parameterType="String">-->
+<!--        delete from enterprises where id in-->
+<!--        <foreach item="id" collection="array" open="(" separator="," close=")">-->
+<!--            #{id}-->
+<!--        </foreach>-->
+<!--    </delete>-->
+<!--</mapper>-->

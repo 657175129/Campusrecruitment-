@@ -12,7 +12,7 @@ import com.entity.view.ZhiweimingchengView;
 
 
 /**
- * 职位名称
+ * 岗位分类
  *
  * @author 
  * @email 

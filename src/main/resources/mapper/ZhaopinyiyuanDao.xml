@@ -5,40 +5,40 @@
 
 	<!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="com.entity.ZhaopinyiyuanEntity" id="zhaopinyiyuanMap">
-        <result property="zhanghao" column="zhanghao"/>
-        <result property="xingming" column="xingming"/>
-        <result property="shoujihaoma" column="shoujihaoma"/>
-        <result property="yaoqingneirong" column="yaoqingneirong"/>
-        <result property="yaoqingriqi" column="yaoqingriqi"/>
-        <result property="qiyezhanghao" column="qiyezhanghao"/>
-        <result property="qiyemingcheng" column="qiyemingcheng"/>
-        <result property="lianxishouji" column="lianxishouji"/>
-        <result property="shhf" column="shhf"/>
+        <result property="zhanghao" column="account"/>
+        <result property="xingming" column="name"/>
+        <result property="shoujihaoma" column="phone"/>
+        <result property="yaoqingneirong" column="detail"/>
+        <result property="yaoqingriqi" column="interview_time"/>
+        <result property="qiyezhanghao" column="enterprise_account"/>
+        <result property="qiyemingcheng" column="enterprise_name"/>
+        <result property="lianxishouji" column="connect"/>
+        <result property="shhf" column="content"/>
     </resultMap>
 
 	<select id="selectListVO"
 		resultType="com.entity.vo.ZhaopinyiyuanVO" >
-		SELECT * FROM zhaopinyiyuan  zhaopinyiyuan         
+		SELECT * FROM zhaopinyiyuan  zhaopinyiyuan
         <where> 1=1 ${ew.sqlSegment}</where>
 	</select>
-	
+
 	<select id="selectVO"
 		resultType="com.entity.vo.ZhaopinyiyuanVO" >
-		SELECT  zhaopinyiyuan.* FROM zhaopinyiyuan  zhaopinyiyuan 	
+		SELECT  zhaopinyiyuan.* FROM zhaopinyiyuan  zhaopinyiyuan
  		<where> 1=1 ${ew.sqlSegment}</where>
 	</select>
 
     <select id="selectListView"
-		resultType="com.entity.view.ZhaopinyiyuanView" >
+		resultMap="zhaopinyiyuanMap" >
 
-		SELECT  zhaopinyiyuan.* FROM zhaopinyiyuan  zhaopinyiyuan 	        
+		SELECT  interviews.* FROM interviews  interviews
         <where> 1=1 ${ew.sqlSegment}</where>
 	</select>
-	
+
 	<select id="selectView"
 		resultType="com.entity.view.ZhaopinyiyuanView" >
 		SELECT * FROM zhaopinyiyuan  zhaopinyiyuan <where> 1=1 ${ew.sqlSegment}</where>
 	</select>
-	
+
 
 </mapper>

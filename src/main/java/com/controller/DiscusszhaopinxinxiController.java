@@ -42,8 +42,8 @@ import java.io.IOException;
 /**
  * 招聘信息评论表
  * 后端接口
- * @author 
- * @email 
+ * @author
+ * @email
  * @date 2023-04-08 13:45:44
  */
 @RestController
@@ -53,7 +53,7 @@ public class DiscusszhaopinxinxiController {
     private DiscusszhaopinxinxiService discusszhaopinxinxiService;
 
 
-    
+
 
 
     /**
@@ -68,16 +68,16 @@ public class DiscusszhaopinxinxiController {
 
         return R.ok().put("data", page);
     }
-    
+
     /**
      * 前端列表
      */
 	@IgnoreAuth
     @RequestMapping("/list")
-    public R list(@RequestParam Map<String, Object> params,DiscusszhaopinxinxiEntity discusszhaopinxinxi, 
+    public R list(@RequestParam Map<String, Object> params,DiscusszhaopinxinxiEntity discusszhaopinxinxi,
 		HttpServletRequest request){
         EntityWrapper<DiscusszhaopinxinxiEntity> ew = new EntityWrapper<DiscusszhaopinxinxiEntity>();
-
+        params.remove("refid");
 		PageUtils page = discusszhaopinxinxiService.queryPage(params, MPUtil.sort(MPUtil.between(MPUtil.likeOrEq(ew, discusszhaopinxinxi), params), params));
         return R.ok().put("data", page);
     }
@@ -88,7 +88,7 @@ public class DiscusszhaopinxinxiController {
     @RequestMapping("/lists")
     public R list( DiscusszhaopinxinxiEntity discusszhaopinxinxi){
        	EntityWrapper<DiscusszhaopinxinxiEntity> ew = new EntityWrapper<DiscusszhaopinxinxiEntity>();
-      	ew.allEq(MPUtil.allEQMapPre( discusszhaopinxinxi, "discusszhaopinxinxi")); 
+      	ew.allEq(MPUtil.allEQMapPre( discusszhaopinxinxi, "discusszhaopinxinxi"));
         return R.ok().put("data", discusszhaopinxinxiService.selectListView(ew));
     }
 
@@ -98,11 +98,11 @@ public class DiscusszhaopinxinxiController {
     @RequestMapping("/query")
     public R query(DiscusszhaopinxinxiEntity discusszhaopinxinxi){
         EntityWrapper< DiscusszhaopinxinxiEntity> ew = new EntityWrapper< DiscusszhaopinxinxiEntity>();
- 		ew.allEq(MPUtil.allEQMapPre( discusszhaopinxinxi, "discusszhaopinxinxi")); 
+ 		ew.allEq(MPUtil.allEQMapPre( discusszhaopinxinxi, "discusszhaopinxinxi"));
 		DiscusszhaopinxinxiView discusszhaopinxinxiView =  discusszhaopinxinxiService.selectView(ew);
 		return R.ok("查询招聘信息评论表成功").put("data", discusszhaopinxinxiView);
     }
-	
+
     /**
      * 后端详情
      */
@@ -121,7 +121,7 @@ public class DiscusszhaopinxinxiController {
         DiscusszhaopinxinxiEntity discusszhaopinxinxi = discusszhaopinxinxiService.selectById(id);
         return R.ok().put("data", discusszhaopinxinxi);
     }
-    
+
 
 
 
@@ -135,7 +135,7 @@ public class DiscusszhaopinxinxiController {
         discusszhaopinxinxiService.insert(discusszhaopinxinxi);
         return R.ok();
     }
-    
+
     /**
      * 前端保存
      */
@@ -161,7 +161,7 @@ public class DiscusszhaopinxinxiController {
     }
 
 
-    
+
 
     /**
      * 删除
@@ -171,16 +171,16 @@ public class DiscusszhaopinxinxiController {
         discusszhaopinxinxiService.deleteBatchIds(Arrays.asList(ids));
         return R.ok();
     }
-    
+
     /**
      * 提醒接口
      */
 	@RequestMapping("/remind/{columnName}/{type}")
-	public R remindCount(@PathVariable("columnName") String columnName, HttpServletRequest request, 
+	public R remindCount(@PathVariable("columnName") String columnName, HttpServletRequest request,
 						 @PathVariable("type") String type,@RequestParam Map<String, Object> map) {
 		map.put("column", columnName);
 		map.put("type", type);
-		
+
 		if(type.equals("2")) {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			Calendar c = Calendar.getInstance();
@@ -188,7 +188,7 @@ public class DiscusszhaopinxinxiController {
 			Date remindEndDate = null;
 			if(map.get("remindstart")!=null) {
 				Integer remindStart = Integer.parseInt(map.get("remindstart").toString());
-				c.setTime(new Date()); 
+				c.setTime(new Date());
 				c.add(Calendar.DAY_OF_MONTH,remindStart);
 				remindStartDate = c.getTime();
 				map.put("remindstart", sdf.format(remindStartDate));
@@ -201,7 +201,7 @@ public class DiscusszhaopinxinxiController {
 				map.put("remindend", sdf.format(remindEndDate));
 			}
 		}
-		
+
 		Wrapper<DiscusszhaopinxinxiEntity> wrapper = new EntityWrapper<DiscusszhaopinxinxiEntity>();
 		if(map.get("remindstart")!=null) {
 			wrapper.ge(columnName, map.get("remindstart"));
@@ -214,7 +214,7 @@ public class DiscusszhaopinxinxiController {
 		int count = discusszhaopinxinxiService.selectCount(wrapper);
 		return R.ok().put("count", count);
 	}
-	
+
 
 
 

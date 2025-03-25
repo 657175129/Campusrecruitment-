@@ -6,7 +6,7 @@
 		</div>
 		<div class="right" :style='{"position":"absolute","right":"7%","top":"8px","display":"flex"}'>
 			<div :style='{"cursor":"pointer","margin":"0 5px","lineHeight":"44px","color":"rgba(64, 75, 95, 1)"}' class="nickname">{{this.$storage.get('role')}} {{this.$storage.get('adminName')}}</div>
-			<div :style='{"cursor":"pointer","margin":"0 25px","lineHeight":"44px","color":"rgba(64, 75, 95, 1)"}' v-if="this.$storage.get('role')!='管理员'" class="logout" @click="onIndexTap">退出到前台</div>
+			<div :style='{"cursor":"pointer","margin":"0 25px","lineHeight":"44px","color":"rgba(64, 75, 95, 1)"}'  class="logout" @click="onIndexTap">前台</div>
 			<div :style='{"cursor":"pointer","margin":"0 5px","lineHeight":"44px","color":"rgba(64, 75, 95, 1)"}' class="logout" @click="onLogout">退出登录</div>
 		</div>
 	</div>

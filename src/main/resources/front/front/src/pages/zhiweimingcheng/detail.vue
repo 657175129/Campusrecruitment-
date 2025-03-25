@@ -24,7 +24,7 @@
 				</div>
 
 				<div class="item" :style='{"border":"0px solid #dfdfdf","padding":"0px 10px","boxShadow":"0px 2px 0px #eee","margin":"0 0 8px 0","borderRadius":"0px","background":"none","display":"flex","justifyContent":"spaceBetween"}'>
-					<div class="lable" :style='{"width":"120px","padding":"0 10px","fontSize":"14px","lineHeight":"40px","color":"#333","textAlign":"right"}'>职位名称</div>
+					<div class="lable" :style='{"width":"120px","padding":"0 10px","fontSize":"14px","lineHeight":"40px","color":"#333","textAlign":"right"}'>岗位分类</div>
 					<div  :style='{"width":"498px","padding":"8px 10px 0","fontSize":"14px","lineHeight":"24px","color":"#666","height":"auto"}'>{{detail.zhiweimingcheng}}</div>
 				</div>
 				<div class="btn" :style='{"padding":"10px 0","flexWrap":"wrap","display":"flex"}'>

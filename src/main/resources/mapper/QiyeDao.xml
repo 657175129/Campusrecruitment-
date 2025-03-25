@@ -5,39 +5,40 @@
 
 	<!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="com.entity.QiyeEntity" id="qiyeMap">
-        <result property="qiyezhanghao" column="qiyezhanghao"/>
-        <result property="mima" column="mima"/>
-        <result property="qiyemingcheng" column="qiyemingcheng"/>
+        <result property="qiyezhanghao" column="number"/>
+        <result property="mima" column="password"/>
+        <result property="qiyemingcheng" column="name"/>
         <result property="fuzeren" column="fuzeren"/>
-        <result property="xingbie" column="xingbie"/>
-        <result property="youxiang" column="youxiang"/>
-        <result property="lianxishouji" column="lianxishouji"/>
-        <result property="yingyezhizhao" column="yingyezhizhao"/>
+        <result property="xingbie" column="sex"/>
+        <result property="youxiang" column="e_mail"/>
+        <result property="lianxishouji" column="phone"/>
+        <result property="yingyezhizhao" column="logo"/>
+		<result property="fuzeren" column="contact"/>
     </resultMap>
 
 	<select id="selectListVO"
 		resultType="com.entity.vo.QiyeVO" >
-		SELECT * FROM qiye  qiye         
+		SELECT * FROM qiye  qiye
         <where> 1=1 ${ew.sqlSegment}</where>
 	</select>
-	
+
 	<select id="selectVO"
 		resultType="com.entity.vo.QiyeVO" >
-		SELECT  qiye.* FROM qiye  qiye 	
+		SELECT  qiye.* FROM qiye  qiye
  		<where> 1=1 ${ew.sqlSegment}</where>
 	</select>
 
     <select id="selectListView"
-		resultType="com.entity.view.QiyeView" >
+		resultMap="qiyeMap" >
 
-		SELECT  qiye.* FROM qiye  qiye 	        
+		SELECT  enterprises.* FROM enterprises  enterprises
         <where> 1=1 ${ew.sqlSegment}</where>
 	</select>
-	
+
 	<select id="selectView"
 		resultType="com.entity.view.QiyeView" >
 		SELECT * FROM qiye  qiye <where> 1=1 ${ew.sqlSegment}</where>
 	</select>
-	
+
 
 </mapper>

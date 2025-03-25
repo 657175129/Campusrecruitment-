@@ -5,39 +5,39 @@
 
 	<!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="com.entity.ZaixianzixunEntity" id="zaixianzixunMap">
-        <result property="zixunbianhao" column="zixunbianhao"/>
-        <result property="qiyezhanghao" column="qiyezhanghao"/>
-        <result property="qiyemingcheng" column="qiyemingcheng"/>
-        <result property="zixunneirong" column="zixunneirong"/>
-        <result property="zhanghao" column="zhanghao"/>
-        <result property="xingming" column="xingming"/>
-        <result property="zixunriqi" column="zixunriqi"/>
-        <result property="shhf" column="shhf"/>
+        <result property="zixunbianhao" column="number"/>
+        <result property="qiyezhanghao" column="enterprise_account"/>
+        <result property="qiyemingcheng" column="enterprise_name"/>
+        <result property="zixunneirong" column="content"/>
+        <result property="zhanghao" column="account"/>
+        <result property="xingming" column="name"/>
+        <result property="zixunriqi" column="date"/>
+        <result property="shhf" column="detail"/>
     </resultMap>
 
 	<select id="selectListVO"
 		resultType="com.entity.vo.ZaixianzixunVO" >
-		SELECT * FROM zaixianzixun  zaixianzixun         
+		SELECT * FROM zaixianzixun  zaixianzixun
         <where> 1=1 ${ew.sqlSegment}</where>
 	</select>
-	
+
 	<select id="selectVO"
 		resultType="com.entity.vo.ZaixianzixunVO" >
-		SELECT  zaixianzixun.* FROM zaixianzixun  zaixianzixun 	
+		SELECT  zaixianzixun.* FROM zaixianzixun  zaixianzixun
  		<where> 1=1 ${ew.sqlSegment}</where>
 	</select>
 
     <select id="selectListView"
-		resultType="com.entity.view.ZaixianzixunView" >
+		resultMap="zaixianzixunMap" >
 
-		SELECT  zaixianzixun.* FROM zaixianzixun  zaixianzixun 	        
+		SELECT  consult.* FROM consult  consult
         <where> 1=1 ${ew.sqlSegment}</where>
 	</select>
-	
+
 	<select id="selectView"
 		resultType="com.entity.view.ZaixianzixunView" >
 		SELECT * FROM zaixianzixun  zaixianzixun <where> 1=1 ${ew.sqlSegment}</where>
 	</select>
-	
+
 
 </mapper>

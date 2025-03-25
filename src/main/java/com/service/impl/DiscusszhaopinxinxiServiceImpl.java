@@ -20,8 +20,8 @@ import com.entity.view.DiscusszhaopinxinxiView;
 
 @Service("discusszhaopinxinxiService")
 public class DiscusszhaopinxinxiServiceImpl extends ServiceImpl<DiscusszhaopinxinxiDao, DiscusszhaopinxinxiEntity> implements DiscusszhaopinxinxiService {
-	
-	
+
+
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
         Page<DiscusszhaopinxinxiEntity> page = this.selectPage(
@@ -30,25 +30,25 @@ public class DiscusszhaopinxinxiServiceImpl extends ServiceImpl<Discusszhaopinxi
         );
         return new PageUtils(page);
     }
-    
+
     @Override
 	public PageUtils queryPage(Map<String, Object> params, Wrapper<DiscusszhaopinxinxiEntity> wrapper) {
-		  Page<DiscusszhaopinxinxiView> page =new Query<DiscusszhaopinxinxiView>(params).getPage();
+		  Page<Map<String,String >> page =new Query<Map<String,String >>(params).getPage();
 	        page.setRecords(baseMapper.selectListView(page,wrapper));
 	    	PageUtils pageUtil = new PageUtils(page);
 	    	return pageUtil;
  	}
-    
+
     @Override
 	public List<DiscusszhaopinxinxiVO> selectListVO(Wrapper<DiscusszhaopinxinxiEntity> wrapper) {
  		return baseMapper.selectListVO(wrapper);
 	}
-	
+
 	@Override
 	public DiscusszhaopinxinxiVO selectVO(Wrapper<DiscusszhaopinxinxiEntity> wrapper) {
  		return baseMapper.selectVO(wrapper);
 	}
-	
+
 	@Override
 	public List<DiscusszhaopinxinxiView> selectListView(Wrapper<DiscusszhaopinxinxiEntity> wrapper) {
 		return baseMapper.selectListView(wrapper);

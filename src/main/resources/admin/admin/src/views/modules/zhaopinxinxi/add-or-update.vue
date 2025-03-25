@@ -15,6 +15,17 @@
 				<el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' v-else class="input" label="招聘名称" prop="zhaopinmingcheng">
 					<el-input v-model="ruleForm.zhaopinmingcheng" placeholder="招聘名称" readonly></el-input>
 				</el-form-item>
+
+        <el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' class="input" v-if="type!='info'"  label="招聘人数" prop="number">
+          <el-input v-model="ruleForm.number" placeholder="招聘人数" clearable  :readonly="ro.zhaopinmingcheng"></el-input>
+        </el-form-item>
+        <el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' class="input" v-if="type!='info'"  label="招聘状态" prop="state">
+          <el-input v-model="ruleForm.state" placeholder="招聘状态" clearable  :readonly="ro.zhaopinmingcheng"></el-input>
+        </el-form-item>
+        <el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' class="input" v-if="type!='info'"  label="工作地点" prop="place">
+          <el-input v-model="ruleForm.place" placeholder="工作地点" clearable  :readonly="ro.zhaopinmingcheng"></el-input>
+        </el-form-item>
+
 				<el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' class="upload" v-if="type!='info' && !ro.zhaopintupian" label="招聘图片" prop="zhaopintupian">
 					<file-upload
 						tip="点击上传招聘图片"
@@ -29,8 +40,8 @@
 					<img v-if="ruleForm.zhaopintupian.substring(0,4)=='http'" class="upload-img" style="margin-right:20px;" v-bind:key="index" :src="ruleForm.zhaopintupian.split(',')[0]" width="100" height="100">
 					<img v-else class="upload-img" style="margin-right:20px;" v-bind:key="index" v-for="(item,index) in ruleForm.zhaopintupian.split(',')" :src="$base.url+item" width="100" height="100">
 				</el-form-item>
-				<el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' class="select" v-if="type!='info'"  label="职位名称" prop="zhiweimingcheng">
-					<el-select :disabled="ro.zhiweimingcheng" v-model="ruleForm.zhiweimingcheng" placeholder="请选择职位名称" >
+				<el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' class="select" v-if="type!='info'"  label="岗位分类" prop="zhiweimingcheng">
+					<el-select :disabled="ro.zhiweimingcheng" v-model="ruleForm.zhiweimingcheng" placeholder="请选择岗位分类" >
 						<el-option
 							v-for="(item,index) in zhiweimingchengOptions"
 							v-bind:key="index"
@@ -39,9 +50,9 @@
 						</el-option>
 					</el-select>
 				</el-form-item>
-				<el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' v-else class="input" label="职位名称" prop="zhiweimingcheng">
+				<el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' v-else class="input" label="岗位分类" prop="zhiweimingcheng">
 					<el-input v-model="ruleForm.zhiweimingcheng"
-						placeholder="职位名称" readonly></el-input>
+						placeholder="岗位分类" readonly></el-input>
 				</el-form-item>
 				<el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' class="input" v-if="type!='info'"  label="薪酬待遇" prop="xinchoudaiyu">
 					<el-input v-model="ruleForm.xinchoudaiyu" placeholder="薪酬待遇" clearable  :readonly="ro.xinchoudaiyu"></el-input>

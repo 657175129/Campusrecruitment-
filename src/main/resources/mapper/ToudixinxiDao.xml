@@ -5,47 +5,47 @@
 
 	<!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="com.entity.ToudixinxiEntity" id="toudixinxiMap">
-        <result property="zhaopinmingcheng" column="zhaopinmingcheng"/>
-        <result property="zhiweimingcheng" column="zhiweimingcheng"/>
-        <result property="qiyezhanghao" column="qiyezhanghao"/>
-        <result property="qiyemingcheng" column="qiyemingcheng"/>
-        <result property="lianxishouji" column="lianxishouji"/>
-        <result property="zhanghao" column="zhanghao"/>
-        <result property="xingming" column="xingming"/>
-        <result property="shoujihaoma" column="shoujihaoma"/>
-        <result property="jianlifujian" column="jianlifujian"/>
-        <result property="nianling" column="nianling"/>
-        <result property="xueli" column="xueli"/>
-        <result property="toudibeizhu" column="toudibeizhu"/>
-        <result property="toudiriqi" column="toudiriqi"/>
-        <result property="sfsh" column="sfsh"/>
-        <result property="shhf" column="shhf"/>
+        <result property="zhaopinmingcheng" column="job_name"/>
+        <result property="zhiweimingcheng" column="postion_name"/>
+        <result property="qiyezhanghao" column="enterprise_account"/>
+        <result property="qiyemingcheng" column="enterprise_name"/>
+        <result property="lianxishouji" column="phone"/>
+        <result property="zhanghao" column="accout"/>
+        <result property="xingming" column="name"/>
+        <result property="shoujihaoma" column="deliver_phone"/>
+        <result property="jianlifujian" column="resume"/>
+        <result property="nianling" column="age"/>
+        <result property="xueli" column="education"/>
+        <result property="toudibeizhu" column="remark"/>
+        <result property="toudiriqi" column="date"/>
+        <result property="sfsh" column="state"/>
+        <result property="shhf" column="reply"/>
     </resultMap>
 
 	<select id="selectListVO"
 		resultType="com.entity.vo.ToudixinxiVO" >
-		SELECT * FROM toudixinxi  toudixinxi         
+		SELECT * FROM toudixinxi  toudixinxi
         <where> 1=1 ${ew.sqlSegment}</where>
 	</select>
-	
+
 	<select id="selectVO"
 		resultType="com.entity.vo.ToudixinxiVO" >
-		SELECT  toudixinxi.* FROM toudixinxi  toudixinxi 	
+		SELECT  toudixinxi.* FROM toudixinxi  toudixinxi
  		<where> 1=1 ${ew.sqlSegment}</where>
 	</select>
 
     <select id="selectListView"
-		resultType="com.entity.view.ToudixinxiView" >
+		resultMap="toudixinxiMap" >
 
-		SELECT  toudixinxi.* FROM toudixinxi  toudixinxi 	        
+		SELECT  deliverys.* FROM deliverys  deliverys
         <where> 1=1 ${ew.sqlSegment}</where>
 	</select>
-	
+
 	<select id="selectView"
 		resultType="com.entity.view.ToudixinxiView" >
 		SELECT * FROM toudixinxi  toudixinxi <where> 1=1 ${ew.sqlSegment}</where>
 	</select>
-	
+
 
     <select id="selectValue" resultType="map" >
         SELECT ${params.xColumn}, sum(${params.yColumn}) total FROM toudixinxi
@@ -73,7 +73,7 @@
     </select>
 
     <select id="selectGroup" resultType="map" >
-        SELECT ${params.column} , count(1) total FROM toudixinxi
+        SELECT ${params.column} as toudiriqi, count(1) total FROM deliverys
         <where> 1=1 ${ew.sqlSegment}</where>
         group by ${params.column}
         limit 10

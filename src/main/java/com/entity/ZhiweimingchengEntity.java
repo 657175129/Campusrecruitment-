@@ -24,19 +24,19 @@ import com.baomidou.mybatisplus.enums.IdType;
 /**
  * 职位名称
  * 数据库通用操作实体类（普通增删改查）
- * @author 
- * @email 
+ * @author
+ * @email
  * @date 2023-04-08 13:45:44
  */
-@TableName("zhiweimingcheng")
+@TableName("position")
 public class ZhiweimingchengEntity<T> implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 
 	public ZhiweimingchengEntity() {
-		
+
 	}
-	
+
 	public ZhiweimingchengEntity(T t) {
 		try {
 			BeanUtils.copyProperties(this, t);
@@ -45,7 +45,7 @@ public class ZhiweimingchengEntity<T> implements Serializable {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * 主键id
 	 */
@@ -54,10 +54,10 @@ public class ZhiweimingchengEntity<T> implements Serializable {
 	/**
 	 * 职位名称
 	 */
-					
+	@TableField("position_name")
 	private String zhiweimingcheng;
-	
-	
+
+
 	@JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
 	@DateTimeFormat
 	private Date addtime;

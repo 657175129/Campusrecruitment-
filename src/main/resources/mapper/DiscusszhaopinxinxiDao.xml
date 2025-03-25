@@ -15,27 +15,27 @@
 
 	<select id="selectListVO"
 		resultType="com.entity.vo.DiscusszhaopinxinxiVO" >
-		SELECT * FROM discusszhaopinxinxi  discusszhaopinxinxi         
+		SELECT * FROM discusszhaopinxinxi  discusszhaopinxinxi
         <where> 1=1 ${ew.sqlSegment}</where>
 	</select>
-	
+
 	<select id="selectVO"
 		resultType="com.entity.vo.DiscusszhaopinxinxiVO" >
-		SELECT  discusszhaopinxinxi.* FROM discusszhaopinxinxi  discusszhaopinxinxi 	
+		SELECT  discusszhaopinxinxi.* FROM discusszhaopinxinxi  discusszhaopinxinxi
  		<where> 1=1 ${ew.sqlSegment}</where>
 	</select>
 
     <select id="selectListView"
-		resultType="com.entity.view.DiscusszhaopinxinxiView" >
+		resultMap="discusszhaopinxinxiMap" >
 
-		SELECT  discusszhaopinxinxi.* FROM discusszhaopinxinxi  discusszhaopinxinxi 	        
+		SELECT  comment.* FROM comment  comment
         <where> 1=1 ${ew.sqlSegment}</where>
 	</select>
-	
+
 	<select id="selectView"
 		resultType="com.entity.view.DiscusszhaopinxinxiView" >
 		SELECT * FROM discusszhaopinxinxi  discusszhaopinxinxi <where> 1=1 ${ew.sqlSegment}</where>
 	</select>
-	
+
 
 </mapper>

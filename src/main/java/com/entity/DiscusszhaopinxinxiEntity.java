@@ -24,19 +24,19 @@ import com.baomidou.mybatisplus.enums.IdType;
 /**
  * 招聘信息评论表
  * 数据库通用操作实体类（普通增删改查）
- * @author 
- * @email 
+ * @author
+ * @email
  * @date 2023-04-08 13:45:44
  */
-@TableName("discusszhaopinxinxi")
+@TableName("comment")
 public class DiscusszhaopinxinxiEntity<T> implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 
 	public DiscusszhaopinxinxiEntity() {
-		
+
 	}
-	
+
 	public DiscusszhaopinxinxiEntity(T t) {
 		try {
 			BeanUtils.copyProperties(this, t);
@@ -45,7 +45,7 @@ public class DiscusszhaopinxinxiEntity<T> implements Serializable {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * 主键id
 	 */
@@ -54,40 +54,55 @@ public class DiscusszhaopinxinxiEntity<T> implements Serializable {
 	/**
 	 * 关联表id
 	 */
-					
+//	@TableField("")
+
 	private Long refid;
-	
+
 	/**
 	 * 用户id
 	 */
-					
 	private Long userid;
-	
+
 	/**
 	 * 头像
 	 */
-					
 	private String avatarurl;
-	
+
 	/**
 	 * 用户名
 	 */
-					
 	private String nickname;
-	
+
 	/**
 	 * 评论内容
 	 */
-					
+
 	private String content;
-	
+
 	/**
 	 * 回复内容
 	 */
-					
 	private String reply;
-	
-	
+
+	private String employmentId;
+	private String studentId;
+
+	public String getEmploymentId() {
+		return employmentId;
+	}
+
+	public void setEmploymentId(String employmentId) {
+		this.employmentId = employmentId;
+	}
+
+	public String getStudentId() {
+		return studentId;
+	}
+
+	public void setStudentId(String studentId) {
+		this.studentId = studentId;
+	}
+
 	@JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
 	@DateTimeFormat
 	private Date addtime;

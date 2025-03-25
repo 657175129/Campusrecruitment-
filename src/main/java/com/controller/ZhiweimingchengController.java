@@ -40,7 +40,7 @@ import com.utils.CommonUtil;
 import java.io.IOException;
 
 /**
- * 职位名称
+ * 岗位分类
  * 后端接口
  * @author 
  * @email 
@@ -100,7 +100,7 @@ public class ZhiweimingchengController {
         EntityWrapper< ZhiweimingchengEntity> ew = new EntityWrapper< ZhiweimingchengEntity>();
  		ew.allEq(MPUtil.allEQMapPre( zhiweimingcheng, "zhiweimingcheng")); 
 		ZhiweimingchengView zhiweimingchengView =  zhiweimingchengService.selectView(ew);
-		return R.ok("查询职位名称成功").put("data", zhiweimingchengView);
+		return R.ok("查询岗位分类成功").put("data", zhiweimingchengView);
     }
 	
     /**

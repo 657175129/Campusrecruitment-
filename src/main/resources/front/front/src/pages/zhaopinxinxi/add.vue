@@ -25,8 +25,8 @@
                 <img v-if="ruleForm.zhaopintupian.substring(0,4)=='http'" class="upload-img" style="margin-right:20px;" v-bind:key="index" :src="ruleForm.zhaopintupian.split(',')[0]" width="100" height="100">
                 <img v-else class="upload-img" style="margin-right:20px;" v-bind:key="index" v-for="(item,index) in ruleForm.zhaopintupian.split(',')" :src="baseUrl+item" width="100" height="100">
             </el-form-item>
-          <el-form-item :style='{"border":"0px solid #dfdfdf","padding":"10px","boxShadow":"0px 0px 0px #eee","margin":"0 0 8px 0","borderRadius":"8px","background":"none"}'  label="职位名称" prop="zhiweimingcheng">
-            <el-select v-model="ruleForm.zhiweimingcheng" placeholder="请选择职位名称"  >
+          <el-form-item :style='{"border":"0px solid #dfdfdf","padding":"10px","boxShadow":"0px 0px 0px #eee","margin":"0 0 8px 0","borderRadius":"8px","background":"none"}'  label="岗位分类" prop="zhiweimingcheng">
+            <el-select v-model="ruleForm.zhiweimingcheng" placeholder="请选择岗位分类"  >
               <el-option
                   v-for="(item,index) in zhiweimingchengOptions"
                   :key="index"

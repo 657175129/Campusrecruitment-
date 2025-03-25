@@ -5,40 +5,40 @@
 
 	<!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="com.entity.LuqutongzhiEntity" id="luqutongzhiMap">
-        <result property="zhanghao" column="zhanghao"/>
-        <result property="xingming" column="xingming"/>
+        <result property="zhanghao" column="account"/>
+        <result property="xingming" column="name"/>
         <result property="shoujihaoma" column="shoujihaoma"/>
-        <result property="yaoqingneirong" column="yaoqingneirong"/>
-        <result property="yaoqingriqi" column="yaoqingriqi"/>
-        <result property="qiyezhanghao" column="qiyezhanghao"/>
-        <result property="qiyemingcheng" column="qiyemingcheng"/>
-        <result property="lianxishouji" column="lianxishouji"/>
-        <result property="shhf" column="shhf"/>
+        <result property="yaoqingneirong" column="phone"/>
+        <result property="yaoqingriqi" column="offer_time"/>
+        <result property="qiyezhanghao" column="enterprsie_account"/>
+        <result property="qiyemingcheng" column="enterprise_name"/>
+        <result property="lianxishouji" column="contact"/>
+        <result property="shhf" column="apply_content"/>
     </resultMap>
 
 	<select id="selectListVO"
 		resultType="com.entity.vo.LuqutongzhiVO" >
-		SELECT * FROM luqutongzhi  luqutongzhi         
+		SELECT * FROM luqutongzhi  luqutongzhi
         <where> 1=1 ${ew.sqlSegment}</where>
 	</select>
-	
+
 	<select id="selectVO"
 		resultType="com.entity.vo.LuqutongzhiVO" >
-		SELECT  luqutongzhi.* FROM luqutongzhi  luqutongzhi 	
+		SELECT  luqutongzhi.* FROM luqutongzhi  luqutongzhi
  		<where> 1=1 ${ew.sqlSegment}</where>
 	</select>
 
     <select id="selectListView"
-		resultType="com.entity.view.LuqutongzhiView" >
+		resultMap="luqutongzhiMap" >
 
-		SELECT  luqutongzhi.* FROM luqutongzhi  luqutongzhi 	        
+		SELECT  offers.* FROM offers  offers
         <where> 1=1 ${ew.sqlSegment}</where>
 	</select>
-	
+
 	<select id="selectView"
 		resultType="com.entity.view.LuqutongzhiView" >
 		SELECT * FROM luqutongzhi  luqutongzhi <where> 1=1 ${ew.sqlSegment}</where>
 	</select>
-	
+
 
 </mapper>

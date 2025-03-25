@@ -1,5 +1,6 @@
 package com.entity;
 
+import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -14,11 +15,11 @@ import java.util.Date;
 /**
  * 招聘意愿
  * 数据库通用操作实体类（普通增删改查）
- * @author 
- * @email 
+ * @author
+ * @email
  * @date 2023-04-08 13:45:44
  */
-@TableName("luqutongzhi")
+@TableName("offers")
 public class LuqutongzhiEntity<T> implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -35,7 +36,25 @@ public class LuqutongzhiEntity<T> implements Serializable {
 			e.printStackTrace();
 		}
 	}
-	
+
+	private Integer offerType;
+
+	public Integer getOfferType() {
+		return offerType;
+	}
+
+	public void setOfferType(Integer offerType) {
+		this.offerType = offerType;
+	}
+
+	public String getEnterprsieAccount() {
+		return enterprsieAccount;
+	}
+
+	public void setEnterprsieAccount(String enterprsieAccount) {
+		this.enterprsieAccount = enterprsieAccount;
+	}
+
 	/**
 	 * 主键id
 	 */
@@ -44,60 +63,82 @@ public class LuqutongzhiEntity<T> implements Serializable {
 	/**
 	 * 账号
 	 */
-					
+	@TableField("account")
 	private String zhanghao;
-	
+	private String account;
+
+	public String getAccount() {
+		return account;
+	}
+
+	public void setAccount(String account) {
+		this.account = account;
+	}
+
 	/**
 	 * 姓名
 	 */
-					
+	@TableField("name")
 	private String xingming;
-	
+
 	/**
 	 * 手机号码
 	 */
-					
+	@TableField("phone")
 	private String shoujihaoma;
-	
+
 	/**
 	 * 邀请内容
 	 */
-					
+	@TableField("content")
 	private String yaoqingneirong;
-	
+
 	/**
 	 * 邀请日期
 	 */
-				
+
 	@JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd")
-	@DateTimeFormat 		
+	@DateTimeFormat
+	@TableField("offer_time")
 	private Date yaoqingriqi;
-	
+
 	/**
 	 * 企业账号
 	 */
-					
+	@TableField("enterprsie_account")
 	private String qiyezhanghao;
-	
+
+
+	private String enterprsieAccount;
+
+	public String getEnterpriseAccount() {
+		return enterprsieAccount;
+	}
+
+	public void setEnterpriseAccount(String enterpriseAccount) {
+		this.enterprsieAccount = enterpriseAccount;
+	}
+
 	/**
 	 * 企业名称
 	 */
-					
+
+	@TableField("enterprise_name")
 	private String qiyemingcheng;
-	
+
 	/**
 	 * 联系手机
 	 */
-					
+	@TableField("contact")
 	private String lianxishouji;
-	
+
 	/**
 	 * 回复内容
 	 */
-					
+	@TableField("apply_content")
 	private String shhf;
-	
-	
+
+
 	@JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
 	@DateTimeFormat
 	private Date addtime;

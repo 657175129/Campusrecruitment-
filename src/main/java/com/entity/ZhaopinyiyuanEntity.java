@@ -24,19 +24,19 @@ import com.baomidou.mybatisplus.enums.IdType;
 /**
  * 招聘意愿
  * 数据库通用操作实体类（普通增删改查）
- * @author 
- * @email 
+ * @author
+ * @email
  * @date 2023-04-08 13:45:44
  */
-@TableName("zhaopinyiyuan")
+@TableName("interviews")
 public class ZhaopinyiyuanEntity<T> implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 
 	public ZhaopinyiyuanEntity() {
-		
+
 	}
-	
+
 	public ZhaopinyiyuanEntity(T t) {
 		try {
 			BeanUtils.copyProperties(this, t);
@@ -45,7 +45,68 @@ public class ZhaopinyiyuanEntity<T> implements Serializable {
 			e.printStackTrace();
 		}
 	}
-	
+
+
+	private String interviewTime;
+	private String result;
+	private String place;
+	private String salary;
+	private String status;
+
+	public String getInterviewTime() {
+		return interviewTime;
+	}
+
+	public void setInterviewTime(String interviewTime) {
+		this.interviewTime = interviewTime;
+	}
+
+	public String getResult() {
+		return result;
+	}
+
+	public void setResult(String result) {
+		this.result = result;
+	}
+
+	public String getPlace() {
+		return place;
+	}
+
+	public void setPlace(String place) {
+		this.place = place;
+	}
+
+	public String getSalary() {
+		return salary;
+	}
+
+	public void setSalary(String salary) {
+		this.salary = salary;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	/**
+	 *
+	 *
+	 * */
+	private String employmentId;
+
+	public String getEmploymentId() {
+		return employmentId;
+	}
+
+	public void setEmploymentId(String employmentId) {
+		this.employmentId = employmentId;
+	}
+
 	/**
 	 * 主键id
 	 */
@@ -54,60 +115,80 @@ public class ZhaopinyiyuanEntity<T> implements Serializable {
 	/**
 	 * 账号
 	 */
-					
+	@TableField("account")
 	private String zhanghao;
-	
+
+	private String account;
+
+	public String getAccount() {
+		return account;
+	}
+
+	public void setAccount(String account) {
+		this.account = account;
+	}
+
 	/**
 	 * 姓名
 	 */
-					
+	@TableField("name")
 	private String xingming;
-	
+
 	/**
 	 * 手机号码
 	 */
-					
+	@TableField("phone")
 	private String shoujihaoma;
-	
+
 	/**
 	 * 邀请内容
 	 */
-					
+	@TableField("detail")
 	private String yaoqingneirong;
-	
+
 	/**
 	 * 邀请日期
 	 */
-				
+	@TableField("interview_time")
 	@JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd")
-	@DateTimeFormat 		
+	@DateTimeFormat
 	private Date yaoqingriqi;
-	
+
 	/**
 	 * 企业账号
 	 */
-					
+	@TableField("enterprise_account")
 	private String qiyezhanghao;
-	
+
+	private String enterpriseAccount;
+
+	public String getEnterpriseAccount() {
+		return enterpriseAccount;
+	}
+
+	public void setEnterpriseAccount(String enterpriseAccount) {
+		this.enterpriseAccount = enterpriseAccount;
+	}
+
 	/**
 	 * 企业名称
 	 */
-					
+	@TableField("enterprise_name")
 	private String qiyemingcheng;
-	
+
 	/**
 	 * 联系手机
 	 */
-					
+	@TableField("connect")
 	private String lianxishouji;
-	
+
 	/**
 	 * 回复内容
 	 */
-					
+	@TableField("content")
 	private String shhf;
-	
-	
+
+
 	@JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
 	@DateTimeFormat
 	private Date addtime;

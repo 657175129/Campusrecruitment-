@@ -14,22 +14,22 @@ import com.entity.view.QiyeView;
 
 /**
  * 企业
- * 
- * @author 
- * @email 
+ *
+ * @author
+ * @email
  * @date 2023-04-08 13:45:44
  */
 public interface QiyeDao extends BaseMapper<QiyeEntity> {
-	
+
 	List<QiyeVO> selectListVO(@Param("ew") Wrapper<QiyeEntity> wrapper);
-	
+
 	QiyeVO selectVO(@Param("ew") Wrapper<QiyeEntity> wrapper);
-	
+
 	List<QiyeView> selectListView(@Param("ew") Wrapper<QiyeEntity> wrapper);
 
-	List<QiyeView> selectListView(Pagination page,@Param("ew") Wrapper<QiyeEntity> wrapper);
-	
+	List<Map<String,String>> selectListView(Pagination page,@Param("ew") Wrapper<QiyeEntity> wrapper);
+
 	QiyeView selectView(@Param("ew") Wrapper<QiyeEntity> wrapper);
-	
+
 
 }

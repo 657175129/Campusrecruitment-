@@ -6,7 +6,7 @@
 			<el-breadcrumb-item v-for="(item, index) in breadcrumbItem" :key="index">{{item.name}}</el-breadcrumb-item>
 		</el-breadcrumb>
 	</div>
-	
+
 	<div class="detail-preview" :style='{"width":"1200px","padding":"0 0 24px","margin":"0px auto","position":"relative"}'>
 		<div class="attr" :style='{"border":"1px solid #9ce3b5","padding":"16px 16px 20px 16px","boxShadow":"0px 2px 6px #ddd,inset 0px 0px 600px 0px #e0f8e8","margin":"20px 0 20px 0","overflow":"hidden","borderRadius":"16px","background":"#fff","position":"relative"}'>
 			<el-carousel :style='{"width":"100%","margin":"20px 0px 0 0","float":"","height":"400px"}' trigger="click" indicator-position="inside" arrow="always" type="card" direction="horizontal" height="400px" autoplay="true" interval="3000" loop="true">
@@ -15,8 +15,8 @@
 					<el-image :style='{"objectFit":"cover","width":"50%","height":"100%"}' v-else :src="baseUrl + item" fit="cover" class="image"></el-image>
 				</el-carousel-item>
 			</el-carousel>
-	
-			
+
+
 			<div class="info" :style='{"width":"98%","padding":"0px 0 20px","margin":"40px auto 0 auto","background":"none","height":"auto"}'>
 				<div class="item" :style='{"border":"0px solid #ddd","padding":"10px 10px","boxShadow":"4px 4px 4px #ddd","margin":"0 0 10px 0","alignItems":"center","borderRadius":"2px","background":"linear-gradient(135deg, rgba(17,112,210,1) 0%, rgba(8,179,68,1) 100%)","display":"flex","justifyContent":"space-between"}'>
 					<div :style='{"color":"#fff","fontSize":"16px"}'>
@@ -27,7 +27,7 @@
 				</div>
 
 				<div class="item" :style='{"border":"0px solid #dfdfdf","padding":"0px 10px","boxShadow":"0px 2px 0px #eee","margin":"0 0 8px 0","borderRadius":"0px","background":"none","display":"flex","justifyContent":"spaceBetween"}'>
-					<div class="lable" :style='{"width":"120px","padding":"0 10px","fontSize":"14px","lineHeight":"40px","color":"#333","textAlign":"right"}'>职位名称</div>
+					<div class="lable" :style='{"width":"120px","padding":"0 10px","fontSize":"14px","lineHeight":"40px","color":"#333","textAlign":"right"}'>岗位分类</div>
 					<div  :style='{"width":"498px","padding":"8px 10px 0","fontSize":"14px","lineHeight":"24px","color":"#666","height":"auto"}'>{{detail.zhiweimingcheng}}</div>
 				</div>
 				<div class="item" :style='{"border":"0px solid #dfdfdf","padding":"0px 10px","boxShadow":"0px 2px 0px #eee","margin":"0 0 8px 0","borderRadius":"0px","background":"none","display":"flex","justifyContent":"spaceBetween"}'>
@@ -58,15 +58,30 @@
 					<div class="lable" :style='{"width":"120px","padding":"0 10px","fontSize":"14px","lineHeight":"40px","color":"#333","textAlign":"right"}'>发布日期</div>
 					<div  :style='{"width":"498px","padding":"8px 10px 0","fontSize":"14px","lineHeight":"24px","color":"#666","height":"auto"}'>{{detail.faburiqi}}</div>
 				</div>
+
+        <div class="item" :style='{"border":"0px solid #dfdfdf","padding":"0px 10px","boxShadow":"0px 2px 0px #eee","margin":"0 0 8px 0","borderRadius":"0px","background":"none","display":"flex","justifyContent":"spaceBetween"}'>
+          <div class="lable" :style='{"width":"120px","padding":"0 10px","fontSize":"14px","lineHeight":"40px","color":"#333","textAlign":"right"}'>招聘人数</div>
+          <div  :style='{"width":"498px","padding":"8px 10px 0","fontSize":"14px","lineHeight":"24px","color":"#666","height":"auto"}'>{{detail.number}}</div>
+        </div>
+        <div class="item" :style='{"border":"0px solid #dfdfdf","padding":"0px 10px","boxShadow":"0px 2px 0px #eee","margin":"0 0 8px 0","borderRadius":"0px","background":"none","display":"flex","justifyContent":"spaceBetween"}'>
+          <div class="lable" :style='{"width":"120px","padding":"0 10px","fontSize":"14px","lineHeight":"40px","color":"#333","textAlign":"right"}'>工作地点</div>
+          <div  :style='{"width":"498px","padding":"8px 10px 0","fontSize":"14px","lineHeight":"24px","color":"#666","height":"auto"}'>{{detail.place}}</div>
+        </div>
+        <div class="item" :style='{"border":"0px solid #dfdfdf","padding":"0px 10px","boxShadow":"0px 2px 0px #eee","margin":"0 0 8px 0","borderRadius":"0px","background":"none","display":"flex","justifyContent":"spaceBetween"}'>
+          <div class="lable" :style='{"width":"120px","padding":"0 10px","fontSize":"14px","lineHeight":"40px","color":"#333","textAlign":"right"}'>招聘状态</div>
+          <div  :style='{"width":"498px","padding":"8px 10px 0","fontSize":"14px","lineHeight":"24px","color":"#666","height":"auto"}'>{{detail.state}}</div>
+        </div>
+
+
 				<div class="btn" :style='{"padding":"10px 0","flexWrap":"wrap","display":"flex"}'>
 					<el-button :style='{"border":"0px solid #ffc800","cursor":"pointer","padding":"0 10px","margin":"0 5px 0 0","outline":"none","color":"#fff","borderRadius":"4px","background":"linear-gradient(135deg, rgba(17,112,210,1) 0%, rgba(8,179,68,1) 100%)","width":"auto","lineHeight":"40px","fontSize":"14px","height":"40px"}' v-if="isAuth('zhaopinxinxi','投递')" @click="onAcross('toudixinxi','','','')" type="warning">投递</el-button>
 					<el-button :style='{"border":"0px solid #ffc800","cursor":"pointer","padding":"0 10px","margin":"0 5px 0 0","outline":"none","color":"#fff","borderRadius":"4px","background":"linear-gradient(135deg, rgba(17,112,210,1) 0%, rgba(8,179,68,1) 100%)","width":"auto","lineHeight":"40px","fontSize":"14px","height":"40px"}' v-if="isAuth('zhaopinxinxi','咨询')" @click="onAcross('zaixianzixun','','','')" type="warning">咨询</el-button>
 				</div>
 			</div>
-			
+
 		</div>
-		
-		
+
+
 		<el-tabs class="detail" :style='{"border":"1px solid #9ce3b5","minHeight":"350px","boxShadow":"0px 2px 6px #ddd,inset 0px 0px 600px 0px #e0f8e8","padding":"16px","margin":"20px 0 0","borderRadius":"16px","background":"#FFF"}' v-model="activeName" type="border-card">
 			<el-tab-pane label="招聘内容" name="first">
 				<div v-html="detail.zhaopinneirong"></div>
@@ -81,7 +96,7 @@
 						<el-button :style='{"border":"1px solid #bbb","cursor":"pointer","padding":"0","boxShadow":"1px 2px 3px #ccc","margin":"0 20px 0 0","color":"#999","outline":"none","borderRadius":"4px","background":"#fff","width":"128px","lineHeight":"40px","fontSize":"14px","height":"40px"}' @click="resetForm('form')">重置</el-button>
 					</el-form-item>
 				</el-form>
-				
+
 				<div v-if="infoList.length" :style='{"boxShadow":"0 0px 0px 0 rgba(0, 0, 0, .1)","padding":"20px 0 0"}' class="comment">
 					<div :style='{"padding":"0px 0","margin":"0 0 8px","borderColor":"#b4ebc8","alignItems":"center","borderWidth":"0 0 0px 0","width":"100%","borderStyle":"solid","height":"auto"}' v-for="item in infoList" :key="item.id">
 						<div class="user" :style='{"padding":"4px","alignItems":"center","borderRadius":"4px","background":"linear-gradient(135deg, rgba(17,112,210,1) 0%, rgba(8,179,68,1) 100%)","display":"flex","width":"100%","height":"auto"}'>
@@ -97,7 +112,7 @@
 						</div>
 					</div>
 				</div>
-				
+
 				<el-pagination
 				  background
 				  class="pagination"
@@ -115,7 +130,7 @@
 				  @next-click="nextClick"
 				></el-pagination>
 			</el-tab-pane>
-			
+
 		</el-tabs>
 	</div>
 </div>
@@ -295,6 +310,7 @@
       },
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
+          // console.log(valid)
           if (valid) {
             this.form.refid = this.detail.id;
             this.form.avatarurl = localStorage.getItem('headportrait')?localStorage.getItem('headportrait'):'';
@@ -328,46 +344,46 @@
 
 <style rel="stylesheet/scss" lang="scss" scoped>
 	.detail-preview {
-	
+
 	  .attr {
 	    .el-carousel /deep/ .el-carousel__indicator button {
 	      width: 0;
 	      height: 0;
 	      display: none;
 	    }
-	
+
 	    .el-input-number__decrease:hover:not(.is-disabled)~.el-input .el-input__inner:not(.is-disabled), .el-input-number__increase:hover:not(.is-disabled)~.el-input .el-input__inner:not(.is-disabled) {
 	      border-color: none;
 	    }
 	  }
-	
+
 	  .detail {
 	    & /deep/ .el-tabs__header .el-tabs__nav-wrap {
 	      margin-bottom: 0;
 	    }
-	
+
 	    & .add .el-textarea {
 	      width: auto;
 	    }
 	  }
 	}
-	
+
 	.attr .el-carousel /deep/ .el-carousel__container .el-carousel__arrow--left {
 		width: 36px;
 		font-size: 12px;
 		height: 36px;
 	}
-	
+
 	.attr .el-carousel /deep/ .el-carousel__container .el-carousel__arrow--left:hover {
 		background: #ffa100;
 	}
-	
+
 	.attr .el-carousel /deep/ .el-carousel__container .el-carousel__arrow--right {
 		width: 36px;
 		font-size: 12px;
 		height: 36px;
 	}
-	
+
 	.attr .el-carousel /deep/ .el-carousel__container .el-carousel__arrow--right:hover {
 		background: #ffa100;
 	}
@@ -379,7 +395,7 @@
 		position: absolute;
 		list-style: none;
 	}
-	
+
 	.attr .el-carousel /deep/ .el-carousel__indicators li {
 		border-radius: 50%;
 		padding: 0;
@@ -391,7 +407,7 @@
 		transition: 0.3s;
 		height: 12px;
 	}
-	
+
 	.attr .el-carousel /deep/ .el-carousel__indicators li:hover {
 		border-radius: 50%;
 		padding: 0;
@@ -402,7 +418,7 @@
 		opacity: 0.7;
 		height: 12px;
 	}
-	
+
 	.attr .el-carousel /deep/ .el-carousel__indicators li.is-active {
 		border-radius: 50%;
 		padding: 0;
@@ -413,7 +429,7 @@
 		opacity: 1;
 		height: 12px;
 	}
-	
+
 	.attr .el-input-number /deep/ .el-input-number__decrease {
 		cursor: pointer;
 		z-index: 1;
@@ -432,7 +448,7 @@
 		text-align: center;
 		height: 38px;
 	}
-	
+
 	.attr .el-input-number /deep/ .el-input-number__decrease i {
 		color: #666;
 		font-size: 14px;
@@ -456,12 +472,12 @@
 		text-align: center;
 		height: 38px;
 	}
-	
+
 	.attr .el-input-number /deep/ .el-input-number__increase i {
 		color: #666;
 		font-size: 14px;
 	}
-	
+
 	.attr .el-input-number /deep/ .el-input .el-input__inner {
 		border: 1px solid #DCDFE6;
 		border-radius: 4px;
@@ -476,7 +492,7 @@
 		text-align: center;
 		height: 40px;
 	}
-	
+
 	.detail-preview .detail.el-tabs /deep/ .el-tabs__header {
 		border-radius: 8px;
 		padding: 4px 6px;
@@ -486,7 +502,7 @@
 		border-width: 0 0 0px 0;
 		border-style: solid;
 	}
-	
+
 	.detail-preview .detail.el-tabs /deep/ .el-tabs__header .el-tabs__item {
 		border: 1px solid #fff;
 		padding: 0 24px;
@@ -502,7 +518,7 @@
 		list-style: none;
 		height: 40px;
 	}
-	
+
 	.detail-preview .detail.el-tabs /deep/ .el-tabs__header .el-tabs__item:hover {
 		border: 1px solid #08b344;
 		border-radius: 4px;
@@ -513,7 +529,7 @@
 		line-height: 40px;
 		height: 40px;
 	}
-	
+
 	.detail-preview .detail.el-tabs /deep/ .el-tabs__header .el-tabs__item.is-active {
 		border: 1px solid #08b344;
 		border-radius: 4px;
@@ -524,11 +540,11 @@
 		line-height: 40px;
 		height: 40px;
 	}
-	
+
 	.detail-preview .detail.el-tabs /deep/ .el-tabs__content {
 		padding: 15px;
 	}
-	
+
 	.detail-preview .detail.el-tabs .add /deep/ .el-form-item__label {
 		padding: 0 10px 0 0;
 		color: #666;
@@ -537,7 +553,7 @@
 		line-height: 40px;
 		text-align: right;
 	}
-	
+
 	.detail-preview .detail.el-tabs .add /deep/ .el-textarea__inner {
 		border: 0;
 		border-radius: 4px;
@@ -552,13 +568,13 @@
 		line-height: 32px;
 		height: 200px;
 	}
-	
+
 	.breadcrumb-preview .el-breadcrumb /deep/ .el-breadcrumb__separator {
 		margin: 0 9px;
 		color: #ccc;
 		font-weight: 500;
 	}
-	
+
 	.breadcrumb-preview .el-breadcrumb /deep/ .el-breadcrumb__inner a {
 		color: #333;
 		display: inline-block;
@@ -568,7 +584,7 @@
 		color: #999;
 		display: inline-block;
 	}
-	
+
 	.el-pagination /deep/ .el-pagination__total {
 		margin: 0 10px 0 0;
 		color: #666;
@@ -579,7 +595,7 @@
 		line-height: 28px;
 		height: 28px;
 	}
-	
+
 	.el-pagination /deep/ .btn-prev {
 		border: none;
 		border-radius: 2px;
@@ -594,7 +610,7 @@
 		min-width: 35px;
 		height: 28px;
 	}
-	
+
 	.el-pagination /deep/ .btn-next {
 		border: none;
 		border-radius: 2px;
@@ -609,7 +625,7 @@
 		min-width: 35px;
 		height: 28px;
 	}
-	
+
 	.el-pagination /deep/ .btn-prev:disabled {
 		border: none;
 		cursor: not-allowed;
@@ -624,7 +640,7 @@
 		line-height: 28px;
 		height: 28px;
 	}
-	
+
 	.el-pagination /deep/ .btn-next:disabled {
 		border: none;
 		cursor: not-allowed;
@@ -639,14 +655,14 @@
 		line-height: 28px;
 		height: 28px;
 	}
-	
+
 	.el-pagination /deep/ .el-pager {
 		padding: 0;
 		margin: 0;
 		display: inline-block;
 		vertical-align: top;
 	}
-	
+
 	.el-pagination /deep/ .el-pager .number {
 		cursor: pointer;
 		padding: 0 4px;
@@ -662,7 +678,7 @@
 		min-width: 30px;
 		height: 28px;
 	}
-	
+
 	.el-pagination /deep/ .el-pager .number:hover {
 		cursor: pointer;
 		padding: 0 4px;
@@ -694,7 +710,7 @@
 		min-width: 30px;
 		height: 28px;
 	}
-	
+
 	.el-pagination /deep/ .el-pagination__sizes {
 		display: inline-block;
 		vertical-align: top;
@@ -702,13 +718,13 @@
 		line-height: 28px;
 		height: 28px;
 	}
-	
+
 	.el-pagination /deep/ .el-pagination__sizes .el-input {
 		margin: 0 5px;
 		width: 100px;
 		position: relative;
 	}
-	
+
 	.el-pagination /deep/ .el-pagination__sizes .el-input .el-input__inner {
 		border: 1px solid #DCDFE6;
 		cursor: pointer;
@@ -724,14 +740,14 @@
 		text-align: center;
 		height: 28px;
 	}
-	
+
 	.el-pagination /deep/ .el-pagination__sizes .el-input span.el-input__suffix {
 		top: 0;
 		position: absolute;
 		right: 0;
 		height: 100%;
 	}
-	
+
 	.el-pagination /deep/ .el-pagination__sizes .el-input .el-input__suffix .el-select__caret {
 		cursor: pointer;
 		color: #C0C4CC;
@@ -750,7 +766,7 @@
 		line-height: 28px;
 		height: 28px;
 	}
-	
+
 	.el-pagination /deep/ .el-pagination__jump .el-input {
 		border-radius: 3px;
 		padding: 0 2px;
@@ -763,7 +779,7 @@
 		text-align: center;
 		height: 28px;
 	}
-	
+
 	.el-pagination /deep/ .el-pagination__jump .el-input .el-input__inner {
 		border: 1px solid #DCDFE6;
 		cursor: pointer;

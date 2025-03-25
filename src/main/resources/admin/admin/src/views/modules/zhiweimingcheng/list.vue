@@ -5,8 +5,8 @@
 			<el-form class="center-form-pv" :style='{"width":"150px","margin":"0","position":"absolute","right":"7%","background":"none","zIndex":"1003"}' :inline="true" :model="searchForm">
 				<el-row :style='{"flexWrap":"wrap","justifyContent":"center","display":"flex"}' >
 					<div :style='{"width":"100%","margin":"0 0 10px","flexWrap":"wrap","justifyContent":"center","display":"flex"}'>
-						<label :style='{"margin":"0","color":"#333","textAlign":"left","display":"inline-block","width":"100%","lineHeight":"40px","fontSize":"14px","fontWeight":"500","height":"40px"}' class="item-label">职位名称</label>
-						<el-input v-model="searchForm.zhiweimingcheng" placeholder="职位名称" clearable></el-input>
+						<label :style='{"margin":"0","color":"#333","textAlign":"left","display":"inline-block","width":"100%","lineHeight":"40px","fontSize":"14px","fontWeight":"500","height":"40px"}' class="item-label">岗位分类</label>
+						<el-input v-model="searchForm.zhiweimingcheng" placeholder="岗位分类" clearable></el-input>
 					</div>
 					<el-button :style='{"border":"2px solid","cursor":"pointer","padding":"0px","outline":"none","backgroundColor":"#fff","margin":"10px auto","color":"rgba(135, 154, 108, 1)","borderRadius":"4px","borderImage":"linear-gradient(180deg, rgba(135.00000715255737, 154.00000602006912, 108.00000116229057, 1), rgba(226.0000017285347, 226.0000017285347, 226.0000017285347, 0.3799999952316284)) 1 1","width":"100%","fontSize":"14px","height":"40px"}' type="success" @click="search()">查询</el-button>
 				</el-row>
@@ -33,7 +33,7 @@
 					<el-table-column :resizable='true' :sortable='false' label="索引" type="index" width="50" />
 					<el-table-column :resizable='true' :sortable='false'  
 						prop="zhiweimingcheng"
-					label="职位名称">
+					label="岗位分类">
 						<template slot-scope="scope">
 							{{scope.row.zhiweimingcheng}}
 						</template>

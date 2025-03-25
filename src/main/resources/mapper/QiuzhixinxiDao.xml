@@ -5,47 +5,47 @@
 
 	<!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="com.entity.QiuzhixinxiEntity" id="qiuzhixinxiMap">
-        <result property="zhanghao" column="zhanghao"/>
-        <result property="xingming" column="xingming"/>
-        <result property="xingbie" column="xingbie"/>
-        <result property="shoujihaoma" column="shoujihaoma"/>
-        <result property="touxiang" column="touxiang"/>
-        <result property="nianling" column="nianling"/>
-        <result property="xueli" column="xueli"/>
-        <result property="biyexuexiao" column="biyexuexiao"/>
-        <result property="gongzuojingli" column="gongzuojingli"/>
-        <result property="shanzhang" column="shanzhang"/>
-        <result property="qzzt" column="qzzt"/>
-        <result property="gzdd" column="gzdd"/>
-        <result property="jianlifujian" column="jianlifujian"/>
-        <result property="xunzhaozhiwei" column="xunzhaozhiwei"/>
-        <result property="daiyuxinchou" column="daiyuxinchou"/>
-        <result property="faburiqi" column="faburiqi"/>
+        <result property="zhanghao" column="account"/>
+        <result property="xingming" column="name"/>
+        <result property="xingbie" column="sex"/>
+        <result property="shoujihaoma" column="phone"/>
+        <result property="touxiang" column="avator"/>
+        <result property="nianling" column="age"/>
+        <result property="xueli" column="education"/>
+        <result property="biyexuexiao" column="gra_schcool"/>
+        <result property="gongzuojingli" column="work_experience"/>
+        <result property="shanzhang" column="skill"/>
+        <result property="qzzt" column="work_status"/>
+        <result property="gzdd" column="place"/>
+        <result property="jianlifujian" column="resume"/>
+        <result property="xunzhaozhiwei" column="find_position"/>
+        <result property="daiyuxinchou" column="salary"/>
+        <result property="faburiqi" column="publish_time"/>
     </resultMap>
 
 	<select id="selectListVO"
 		resultType="com.entity.vo.QiuzhixinxiVO" >
-		SELECT * FROM qiuzhixinxi  qiuzhixinxi         
+		SELECT * FROM qiuzhixinxi  qiuzhixinxi
         <where> 1=1 ${ew.sqlSegment}</where>
 	</select>
-	
+
 	<select id="selectVO"
 		resultType="com.entity.vo.QiuzhixinxiVO" >
-		SELECT  qiuzhixinxi.* FROM qiuzhixinxi  qiuzhixinxi 	
+		SELECT  qiuzhixinxi.* FROM qiuzhixinxi  qiuzhixinxi
  		<where> 1=1 ${ew.sqlSegment}</where>
 	</select>
 
     <select id="selectListView"
-		resultType="com.entity.view.QiuzhixinxiView" >
+		resultMap="qiuzhixinxiMap" >
 
-		SELECT  qiuzhixinxi.* FROM qiuzhixinxi  qiuzhixinxi 	        
+		SELECT  search.* FROM search  search
         <where> 1=1 ${ew.sqlSegment}</where>
 	</select>
-	
+
 	<select id="selectView"
 		resultType="com.entity.view.QiuzhixinxiView" >
 		SELECT * FROM qiuzhixinxi  qiuzhixinxi <where> 1=1 ${ew.sqlSegment}</where>
 	</select>
-	
+
 
 </mapper>

@@ -72,6 +72,7 @@ export default {
       this.$storage.remove("Token");
       this.$router.replace({ name: "login" });
     },
+
     // 修改密码
     onUpdateHandler() {
       this.$refs["ruleForm"].validate(valid => {
@@ -127,6 +128,7 @@ export default {
         }
       });
     }
+
   }
 };
 </script>

@@ -24,19 +24,19 @@ import com.baomidou.mybatisplus.enums.IdType;
 /**
  * 投递信息
  * 数据库通用操作实体类（普通增删改查）
- * @author 
- * @email 
+ * @author
+ * @email
  * @date 2023-04-08 13:45:44
  */
-@TableName("toudixinxi")
+@TableName("deliverys")
 public class ToudixinxiEntity<T> implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 
 	public ToudixinxiEntity() {
-		
+
 	}
-	
+
 	public ToudixinxiEntity(T t) {
 		try {
 			BeanUtils.copyProperties(this, t);
@@ -45,7 +45,7 @@ public class ToudixinxiEntity<T> implements Serializable {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * 主键id
 	 */
@@ -54,96 +54,159 @@ public class ToudixinxiEntity<T> implements Serializable {
 	/**
 	 * 招聘名称
 	 */
-					
+	@TableField("job_name")
 	private String zhaopinmingcheng;
-	
+
 	/**
 	 * 职位名称
 	 */
-					
+	@TableField("postion_name")
 	private String zhiweimingcheng;
-	
+
 	/**
 	 * 企业账号
 	 */
-					
+	@TableField("enterprise_account")
 	private String qiyezhanghao;
-	
+
+	private String enterpriseAccount;
+
+	public String getEnterpriseAccount() {
+		return enterpriseAccount;
+	}
+
+	public void setEnterpriseAccount(String enterpriseAccount) {
+		this.enterpriseAccount = enterpriseAccount;
+	}
+
+	public String getAccout() {
+		return accout;
+	}
+
+	public void setAccout(String accout) {
+		this.accout = accout;
+	}
+
+	/**
+	 * 学生外键id
+	 * */
+	private String studentId;
+
+	public String getStudentId() {
+		return studentId;
+	}
+
+	public void setStudentId(String studentId) {
+		this.studentId = studentId;
+	}
+
+	public String getEmploymentId() {
+		return employmentId;
+	}
+
+	public void setEmploymentId(String employmentId) {
+		this.employmentId = employmentId;
+	}
+	/*)
+	*
+	* 企业外键id
+	* */
+
+	private String employmentId;
+
+	public String getEnterpriseId() {
+		return employmentId;
+	}
+
+	public void setEnterpriseId(String employmentId) {
+		this.employmentId = employmentId;
+	}
+
 	/**
 	 * 企业名称
 	 */
-					
+	@TableField("enterprise_name")
 	private String qiyemingcheng;
-	
+
 	/**
 	 * 联系手机
 	 */
-					
+	@TableField("phone")
 	private String lianxishouji;
-	
+
 	/**
 	 * 账号
 	 */
-					
+	@TableField("accout")
 	private String zhanghao;
-	
+
+	private String accout;
+
+	public String getAccount() {
+		return accout;
+	}
+
+	public void setAccount(String account) {
+		this.accout = account;
+	}
+
 	/**
 	 * 姓名
 	 */
-					
+	@TableField("name")
 	private String xingming;
-	
+
 	/**
 	 * 手机号码
 	 */
-					
+	@TableField("deliver_phone")
 	private String shoujihaoma;
-	
+
 	/**
 	 * 简历附件
 	 */
-					
+	@TableField("resume")
 	private String jianlifujian;
-	
+
 	/**
 	 * 年龄
 	 */
-					
+	@TableField("age")
 	private Integer nianling;
-	
+
 	/**
 	 * 学历
 	 */
-					
+	@TableField("education")
 	private String xueli;
-	
+
 	/**
 	 * 投递备注
 	 */
-					
+	@TableField("remark")
 	private String toudibeizhu;
-	
+
 	/**
 	 * 投递日期
 	 */
-				
+	@TableField("date")
 	@JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd")
-	@DateTimeFormat 		
+	@DateTimeFormat
 	private Date toudiriqi;
-	
+
 	/**
 	 * 是否审核
 	 */
-					
+	@TableField("state")
 	private String sfsh;
-	
+
 	/**
 	 * 审核回复
 	 */
-					
+	@TableField("reply")
 	private String shhf;
-	
-	
+
+
 	@JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
 	@DateTimeFormat
 	private Date addtime;

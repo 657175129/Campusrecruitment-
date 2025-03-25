@@ -9,30 +9,35 @@
 			label-width="140px"
 		>
 			<template >
-				<el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' class="input" v-if="type!='info'" label="咨询编号" prop="zixunbianhao">
-					<el-input v-model="ruleForm.zixunbianhao" placeholder="咨询编号" readonly></el-input>
-				</el-form-item>
-				<el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' class="input" v-else-if="ruleForm.zixunbianhao" label="咨询编号" prop="zixunbianhao">
-					<el-input v-model="ruleForm.zixunbianhao" placeholder="咨询编号" readonly></el-input>
-				</el-form-item>
-				<el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' class="input" v-if="type!='info'"  label="企业账号" prop="qiyezhanghao">
-					<el-input v-model="ruleForm.qiyezhanghao" placeholder="企业账号" clearable  :readonly="ro.qiyezhanghao"></el-input>
-				</el-form-item>
-				<el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' v-else class="input" label="企业账号" prop="qiyezhanghao">
-					<el-input v-model="ruleForm.qiyezhanghao" placeholder="企业账号" readonly></el-input>
-				</el-form-item>
+<!--				<el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' class="input" v-if="type!='info'" label="咨询编号" prop="zixunbianhao">-->
+<!--					<el-input v-model="ruleForm.zixunbianhao" placeholder="咨询编号" readonly></el-input>-->
+<!--				</el-form-item>-->
+
+<!--				<el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' class="input" v-else-if="ruleForm.zixunbianhao" label="咨询编号" prop="zixunbianhao">-->
+<!--					<el-input v-model="ruleForm.zixunbianhao" placeholder="咨询编号" readonly></el-input>-->
+<!--				</el-form-item>-->
+
+<!--				<el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' class="input" v-if="type!='info'"  label="企业账号" prop="qiyezhanghao">-->
+<!--					<el-input v-model="ruleForm.qiyezhanghao" placeholder="企业账号" clearable  :readonly="ro.qiyezhanghao"></el-input>-->
+<!--				</el-form-item>-->
+<!--				<el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' v-else class="input" label="企业账号" prop="qiyezhanghao">-->
+<!--					<el-input v-model="ruleForm.qiyezhanghao" placeholder="企业账号" readonly></el-input>-->
+<!--				</el-form-item>-->
+
 				<el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' class="input" v-if="type!='info'"  label="企业名称" prop="qiyemingcheng">
 					<el-input v-model="ruleForm.qiyemingcheng" placeholder="企业名称" clearable  :readonly="ro.qiyemingcheng"></el-input>
 				</el-form-item>
 				<el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' v-else class="input" label="企业名称" prop="qiyemingcheng">
 					<el-input v-model="ruleForm.qiyemingcheng" placeholder="企业名称" readonly></el-input>
 				</el-form-item>
-				<el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' class="input" v-if="type!='info'"  label="账号" prop="zhanghao">
-					<el-input v-model="ruleForm.zhanghao" placeholder="账号" clearable  :readonly="ro.zhanghao"></el-input>
-				</el-form-item>
-				<el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' v-else class="input" label="账号" prop="zhanghao">
-					<el-input v-model="ruleForm.zhanghao" placeholder="账号" readonly></el-input>
-				</el-form-item>
+
+<!--				<el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' class="input" v-if="type!='info'"  label="账号" prop="zhanghao">-->
+<!--					<el-input v-model="ruleForm.zhanghao" placeholder="账号" clearable  :readonly="ro.zhanghao"></el-input>-->
+<!--				</el-form-item>-->
+<!--				<el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' v-else class="input" label="账号" prop="zhanghao">-->
+<!--					<el-input v-model="ruleForm.zhanghao" placeholder="账号" readonly></el-input>-->
+<!--				</el-form-item>-->
+
 				<el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' class="input" v-if="type!='info'"  label="姓名" prop="xingming">
 					<el-input v-model="ruleForm.xingming" placeholder="姓名" clearable  :readonly="ro.xingming"></el-input>
 				</el-form-item>
@@ -61,7 +66,7 @@
 						action="file/upload">
 					</editor>
 				</el-form-item>
-				<el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' v-else-if="ruleForm.zixunneirong" label="咨询内容" prop="zixunneirong">
+				<el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' v-else-if="ruleForm.zixunneirong" label="学生咨询内容" prop="zixunneirong">
                     <span :style='{"fontSize":"14px","lineHeight":"40px","color":"#333","fontWeight":"500","display":"inline-block"}' v-html="ruleForm.zixunneirong"></span>
                 </el-form-item>
 			<el-form-item :style='{"padding":"0","margin":"0"}' class="btn">

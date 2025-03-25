@@ -5,39 +5,39 @@
 
 	<!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="com.entity.TongzhixinxiEntity" id="tongzhixinxiMap">
-        <result property="tongzhimingcheng" column="tongzhimingcheng"/>
-        <result property="zhanghao" column="zhanghao"/>
-        <result property="xingming" column="xingming"/>
-        <result property="tongzhineirong" column="tongzhineirong"/>
-        <result property="qiyezhanghao" column="qiyezhanghao"/>
-        <result property="qiyemingcheng" column="qiyemingcheng"/>
-        <result property="tongzhiriqi" column="tongzhiriqi"/>
-        <result property="shhf" column="shhf"/>
+        <result property="tongzhimingcheng" column="title"/>
+        <result property="zhanghao" column="account"/>
+        <result property="xingming" column="name"/>
+        <result property="tongzhineirong" column="content"/>
+        <result property="qiyezhanghao" column="enterprse_account"/>
+        <result property="qiyemingcheng" column="enterprise_name"/>
+        <result property="tongzhiriqi" column="data"/>
+        <result property="shhf" column="details"/>
     </resultMap>
 
 	<select id="selectListVO"
 		resultType="com.entity.vo.TongzhixinxiVO" >
-		SELECT * FROM tongzhixinxi  tongzhixinxi         
+		SELECT * FROM tongzhixinxi  tongzhixinxi
         <where> 1=1 ${ew.sqlSegment}</where>
 	</select>
-	
+
 	<select id="selectVO"
 		resultType="com.entity.vo.TongzhixinxiVO" >
-		SELECT  tongzhixinxi.* FROM tongzhixinxi  tongzhixinxi 	
+		SELECT  tongzhixinxi.* FROM tongzhixinxi  tongzhixinxi
  		<where> 1=1 ${ew.sqlSegment}</where>
 	</select>
 
     <select id="selectListView"
-		resultType="com.entity.view.TongzhixinxiView" >
+		resultMap="tongzhixinxiMap" >
 
-		SELECT  tongzhixinxi.* FROM tongzhixinxi  tongzhixinxi 	        
+		SELECT  informs.* FROM informs  informs
         <where> 1=1 ${ew.sqlSegment}</where>
 	</select>
-	
+
 	<select id="selectView"
 		resultType="com.entity.view.TongzhixinxiView" >
 		SELECT * FROM tongzhixinxi  tongzhixinxi <where> 1=1 ${ew.sqlSegment}</where>
 	</select>
-	
+
 
 </mapper>

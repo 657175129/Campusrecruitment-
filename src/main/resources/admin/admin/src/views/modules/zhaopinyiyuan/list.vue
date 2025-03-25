@@ -23,96 +23,138 @@
 
 				<el-row :style='{"margin":"20px 0 0 0px","flexWrap":"wrap","flexDirection":"column","background":"none","justifyContent":"center","display":"flex"}'>
 					<el-button :style='{"border":"2px solid","cursor":"pointer","padding":"0 24px","margin":"0 auto 10px","outline":"none","color":"rgba(135, 154, 108, 1)","borderRadius":"4px","background":"#fff","borderImage":"linear-gradient(180deg, rgba(135.00000715255737, 154.00000602006912, 108.00000116229057, 1), rgba(226.0000017285347, 226.0000017285347, 226.0000017285347, 0.3799999952316284)) 1 1","width":"100%","fontSize":"14px","height":"40px"}' v-if="isAuth('zhaopinyiyuan','新增')" type="success" @click="addOrUpdateHandler()">新增</el-button>
-					<el-button :style='{"border":"2px solid","cursor":"pointer","padding":"0 24px","margin":"0 auto 10px","outline":"none","color":"rgba(135, 154, 108, 1)","borderRadius":"4px","background":"#fff","borderImage":"linear-gradient(180deg, rgba(135.00000715255737, 154.00000602006912, 108.00000116229057, 1), rgba(226.0000017285347, 226.0000017285347, 226.0000017285347, 0.3799999952316284)) 1 1","width":"100%","fontSize":"14px","height":"40px"}' v-if="isAuth('zhaopinyiyuan','删除')" :disabled="dataListSelections.length <= 0" type="danger" @click="deleteHandler()">删除</el-button>
-
-
-
+<!--					<el-button :style='{"border":"2px solid","cursor":"pointer","padding":"0 24px","margin":"0 auto 10px","outline":"none","color":"rgba(135, 154, 108, 1)","borderRadius":"4px","background":"#fff","borderImage":"linear-gradient(180deg, rgba(135.00000715255737, 154.00000602006912, 108.00000116229057, 1), rgba(226.0000017285347, 226.0000017285347, 226.0000017285347, 0.3799999952316284)) 1 1","width":"100%","fontSize":"14px","height":"40px"}' v-if="isAuth('zhaopinyiyuan','删除')" :disabled="dataListSelections.length <= 0" type="danger" @click="deleteHandler()">删除</el-button>-->
 
 				</el-row>
 			</el-form>
-			
+
 			<!-- <div> -->
 				<el-table class="tables"
 					:stripe='false'
-					:style='{"padding":"0","boxShadow":"0px 4px 10px 0px rgba(0,0,0,0.3020)","borderColor":"#eee","margin":"0 0 0 7%","borderRadius":"30px 30px 5px 5px","borderWidth":"1px 0 0 1px","background":"#fff","width":"calc(86% - 170px)","borderStyle":"solid"}' 
+					:style='{"padding":"0","boxShadow":"0px 4px 10px 0px rgba(0,0,0,0.3020)","borderColor":"#eee","margin":"0 0 0 7%","borderRadius":"30px 30px 5px 5px","borderWidth":"1px 0 0 1px","background":"#fff","width":"calc(86% - 170px)","borderStyle":"solid"}'
 					v-if="isAuth('zhaopinyiyuan','查看')"
 					:data="dataList"
 					v-loading="dataListLoading"
 				@selection-change="selectionChangeHandler">
 					<el-table-column :resizable='true' type="selection" align="center" width="50"></el-table-column>
 					<el-table-column :resizable='true' :sortable='false' label="索引" type="index" width="50" />
-					<el-table-column :resizable='true' :sortable='false'  
+					<el-table-column :resizable='true' :sortable='false'
 						prop="zhanghao"
 					label="账号">
 						<template slot-scope="scope">
 							{{scope.row.zhanghao}}
 						</template>
 					</el-table-column>
-					<el-table-column :resizable='true' :sortable='false'  
+					<el-table-column :resizable='true' :sortable='false'
 						prop="xingming"
 					label="姓名">
 						<template slot-scope="scope">
 							{{scope.row.xingming}}
 						</template>
 					</el-table-column>
-					<el-table-column :resizable='true' :sortable='false'  
+					<el-table-column :resizable='true' :sortable='false'
 						prop="shoujihaoma"
 					label="手机号码">
 						<template slot-scope="scope">
 							{{scope.row.shoujihaoma}}
 						</template>
 					</el-table-column>
-					<el-table-column :resizable='true' :sortable='false'  
+					<el-table-column :resizable='true' :sortable='false'
 						prop="yaoqingneirong"
 					label="邀请内容">
 						<template slot-scope="scope">
 							{{scope.row.yaoqingneirong}}
 						</template>
 					</el-table-column>
-					<el-table-column :resizable='true' :sortable='false'  
+					<el-table-column :resizable='true' :sortable='false'
 						prop="yaoqingriqi"
 					label="邀请日期">
 						<template slot-scope="scope">
 							{{scope.row.yaoqingriqi}}
 						</template>
 					</el-table-column>
-					<el-table-column :resizable='true' :sortable='false'  
+					<el-table-column :resizable='true' :sortable='false'
 						prop="qiyezhanghao"
 					label="企业账号">
 						<template slot-scope="scope">
 							{{scope.row.qiyezhanghao}}
 						</template>
 					</el-table-column>
-					<el-table-column :resizable='true' :sortable='false'  
+					<el-table-column :resizable='true' :sortable='false'
 						prop="qiyemingcheng"
 					label="企业名称">
 						<template slot-scope="scope">
 							{{scope.row.qiyemingcheng}}
 						</template>
 					</el-table-column>
-					<el-table-column :resizable='true' :sortable='false'  
+					<el-table-column :resizable='true' :sortable='false'
 						prop="lianxishouji"
 					label="联系手机">
 						<template slot-scope="scope">
 							{{scope.row.lianxishouji}}
 						</template>
 					</el-table-column>
-					<el-table-column :resizable='true' :sortable='false' prop="shhf" label="回复"></el-table-column>
-					<el-table-column :resizable='true' :sortable='false' v-if="isAuth('zhaopinyiyuan','审核')" prop="sfsh" label="回复">
-						<template slot-scope="scope">
-							<el-button  type="text" size="small" @click="shDialog(scope.row)">回复</el-button>
-						</template>
-					</el-table-column>
+          <el-table-column :resizable='true' :sortable='false'
+                           prop="yaoqingriqi"
+                           label="面试时间">
+            <template slot-scope="scope">
+              {{scope.row.yaoqingriqi}}
+            </template>
+          </el-table-column>
+
+          <el-table-column :resizable='true' :sortable='false'
+                           prop="result"
+                           label="面试结果">
+            <template slot-scope="scope">
+              {{scope.row.result}}
+            </template>
+          </el-table-column>
+
+          <el-table-column :resizable='true' :sortable='false'
+                           prop="place"
+                           label="面试地点">
+            <template slot-scope="scope">
+              {{scope.row.place}}
+            </template>
+          </el-table-column>
+          <el-table-column :resizable='true' :sortable='false'
+                           prop="salary"
+                           label="薪资待遇">
+            <template slot-scope="scope">
+              {{scope.row.salary}}
+            </template>
+          </el-table-column>
+
+<!--          <el-table-column :resizable='true' :sortable='false'-->
+<!--                           prop="status"-->
+<!--                           label="状态">-->
+<!--            <template slot-scope="scope">-->
+<!--              {{scope.row.status}}-->
+<!--            </template>-->
+<!--          </el-table-column>-->
+
+					<el-table-column :resizable='true' :sortable='false' prop="shhf" label="学生回复内容"></el-table-column>
+
+<!--					<el-table-column :resizable='true' :sortable='false' v-if="isAuth('zhaopinyiyuan','审核')" prop="sfsh" label="回复">-->
+<!--						<template slot-scope="scope">-->
+<!--							<el-button  type="text" size="small" @click="shDialog(scope.row)">回复</el-button>-->
+<!--						</template>-->
+<!--					</el-table-column>-->
+
 					<el-table-column width="300" label="操作">
 						<template slot-scope="scope">
-							<el-button :style='{"border":"2px solid","cursor":"pointer","padding":"0 24px","margin":"0 10px 5px 0","outline":"none","color":"rgba(135, 154, 108, 1)","borderRadius":"4px","background":"#fff","borderImage":"linear-gradient(180deg, rgba(135.00000715255737, 154.00000602006912, 108.00000116229057, 1), rgba(226.0000017285347, 226.0000017285347, 226.0000017285347, 0.3799999952316284)) 1 1","width":"auto","fontSize":"14px","height":"32px"}' v-if=" isAuth('zhaopinyiyuan','查看')" type="success" size="mini" @click="addOrUpdateHandler(scope.row.id,'info')">详情</el-button>
-							<el-button :style='{"border":"2px solid","cursor":"pointer","padding":"0 24px","margin":"0 10px 5px 0","outline":"none","color":"rgba(135, 154, 108, 1)","borderRadius":"4px","background":"#fff","borderImage":"linear-gradient(180deg, rgba(135.00000715255737, 154.00000602006912, 108.00000116229057, 1), rgba(226.0000017285347, 226.0000017285347, 226.0000017285347, 0.3799999952316284)) 1 1","width":"auto","fontSize":"14px","height":"32px"}' v-if=" isAuth('zhaopinyiyuan','修改')" type="primary" size="mini" @click="addOrUpdateHandler(scope.row.id)">修改</el-button>
+<!--							<el-button :style='{"border":"2px solid","cursor":"pointer","padding":"0 24px","margin":"0 10px 5px 0","outline":"none","color":"rgba(135, 154, 108, 1)","borderRadius":"4px","background":"#fff","borderImage":"linear-gradient(180deg, rgba(135.00000715255737, 154.00000602006912, 108.00000116229057, 1), rgba(226.0000017285347, 226.0000017285347, 226.0000017285347, 0.3799999952316284)) 1 1","width":"auto","fontSize":"14px","height":"32px"}' v-if=" isAuth('zhaopinyiyuan','查看')" type="success" size="mini" @click="addOrUpdateHandler(scope.row.id,'info')">邀请面试详情</el-button>-->
+							<el-button :style='{"border":"2px solid","cursor":"pointer","padding":"0 24px","margin":"0 10px 5px 0","outline":"none","color":"rgba(135, 154, 108, 1)","borderRadius":"4px","background":"#fff","borderImage":"linear-gradient(180deg, rgba(135.00000715255737, 154.00000602006912, 108.00000116229057, 1), rgba(226.0000017285347, 226.0000017285347, 226.0000017285347, 0.3799999952316284)) 1 1","width":"auto","fontSize":"14px","height":"32px"}' v-if=" isAuth('zhaopinyiyuan','修改')" type="primary" size="mini" @click="addOrUpdateHandler(scope.row.id)">面试结果通知</el-button>
+
+              <el-button :style='{"border":"2px solid","cursor":"pointer","padding":"0 24px","margin":"0 10px 5px 0","outline":"none","color":"rgba(135, 154, 108, 1)","borderRadius":"4px","background":"#fff","borderImage":"linear-gradient(180deg, rgba(135.00000715255737, 154.00000602006912, 108.00000116229057, 1), rgba(226.0000017285347, 226.0000017285347, 226.0000017285347, 0.3799999952316284)) 1 1","width":"auto","fontSize":"14px","height":"32px"}' v-if=" isAuth('tongzhixinxi','查看')" type="success" size="mini"  @click="shDialog(scope.row)">回复</el-button>
+<!--              <el-button :style='{"border":"2px solid","cursor":"pointer","padding":"0 24px","margin":"0 10px 5px 0","outline":"none","color":"rgba(135, 154, 108, 1)","borderRadius":"4px","background":"#fff","borderImage":"linear-gradient(180deg, rgba(135.00000715255737, 154.00000602006912, 108.00000116229057, 1), rgba(226.0000017285347, 226.0000017285347, 226.0000017285347, 0.3799999952316284)) 1 1","width":"auto","fontSize":"14px","height":"32px"}' v-if=" isAuth('tongzhixinxi','查看')" type="success" size="mini"  @click="shDialog(scope.row)">回复</el-button>-->
 
 
 
 
 
-							<el-button :style='{"border":"2px solid","cursor":"pointer","padding":"0 24px","margin":"0 10px 5px 0","outline":"none","color":"rgba(135, 154, 108, 1)","borderRadius":"4px","background":"#fff","borderImage":"linear-gradient(180deg, rgba(135.00000715255737, 154.00000602006912, 108.00000116229057, 1), rgba(226.0000017285347, 226.0000017285347, 226.0000017285347, 0.3799999952316284)) 1 1","width":"auto","fontSize":"14px","height":"32px"}' v-if="isAuth('zhaopinyiyuan','删除') " type="danger" size="mini" @click="deleteHandler(scope.row.id)">删除</el-button>
+
+<!--							<el-button :style='{"border":"2px solid","cursor":"pointer","padding":"0 24px","margin":"0 10px 5px 0","outline":"none","color":"rgba(135, 154, 108, 1)","borderRadius":"4px","background":"#fff","borderImage":"linear-gradient(180deg, rgba(135.00000715255737, 154.00000602006912, 108.00000116229057, 1), rgba(226.0000017285347, 226.0000017285347, 226.0000017285347, 0.3799999952316284)) 1 1","width":"auto","fontSize":"14px","height":"32px"}' v-if="isAuth('zhaopinyiyuan','删除') " type="danger" size="mini" @click="deleteHandler(scope.row.id)">删除</el-button>-->
 						</template>
 					</el-table-column>
 				</el-table>
@@ -132,7 +174,7 @@
 				></el-pagination>
 			<!-- </div> -->
 		</template>
-		
+
 		<!-- 添加/修改页面  将父组件的search方法传递给子组件-->
 		<add-or-update v-if="addOrUpdateFlag" :parent="this" ref="addOrUpdate"></add-or-update>
 
@@ -386,17 +428,17 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-	
+
 	.center-form-pv {
 	  .el-date-editor.el-input {
 	    width: auto;
 	  }
 	}
-	
+
 	.el-input {
 	  width: auto;
 	}
-	
+
 	// form
 	.center-form-pv .el-input /deep/ .el-input__inner {
 				border: 0px solid;
@@ -410,7 +452,7 @@ export default {
 				font-size: 14px;
 				height: 40px;
 			}
-	
+
 	.center-form-pv .el-select /deep/ .el-input__inner {
 				border: 0;
 				border-radius: 0;
@@ -422,7 +464,7 @@ export default {
 				font-size: 14px;
 				height: 40px;
 			}
-	
+
 	.center-form-pv .el-date-editor /deep/ .el-input__inner {
 				border: 0;
 				border-radius: 0;
@@ -434,18 +476,18 @@ export default {
 				font-size: 14px;
 				height: 40px;
 			}
-	
+
 	// table
 	.el-table /deep/ .el-table__header-wrapper thead {
 				color: #fff;
 				font-weight: 500;
 				width: 100%;
 			}
-	
+
 	.el-table /deep/ .el-table__header-wrapper thead tr {
 				background: #fff;
 			}
-	
+
 	.el-table /deep/ .el-table__header-wrapper thead tr th {
 				padding: 12px 0;
 				background: rgba(135, 154, 108, 1);
@@ -469,7 +511,7 @@ export default {
 				text-overflow: ellipsis;
 			}
 
-	
+
 	.el-table /deep/ .el-table__body-wrapper tbody {
 				width: 100%;
 			}
@@ -477,7 +519,7 @@ export default {
 	.el-table /deep/ .el-table__body-wrapper tbody tr {
 				background: #fff;
 			}
-	
+
 	.el-table /deep/ .el-table__body-wrapper tbody tr td {
 				padding: 12px 0;
 				color: #999;
@@ -487,8 +529,8 @@ export default {
 				border-style: solid;
 				text-align: center;
 			}
-	
-		
+
+
 	.el-table /deep/ .el-table__body-wrapper tbody tr:hover td {
 				padding: 12px 0;
 				color: #333;
@@ -497,7 +539,7 @@ export default {
 				border-style: solid;
 				text-align: center;
 			}
-	
+
 	.el-table /deep/ .el-table__body-wrapper tbody tr td {
 				padding: 12px 0;
 				color: #999;
@@ -516,7 +558,7 @@ export default {
 				line-height: 24px;
 				text-overflow: ellipsis;
 			}
-	
+
 	// pagination
 	.main-content .el-pagination /deep/ .el-pagination__total {
 				margin: 0 10px 0 0;
@@ -528,7 +570,7 @@ export default {
 				line-height: 28px;
 				height: 28px;
 			}
-	
+
 	.main-content .el-pagination /deep/ .btn-prev {
 				border: none;
 				border-radius: 2px;
@@ -543,7 +585,7 @@ export default {
 				min-width: 35px;
 				height: 28px;
 			}
-	
+
 	.main-content .el-pagination /deep/ .btn-next {
 				border: none;
 				border-radius: 2px;
@@ -558,7 +600,7 @@ export default {
 				min-width: 35px;
 				height: 28px;
 			}
-	
+
 	.main-content .el-pagination /deep/ .btn-prev:disabled {
 				border: none;
 				cursor: not-allowed;
@@ -573,7 +615,7 @@ export default {
 				line-height: 28px;
 				height: 28px;
 			}
-	
+
 	.main-content .el-pagination /deep/ .btn-next:disabled {
 				border: none;
 				cursor: not-allowed;
@@ -611,7 +653,7 @@ export default {
 				min-width: 30px;
 				height: 28px;
 			}
-	
+
 	.main-content .el-pagination /deep/ .el-pager .number:hover {
 				cursor: pointer;
 				padding: 0 4px;
@@ -627,7 +669,7 @@ export default {
 				min-width: 30px;
 				height: 28px;
 			}
-	
+
 	.main-content .el-pagination /deep/ .el-pager .number.active {
 				cursor: default;
 				padding: 0 4px;
@@ -643,7 +685,7 @@ export default {
 				min-width: 30px;
 				height: 28px;
 			}
-	
+
 	.main-content .el-pagination /deep/ .el-pagination__sizes {
 				display: inline-block;
 				vertical-align: top;
@@ -651,13 +693,13 @@ export default {
 				line-height: 28px;
 				height: 28px;
 			}
-	
+
 	.main-content .el-pagination /deep/ .el-pagination__sizes .el-input {
 				margin: 0 5px;
 				width: 100px;
 				position: relative;
 			}
-	
+
 	.main-content .el-pagination /deep/ .el-pagination__sizes .el-input .el-input__inner {
 				border: 1px solid #DCDFE6;
 				cursor: pointer;
@@ -673,14 +715,14 @@ export default {
 				text-align: center;
 				height: 28px;
 			}
-	
+
 	.main-content .el-pagination /deep/ .el-pagination__sizes .el-input span.el-input__suffix {
 				top: 0;
 				position: absolute;
 				right: 0;
 				height: 100%;
 			}
-	
+
 	.main-content .el-pagination /deep/ .el-pagination__sizes .el-input .el-input__suffix .el-select__caret {
 				cursor: pointer;
 				color: #C0C4CC;
@@ -689,7 +731,7 @@ export default {
 				line-height: 28px;
 				text-align: center;
 			}
-	
+
 	.main-content .el-pagination /deep/ .el-pagination__jump {
 				margin: 0 0 0 24px;
 				color: #606266;
@@ -699,7 +741,7 @@ export default {
 				line-height: 28px;
 				height: 28px;
 			}
-	
+
 	.main-content .el-pagination /deep/ .el-pagination__jump .el-input {
 				border-radius: 3px;
 				padding: 0 2px;
@@ -712,7 +754,7 @@ export default {
 				text-align: center;
 				height: 28px;
 			}
-	
+
 	.main-content .el-pagination /deep/ .el-pagination__jump .el-input .el-input__inner {
 				border: 1px solid #DCDFE6;
 				cursor: pointer;

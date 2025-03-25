@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
+import com.entity.vo.XueshengVO;
 import com.utils.ValidatorUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,8 +43,8 @@ import java.io.IOException;
 /**
  * 学生
  * 后端接口
- * @author 
- * @email 
+ * @author
+ * @email
  * @date 2023-04-08 13:45:44
  */
 @RestController
@@ -53,25 +54,25 @@ public class XueshengController {
     private XueshengService xueshengService;
 
 
-    
+
 	@Autowired
 	private TokenService tokenService;
-	
+
 	/**
 	 * 登录
 	 */
 	@IgnoreAuth
 	@RequestMapping(value = "/login")
 	public R login(String username, String password, String captcha, HttpServletRequest request) {
-		XueshengEntity u = xueshengService.selectOne(new EntityWrapper<XueshengEntity>().eq("zhanghao", username));
+		XueshengEntity u = xueshengService.selectOne(new EntityWrapper<XueshengEntity>().eq("number", username));
 		if(u==null || !u.getMima().equals(MD5Util.md5(password))) {
 			return R.error("账号或密码不正确");
 		}
-		String token = tokenService.generateToken(u.getId(), username,"xuesheng",  "学生" );
+		String token = tokenService.generateToken(u.getId(), username,"student",  "学生" );
 		return R.ok().put("token", token);
 	}
 
-	
+
 	/**
      * 注册
      */
@@ -79,9 +80,9 @@ public class XueshengController {
     @RequestMapping("/register")
     public R register(@RequestBody XueshengEntity xuesheng){
     	//ValidatorUtils.validateEntity(xuesheng);
-    	XueshengEntity u = xueshengService.selectOne(new EntityWrapper<XueshengEntity>().eq("zhanghao", xuesheng.getZhanghao()));
+    	XueshengEntity u = xueshengService.selectOne(new EntityWrapper<XueshengEntity>().eq("number", xuesheng.getZhanghao()));
 		if(u!=null) {
-			return R.error("注册用户已存在");
+			return R.error("注册用户已存在，注册失败！");
 		}
 		Long uId = new Date().getTime();
 		xuesheng.setId(uId);
@@ -90,7 +91,7 @@ public class XueshengController {
         return R.ok();
     }
 
-	
+
 	/**
 	 * 退出
 	 */
@@ -99,7 +100,7 @@ public class XueshengController {
 		request.getSession().invalidate();
 		return R.ok("退出成功");
 	}
-	
+
 	/**
      * 获取用户的session用户信息
      */
@@ -107,16 +108,26 @@ public class XueshengController {
     public R getCurrUser(HttpServletRequest request){
     	Long id = (Long)request.getSession().getAttribute("userId");
         XueshengEntity u = xueshengService.selectById(id);
-        return R.ok().put("data", u);
+		XueshengVO xueshengVO = new XueshengVO();
+		xueshengVO.setId(id);
+		xueshengVO.setMima(u.getMima());
+		xueshengVO.setNianling(u.getNianling());
+		xueshengVO.setXueli(u.getXueli());
+		xueshengVO.setShoujihaoma(u.getShoujihaoma());
+		xueshengVO.setXingming(u.getXingming());
+		xueshengVO.setTouxiang(u.getTouxiang());
+		xueshengVO.setXingbie(u.getXingbie());
+
+		return R.ok().put("data", xueshengVO);
     }
-    
+
     /**
      * 密码重置
      */
     @IgnoreAuth
 	@RequestMapping(value = "/resetPass")
     public R resetPass(String username, HttpServletRequest request){
-    	XueshengEntity u = xueshengService.selectOne(new EntityWrapper<XueshengEntity>().eq("zhanghao", username));
+    	XueshengEntity u = xueshengService.selectOne(new EntityWrapper<XueshengEntity>().eq("number", username));
     	if(u==null) {
     		return R.error("账号不存在");
     	}
@@ -133,18 +144,21 @@ public class XueshengController {
     public R page(@RequestParam Map<String, Object> params,XueshengEntity xuesheng,
 		HttpServletRequest request){
         EntityWrapper<XueshengEntity> ew = new EntityWrapper<XueshengEntity>();
+//		if (xuesheng!=null && xuesheng.getAge()==0){
+//			xuesheng.setAge(null);
+//		}
 
 		PageUtils page = xueshengService.queryPage(params, MPUtil.sort(MPUtil.between(MPUtil.likeOrEq(ew, xuesheng), params), params));
 
         return R.ok().put("data", page);
     }
-    
+
     /**
      * 前端列表
      */
 	@IgnoreAuth
     @RequestMapping("/list")
-    public R list(@RequestParam Map<String, Object> params,XueshengEntity xuesheng, 
+    public R list(@RequestParam Map<String, Object> params,XueshengEntity xuesheng,
 		HttpServletRequest request){
         EntityWrapper<XueshengEntity> ew = new EntityWrapper<XueshengEntity>();
 
@@ -158,7 +172,7 @@ public class XueshengController {
     @RequestMapping("/lists")
     public R list( XueshengEntity xuesheng){
        	EntityWrapper<XueshengEntity> ew = new EntityWrapper<XueshengEntity>();
-      	ew.allEq(MPUtil.allEQMapPre( xuesheng, "xuesheng")); 
+      	ew.allEq(MPUtil.allEQMapPre( xuesheng, "xuesheng"));
         return R.ok().put("data", xueshengService.selectListView(ew));
     }
 
@@ -168,11 +182,11 @@ public class XueshengController {
     @RequestMapping("/query")
     public R query(XueshengEntity xuesheng){
         EntityWrapper< XueshengEntity> ew = new EntityWrapper< XueshengEntity>();
- 		ew.allEq(MPUtil.allEQMapPre( xuesheng, "xuesheng")); 
+ 		ew.allEq(MPUtil.allEQMapPre( xuesheng, "xuesheng"));
 		XueshengView xueshengView =  xueshengService.selectView(ew);
 		return R.ok("查询学生成功").put("data", xueshengView);
     }
-	
+
     /**
      * 后端详情
      */
@@ -191,7 +205,7 @@ public class XueshengController {
         XueshengEntity xuesheng = xueshengService.selectById(id);
         return R.ok().put("data", xuesheng);
     }
-    
+
 
 
 
@@ -202,16 +216,16 @@ public class XueshengController {
     public R save(@RequestBody XueshengEntity xuesheng, HttpServletRequest request){
     	xuesheng.setId(new Date().getTime()+new Double(Math.floor(Math.random()*1000)).longValue());
     	//ValidatorUtils.validateEntity(xuesheng);
-    	XueshengEntity u = xueshengService.selectOne(new EntityWrapper<XueshengEntity>().eq("zhanghao", xuesheng.getZhanghao()));
+    	XueshengEntity u = xueshengService.selectOne(new EntityWrapper<XueshengEntity>().eq("number", xuesheng.getZhanghao()));
 		if(u!=null) {
 			return R.error("用户已存在");
 		}
 		xuesheng.setId(new Date().getTime());
-                xuesheng.setMima(MD5Util.md5(xuesheng.getMima())); 
+                xuesheng.setMima(MD5Util.md5(xuesheng.getMima()));
         xueshengService.insert(xuesheng);
         return R.ok();
     }
-    
+
     /**
      * 前端保存
      */
@@ -219,7 +233,7 @@ public class XueshengController {
     public R add(@RequestBody XueshengEntity xuesheng, HttpServletRequest request){
     	xuesheng.setId(new Date().getTime()+new Double(Math.floor(Math.random()*1000)).longValue());
     	//ValidatorUtils.validateEntity(xuesheng);
-    	XueshengEntity u = xueshengService.selectOne(new EntityWrapper<XueshengEntity>().eq("zhanghao", xuesheng.getZhanghao()));
+    	XueshengEntity u = xueshengService.selectOne(new EntityWrapper<XueshengEntity>().eq("number", xuesheng.getZhanghao()));
 		if(u!=null) {
 			return R.error("用户已存在");
 		}
@@ -247,7 +261,7 @@ public class XueshengController {
     }
 
 
-    
+
 
     /**
      * 删除
@@ -257,16 +271,16 @@ public class XueshengController {
         xueshengService.deleteBatchIds(Arrays.asList(ids));
         return R.ok();
     }
-    
+
     /**
      * 提醒接口
      */
 	@RequestMapping("/remind/{columnName}/{type}")
-	public R remindCount(@PathVariable("columnName") String columnName, HttpServletRequest request, 
+	public R remindCount(@PathVariable("columnName") String columnName, HttpServletRequest request,
 						 @PathVariable("type") String type,@RequestParam Map<String, Object> map) {
 		map.put("column", columnName);
 		map.put("type", type);
-		
+
 		if(type.equals("2")) {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			Calendar c = Calendar.getInstance();
@@ -274,7 +288,7 @@ public class XueshengController {
 			Date remindEndDate = null;
 			if(map.get("remindstart")!=null) {
 				Integer remindStart = Integer.parseInt(map.get("remindstart").toString());
-				c.setTime(new Date()); 
+				c.setTime(new Date());
 				c.add(Calendar.DAY_OF_MONTH,remindStart);
 				remindStartDate = c.getTime();
 				map.put("remindstart", sdf.format(remindStartDate));
@@ -287,7 +301,7 @@ public class XueshengController {
 				map.put("remindend", sdf.format(remindEndDate));
 			}
 		}
-		
+
 		Wrapper<XueshengEntity> wrapper = new EntityWrapper<XueshengEntity>();
 		if(map.get("remindstart")!=null) {
 			wrapper.ge(columnName, map.get("remindstart"));
@@ -300,7 +314,7 @@ public class XueshengController {
 		int count = xueshengService.selectCount(wrapper);
 		return R.ok().put("count", count);
 	}
-	
+
 
 
 

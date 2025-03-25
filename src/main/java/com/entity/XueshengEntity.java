@@ -24,19 +24,19 @@ import com.baomidou.mybatisplus.enums.IdType;
 /**
  * 学生
  * 数据库通用操作实体类（普通增删改查）
- * @author 
- * @email 
+ * @author
+ * @email
  * @date 2023-04-08 13:45:44
  */
-@TableName("xuesheng")
+@TableName("students")
 public class XueshengEntity<T> implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 
 	public XueshengEntity() {
-		
+
 	}
-	
+
 	public XueshengEntity(T t) {
 		try {
 			BeanUtils.copyProperties(this, t);
@@ -45,7 +45,7 @@ public class XueshengEntity<T> implements Serializable {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * 主键id
 	 */
@@ -54,52 +54,52 @@ public class XueshengEntity<T> implements Serializable {
 	/**
 	 * 账号
 	 */
-					
+	@TableField("number")
 	private String zhanghao;
-	
+
 	/**
 	 * 密码
 	 */
-					
+	@TableField("password")
 	private String mima;
-	
+
 	/**
 	 * 姓名
 	 */
-					
+	@TableField("name")
 	private String xingming;
-	
+
 	/**
 	 * 性别
 	 */
-					
+	@TableField("sex")
 	private String xingbie;
-	
+
 	/**
 	 * 年龄
 	 */
-					
+	@TableField("age")
 	private Integer nianling;
-	
+
 	/**
 	 * 手机号码
 	 */
-					
+	@TableField("phone")
 	private String shoujihaoma;
-	
+
 	/**
 	 * 学历
 	 */
-					
+	@TableField("education")
 	private String xueli;
-	
+
 	/**
 	 * 头像
 	 */
-					
+	@TableField("picture")
 	private String touxiang;
-	
-	
+
+
 	@JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
 	@DateTimeFormat
 	private Date addtime;

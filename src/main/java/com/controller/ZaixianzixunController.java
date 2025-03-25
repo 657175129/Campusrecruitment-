@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
+import com.dao.XueshengDao;
 import com.utils.ValidatorUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,8 +43,8 @@ import java.io.IOException;
 /**
  * 在线咨询
  * 后端接口
- * @author 
- * @email 
+ * @author
+ * @email
  * @date 2023-04-08 13:45:44
  */
 @RestController
@@ -53,9 +54,10 @@ public class ZaixianzixunController {
     private ZaixianzixunService zaixianzixunService;
 
 
-    
 
 
+	@Autowired
+	private XueshengDao xueshengDao;
     /**
      * 后端列表
      */
@@ -64,10 +66,12 @@ public class ZaixianzixunController {
 		HttpServletRequest request){
 		String tableName = request.getSession().getAttribute("tableName").toString();
 		if(tableName.equals("qiye")) {
-			zaixianzixun.setQiyezhanghao((String)request.getSession().getAttribute("username"));
+//			zaixianzixun.setQiyezhanghao((String)request.getSession().getAttribute("username"));
+			zaixianzixun.setEnterpriseAccount((String)request.getSession().getAttribute("username"));
 		}
 		if(tableName.equals("xuesheng")) {
-			zaixianzixun.setZhanghao((String)request.getSession().getAttribute("username"));
+			Map<String, String> stringStringMap = xueshengDao.selectSpecialStudet((Long) request.getSession().getAttribute("userId"));
+			zaixianzixun.setAccount(stringStringMap.get("number"));
 		}
         EntityWrapper<ZaixianzixunEntity> ew = new EntityWrapper<ZaixianzixunEntity>();
 
@@ -75,13 +79,13 @@ public class ZaixianzixunController {
 
         return R.ok().put("data", page);
     }
-    
+
     /**
      * 前端列表
      */
 	@IgnoreAuth
     @RequestMapping("/list")
-    public R list(@RequestParam Map<String, Object> params,ZaixianzixunEntity zaixianzixun, 
+    public R list(@RequestParam Map<String, Object> params,ZaixianzixunEntity zaixianzixun,
 		HttpServletRequest request){
         EntityWrapper<ZaixianzixunEntity> ew = new EntityWrapper<ZaixianzixunEntity>();
 
@@ -95,7 +99,7 @@ public class ZaixianzixunController {
     @RequestMapping("/lists")
     public R list( ZaixianzixunEntity zaixianzixun){
        	EntityWrapper<ZaixianzixunEntity> ew = new EntityWrapper<ZaixianzixunEntity>();
-      	ew.allEq(MPUtil.allEQMapPre( zaixianzixun, "zaixianzixun")); 
+      	ew.allEq(MPUtil.allEQMapPre( zaixianzixun, "zaixianzixun"));
         return R.ok().put("data", zaixianzixunService.selectListView(ew));
     }
 
@@ -105,11 +109,11 @@ public class ZaixianzixunController {
     @RequestMapping("/query")
     public R query(ZaixianzixunEntity zaixianzixun){
         EntityWrapper< ZaixianzixunEntity> ew = new EntityWrapper< ZaixianzixunEntity>();
- 		ew.allEq(MPUtil.allEQMapPre( zaixianzixun, "zaixianzixun")); 
+ 		ew.allEq(MPUtil.allEQMapPre( zaixianzixun, "zaixianzixun"));
 		ZaixianzixunView zaixianzixunView =  zaixianzixunService.selectView(ew);
 		return R.ok("查询在线咨询成功").put("data", zaixianzixunView);
     }
-	
+
     /**
      * 后端详情
      */
@@ -128,7 +132,7 @@ public class ZaixianzixunController {
         ZaixianzixunEntity zaixianzixun = zaixianzixunService.selectById(id);
         return R.ok().put("data", zaixianzixun);
     }
-    
+
 
 
 
@@ -142,7 +146,7 @@ public class ZaixianzixunController {
         zaixianzixunService.insert(zaixianzixun);
         return R.ok();
     }
-    
+
     /**
      * 前端保存
      */
@@ -150,6 +154,8 @@ public class ZaixianzixunController {
     public R add(@RequestBody ZaixianzixunEntity zaixianzixun, HttpServletRequest request){
     	zaixianzixun.setId(new Date().getTime()+new Double(Math.floor(Math.random()*1000)).longValue());
     	//ValidatorUtils.validateEntity(zaixianzixun);
+		zaixianzixun.setStudentId("11");
+		zaixianzixun.setEnterpriseId("1");
         zaixianzixunService.insert(zaixianzixun);
         return R.ok();
     }
@@ -168,7 +174,7 @@ public class ZaixianzixunController {
     }
 
 
-    
+
 
     /**
      * 删除
@@ -178,16 +184,16 @@ public class ZaixianzixunController {
         zaixianzixunService.deleteBatchIds(Arrays.asList(ids));
         return R.ok();
     }
-    
+
     /**
      * 提醒接口
      */
 	@RequestMapping("/remind/{columnName}/{type}")
-	public R remindCount(@PathVariable("columnName") String columnName, HttpServletRequest request, 
+	public R remindCount(@PathVariable("columnName") String columnName, HttpServletRequest request,
 						 @PathVariable("type") String type,@RequestParam Map<String, Object> map) {
 		map.put("column", columnName);
 		map.put("type", type);
-		
+
 		if(type.equals("2")) {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			Calendar c = Calendar.getInstance();
@@ -195,7 +201,7 @@ public class ZaixianzixunController {
 			Date remindEndDate = null;
 			if(map.get("remindstart")!=null) {
 				Integer remindStart = Integer.parseInt(map.get("remindstart").toString());
-				c.setTime(new Date()); 
+				c.setTime(new Date());
 				c.add(Calendar.DAY_OF_MONTH,remindStart);
 				remindStartDate = c.getTime();
 				map.put("remindstart", sdf.format(remindStartDate));
@@ -208,7 +214,7 @@ public class ZaixianzixunController {
 				map.put("remindend", sdf.format(remindEndDate));
 			}
 		}
-		
+
 		Wrapper<ZaixianzixunEntity> wrapper = new EntityWrapper<ZaixianzixunEntity>();
 		if(map.get("remindstart")!=null) {
 			wrapper.ge(columnName, map.get("remindstart"));
@@ -228,7 +234,7 @@ public class ZaixianzixunController {
 		int count = zaixianzixunService.selectCount(wrapper);
 		return R.ok().put("count", count);
 	}
-	
+
 
 
 

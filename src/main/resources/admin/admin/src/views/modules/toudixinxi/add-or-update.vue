@@ -15,11 +15,11 @@
 				<el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' v-else class="input" label="招聘名称" prop="zhaopinmingcheng">
 					<el-input v-model="ruleForm.zhaopinmingcheng" placeholder="招聘名称" readonly></el-input>
 				</el-form-item>
-				<el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' class="input" v-if="type!='info'"  label="职位名称" prop="zhiweimingcheng">
-					<el-input v-model="ruleForm.zhiweimingcheng" placeholder="职位名称" clearable  :readonly="ro.zhiweimingcheng"></el-input>
+				<el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' class="input" v-if="type!='info'"  label="岗位分类" prop="zhiweimingcheng">
+					<el-input v-model="ruleForm.zhiweimingcheng" placeholder="岗位分类" clearable  :readonly="ro.zhiweimingcheng"></el-input>
 				</el-form-item>
-				<el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' v-else class="input" label="职位名称" prop="zhiweimingcheng">
-					<el-input v-model="ruleForm.zhiweimingcheng" placeholder="职位名称" readonly></el-input>
+				<el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' v-else class="input" label="岗位分类" prop="zhiweimingcheng">
+					<el-input v-model="ruleForm.zhiweimingcheng" placeholder="岗位分类" readonly></el-input>
 				</el-form-item>
 				<el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' class="input" v-if="type!='info'"  label="企业账号" prop="qiyezhanghao">
 					<el-input v-model="ruleForm.qiyezhanghao" placeholder="企业账号" clearable  :readonly="ro.qiyezhanghao"></el-input>

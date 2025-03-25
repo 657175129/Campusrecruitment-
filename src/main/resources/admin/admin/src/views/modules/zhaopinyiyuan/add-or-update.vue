@@ -9,6 +9,9 @@
 			label-width="140px"
 		>
 			<template >
+
+
+
 				<el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' class="input" v-if="type!='info'"  label="账号" prop="zhanghao">
 					<el-input v-model="ruleForm.zhanghao" placeholder="账号" clearable  :readonly="ro.zhanghao"></el-input>
 				</el-form-item>
@@ -33,19 +36,44 @@
 				<el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' v-else class="input" label="邀请内容" prop="yaoqingneirong">
 					<el-input v-model="ruleForm.yaoqingneirong" placeholder="邀请内容" readonly></el-input>
 				</el-form-item>
+        <el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' class="input" v-if="type!='info'"  label="面试地点" prop="place">
+          <el-input v-model="ruleForm.place" placeholder="面试地点" clearable  :readonly="ro.yaoqingneirong"></el-input>
+        </el-form-item>
+        <el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' v-else class="input" label="面试地点" prop="place">
+          <el-input v-model="ruleForm.place" placeholder="面试地点" readonly></el-input>
+        </el-form-item>
+        <el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' class="input" v-if="type!='info'"  label="薪资待遇" prop="salary">
+          <el-input v-model="ruleForm.salary" placeholder="薪资待遇" clearable  :readonly="ro.yaoqingneirong"></el-input>
+        </el-form-item>
+        <el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' v-else class="input" label="薪资待遇" prop="salary">
+          <el-input v-model="ruleForm.salary" placeholder="薪资待遇" readonly></el-input>
+        </el-form-item>
 				<el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' class="date" v-if="type!='info'" label="邀请日期" prop="yaoqingriqi">
 					<el-date-picker
 						format="yyyy 年 MM 月 dd 日"
 						value-format="yyyy-MM-dd"
-						v-model="ruleForm.yaoqingriqi" 
+						v-model="ruleForm.yaoqingriqi"
 						type="date"
 						:readonly="ro.yaoqingriqi"
 						placeholder="邀请日期"
-					></el-date-picker> 
+					></el-date-picker>
 				</el-form-item>
 				<el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' class="input" v-else-if="ruleForm.yaoqingriqi" label="邀请日期" prop="yaoqingriqi">
 					<el-input v-model="ruleForm.yaoqingriqi" placeholder="邀请日期" readonly></el-input>
 				</el-form-item>
+        <el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' class="date" v-if="type!='info'" label="面试时间" prop="mianshishijian">
+          <el-date-picker
+              format="yyyy 年 MM 月 dd 日"
+              value-format="yyyy-MM-dd"
+              v-model="ruleForm.mianshishijian"
+              type="date"
+              :readonly="ro.mianshishijian"
+              placeholder="面试时间"
+          ></el-date-picker>
+        </el-form-item>
+        <el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' class="input" v-else-if="ruleForm.mianshishijian" label="面试时间" prop="mianshishijian">
+          <el-input v-model="ruleForm.mianshishijian" placeholder="面试时间" readonly></el-input>
+        </el-form-item>
 				<el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' class="input" v-if="type!='info'"  label="企业账号" prop="qiyezhanghao">
 					<el-input v-model="ruleForm.qiyezhanghao" placeholder="企业账号" clearable  :readonly="ro.qiyezhanghao"></el-input>
 				</el-form-item>
@@ -64,6 +92,16 @@
 				<el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' v-else class="input" label="联系手机" prop="lianxishouji">
 					<el-input v-model="ruleForm.lianxishouji" placeholder="联系手机" readonly></el-input>
 				</el-form-item>
+
+
+
+        <el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' class="input" v-if="type!='info'"  label="面试结果" prop="result">
+          <el-input v-model="ruleForm.result" placeholder="面试结果" clearable  :readonly="ro.yaoqingneirong"></el-input>
+        </el-form-item>
+        <el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' v-else class="input" label="面试结果" prop="result">
+          <el-input v-model="ruleForm.result" placeholder="面试结果" readonly></el-input>
+        </el-form-item>
+
 			</template>
 			<el-form-item :style='{"padding":"0","margin":"0"}' class="btn">
 				<el-button :style='{"border":"0","cursor":"pointer","padding":"0","margin":"0 20px 0 0","outline":"none","color":"rgba(255, 255, 255, 1)","borderRadius":"4px","background":"rgba(135, 154, 108, 1)","width":"128px","lineHeight":"40px","fontSize":"14px","height":"40px"}'  v-if="type!='info'" type="primary" class="btn-success" @click="onSubmit">提交</el-button>
@@ -159,6 +197,11 @@ export default {
 				qiyemingcheng : false,
 				lianxishouji : false,
 				shhf : false,
+        mianshishijian : false,
+        interviewtime: false,
+        result: false,
+        place: false,
+        salary: false,
 			},
 			
 			
@@ -172,6 +215,11 @@ export default {
 				qiyemingcheng: '',
 				lianxishouji: '',
 				shhf: '',
+        mianshishijian: '',
+        interviewtime:'',
+        result: '',
+        place: '',
+        salary: '',
 			},
 		
 			
@@ -182,7 +230,7 @@ export default {
 				],
 				shoujihaoma: [
 				],
-				yaoqingneirong: [
+				yaoqingneirong: [{ required: true, message: '邀请内容不能为空', trigger: 'blur' },
 				],
 				yaoqingriqi: [
 				],
@@ -194,6 +242,16 @@ export default {
 				],
 				shhf: [
 				],
+        interviewtime: [
+        ],
+        result:[
+        ],
+        place: [
+          { required: true, message: '面试地点不能为空', trigger: 'blur' },
+        ],
+        salary: [
+          { required: true, message: '薪资待遇不能为空', trigger: 'blur' },
+        ],
 			}
 		};
 	},
@@ -252,6 +310,11 @@ export default {
 							this.ro.yaoqingriqi = true;
 							continue;
 						}
+            if(o=='mianshishijian'){
+              this.ruleForm.mianshishijian = obj[o];
+              this.ro.mianshishijian = true;
+              continue;
+           }
 						if(o=='qiyezhanghao'){
 							this.ruleForm.qiyezhanghao = obj[o];
 							this.ro.qiyezhanghao = true;

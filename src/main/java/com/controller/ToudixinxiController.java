@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
+import com.dao.XueshengDao;
 import com.utils.ValidatorUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,8 +43,8 @@ import java.io.IOException;
 /**
  * 投递信息
  * 后端接口
- * @author 
- * @email 
+ * @author
+ * @email
  * @date 2023-04-08 13:45:44
  */
 @RestController
@@ -53,8 +54,9 @@ public class ToudixinxiController {
     private ToudixinxiService toudixinxiService;
 
 
-    
 
+    @Autowired
+    private XueshengDao xueshengDao;
 
     /**
      * 后端列表
@@ -66,10 +68,18 @@ public class ToudixinxiController {
 		HttpServletRequest request){
 		String tableName = request.getSession().getAttribute("tableName").toString();
 		if(tableName.equals("qiye")) {
-			toudixinxi.setQiyezhanghao((String)request.getSession().getAttribute("username"));
+
+//			toudixinxi.setQiyezhanghao((String)request.getSession().getAttribute("username"));
+            toudixinxi.setEnterpriseAccount((String)request.getSession().getAttribute("username"));
 		}
 		if(tableName.equals("xuesheng")) {
-			toudixinxi.setZhanghao((String)request.getSession().getAttribute("username"));
+            Map<String, String> stringStringMap = xueshengDao.selectSpecialStudet((Long) request.getSession().getAttribute("userId"));
+
+
+
+
+			toudixinxi.setAccount(stringStringMap.get("number"));
+
 		}
         EntityWrapper<ToudixinxiEntity> ew = new EntityWrapper<ToudixinxiEntity>();
                 if(toudiriqistart!=null) ew.ge("toudiriqi", toudiriqistart);
@@ -79,13 +89,13 @@ public class ToudixinxiController {
 
         return R.ok().put("data", page);
     }
-    
+
     /**
      * 前端列表
      */
 	@IgnoreAuth
     @RequestMapping("/list")
-    public R list(@RequestParam Map<String, Object> params,ToudixinxiEntity toudixinxi, 
+    public R list(@RequestParam Map<String, Object> params,ToudixinxiEntity toudixinxi,
                 @RequestParam(required = false) @DateTimeFormat(pattern="yyyy-MM-dd") Date toudiriqistart,
                 @RequestParam(required = false) @DateTimeFormat(pattern="yyyy-MM-dd") Date toudiriqiend,
 		HttpServletRequest request){
@@ -103,7 +113,7 @@ public class ToudixinxiController {
     @RequestMapping("/lists")
     public R list( ToudixinxiEntity toudixinxi){
        	EntityWrapper<ToudixinxiEntity> ew = new EntityWrapper<ToudixinxiEntity>();
-      	ew.allEq(MPUtil.allEQMapPre( toudixinxi, "toudixinxi")); 
+      	ew.allEq(MPUtil.allEQMapPre( toudixinxi, "toudixinxi"));
         return R.ok().put("data", toudixinxiService.selectListView(ew));
     }
 
@@ -113,11 +123,11 @@ public class ToudixinxiController {
     @RequestMapping("/query")
     public R query(ToudixinxiEntity toudixinxi){
         EntityWrapper< ToudixinxiEntity> ew = new EntityWrapper< ToudixinxiEntity>();
- 		ew.allEq(MPUtil.allEQMapPre( toudixinxi, "toudixinxi")); 
+ 		ew.allEq(MPUtil.allEQMapPre( toudixinxi, "toudixinxi"));
 		ToudixinxiView toudixinxiView =  toudixinxiService.selectView(ew);
 		return R.ok("查询投递信息成功").put("data", toudixinxiView);
     }
-	
+
     /**
      * 后端详情
      */
@@ -136,7 +146,7 @@ public class ToudixinxiController {
         ToudixinxiEntity toudixinxi = toudixinxiService.selectById(id);
         return R.ok().put("data", toudixinxi);
     }
-    
+
 
 
 
@@ -150,7 +160,7 @@ public class ToudixinxiController {
         toudixinxiService.insert(toudixinxi);
         return R.ok();
     }
-    
+
     /**
      * 前端保存
      */
@@ -158,6 +168,9 @@ public class ToudixinxiController {
     public R add(@RequestBody ToudixinxiEntity toudixinxi, HttpServletRequest request){
     	toudixinxi.setId(new Date().getTime()+new Double(Math.floor(Math.random()*1000)).longValue());
     	//ValidatorUtils.validateEntity(toudixinxi);
+
+        toudixinxi.setEnterpriseId("1");
+        toudixinxi.setStudentId("11");
         toudixinxiService.insert(toudixinxi);
         return R.ok();
     }
@@ -176,7 +189,7 @@ public class ToudixinxiController {
     }
 
 
-    
+
 
     /**
      * 删除
@@ -186,16 +199,16 @@ public class ToudixinxiController {
         toudixinxiService.deleteBatchIds(Arrays.asList(ids));
         return R.ok();
     }
-    
+
     /**
      * 提醒接口
      */
 	@RequestMapping("/remind/{columnName}/{type}")
-	public R remindCount(@PathVariable("columnName") String columnName, HttpServletRequest request, 
+	public R remindCount(@PathVariable("columnName") String columnName, HttpServletRequest request,
 						 @PathVariable("type") String type,@RequestParam Map<String, Object> map) {
 		map.put("column", columnName);
 		map.put("type", type);
-		
+
 		if(type.equals("2")) {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			Calendar c = Calendar.getInstance();
@@ -203,7 +216,7 @@ public class ToudixinxiController {
 			Date remindEndDate = null;
 			if(map.get("remindstart")!=null) {
 				Integer remindStart = Integer.parseInt(map.get("remindstart").toString());
-				c.setTime(new Date()); 
+				c.setTime(new Date());
 				c.add(Calendar.DAY_OF_MONTH,remindStart);
 				remindStartDate = c.getTime();
 				map.put("remindstart", sdf.format(remindStartDate));
@@ -216,7 +229,7 @@ public class ToudixinxiController {
 				map.put("remindend", sdf.format(remindEndDate));
 			}
 		}
-		
+
 		Wrapper<ToudixinxiEntity> wrapper = new EntityWrapper<ToudixinxiEntity>();
 		if(map.get("remindstart")!=null) {
 			wrapper.ge(columnName, map.get("remindstart"));
@@ -236,7 +249,7 @@ public class ToudixinxiController {
 		int count = toudixinxiService.selectCount(wrapper);
 		return R.ok().put("count", count);
 	}
-	
+
 
 
 
@@ -301,12 +314,16 @@ public class ToudixinxiController {
     }
 
     /**
-     * 分组统计
+     * 分组统计投递人数
      */
     @RequestMapping("/group/{columnName}")
     public R group(@PathVariable("columnName") String columnName,HttpServletRequest request) {
         Map<String, Object> params = new HashMap<String, Object>();
+
         params.put("column", columnName);
+        if (StringUtils.equals(columnName,"toudiriqi")){
+            params.put("column","date");
+        }
         EntityWrapper<ToudixinxiEntity> ew = new EntityWrapper<ToudixinxiEntity>();
         String tableName = request.getSession().getAttribute("tableName").toString();
         if(tableName.equals("qiye")) {

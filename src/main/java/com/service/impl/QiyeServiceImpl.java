@@ -20,8 +20,8 @@ import com.entity.view.QiyeView;
 
 @Service("qiyeService")
 public class QiyeServiceImpl extends ServiceImpl<QiyeDao, QiyeEntity> implements QiyeService {
-	
-	
+
+
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
         Page<QiyeEntity> page = this.selectPage(
@@ -30,25 +30,26 @@ public class QiyeServiceImpl extends ServiceImpl<QiyeDao, QiyeEntity> implements
         );
         return new PageUtils(page);
     }
-    
+
     @Override
 	public PageUtils queryPage(Map<String, Object> params, Wrapper<QiyeEntity> wrapper) {
-		  Page<QiyeView> page =new Query<QiyeView>(params).getPage();
-	        page.setRecords(baseMapper.selectListView(page,wrapper));
+		  Page<Map<String,String>> page =new Query<Map<String,String>>(params).getPage();
+	      //查询所有的数据列表，查完以后封装到page里
+		  page.setRecords(baseMapper.selectListView(page,wrapper));
 	    	PageUtils pageUtil = new PageUtils(page);
 	    	return pageUtil;
  	}
-    
+
     @Override
 	public List<QiyeVO> selectListVO(Wrapper<QiyeEntity> wrapper) {
  		return baseMapper.selectListVO(wrapper);
 	}
-	
+
 	@Override
 	public QiyeVO selectVO(Wrapper<QiyeEntity> wrapper) {
  		return baseMapper.selectVO(wrapper);
 	}
-	
+
 	@Override
 	public List<QiyeView> selectListView(Wrapper<QiyeEntity> wrapper) {
 		return baseMapper.selectListView(wrapper);

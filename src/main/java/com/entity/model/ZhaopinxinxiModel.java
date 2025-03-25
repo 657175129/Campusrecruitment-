@@ -30,7 +30,7 @@ public class ZhaopinxinxiModel  implements Serializable {
 	private String zhaopintupian;
 		
 	/**
-	 * 职位名称
+	 * 岗位分类
 	 */
 	
 	private String zhiweimingcheng;
@@ -111,7 +111,7 @@ public class ZhaopinxinxiModel  implements Serializable {
 				
 	
 	/**
-	 * 设置：职位名称
+	 * 设置：岗位分类
 	 */
 	 
 	public void setZhiweimingcheng(String zhiweimingcheng) {

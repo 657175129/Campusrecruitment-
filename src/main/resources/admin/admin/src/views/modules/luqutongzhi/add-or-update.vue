@@ -21,31 +21,44 @@
 				<el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' v-else class="input" label="姓名" prop="xingming">
 					<el-input v-model="ruleForm.xingming" placeholder="姓名" readonly></el-input>
 				</el-form-item>
-				<el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' class="input" v-if="type!='info'"  label="手机号码" prop="shoujihaoma">
-					<el-input v-model="ruleForm.shoujihaoma" placeholder="手机号码" clearable  :readonly="ro.shoujihaoma"></el-input>
-				</el-form-item>
-				<el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' v-else class="input" label="手机号码" prop="shoujihaoma">
-					<el-input v-model="ruleForm.shoujihaoma" placeholder="手机号码" readonly></el-input>
-				</el-form-item>
-				<el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' class="input" v-if="type!='info'"  label="录取内容" prop="yaoqingneirong">
-					<el-input v-model="ruleForm.yaoqingneirong" placeholder="录取内容" clearable  :readonly="ro.yaoqingneirong"></el-input>
-				</el-form-item>
-				<el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' v-else class="input" label="录取内容" prop="yaoqingneirong">
-					<el-input v-model="ruleForm.yaoqingneirong" placeholder="录取内容" readonly></el-input>
-				</el-form-item>
-				<el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' class="date" v-if="type!='info'" label="录取日期" prop="yaoqingriqi">
-					<el-date-picker
-						format="yyyy 年 MM 月 dd 日"
-						value-format="yyyy-MM-dd"
-						v-model="ruleForm.yaoqingriqi" 
-						type="date"
-						:readonly="ro.yaoqingriqi"
-						placeholder="录取日期"
-					></el-date-picker> 
-				</el-form-item>
-				<el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' class="input" v-else-if="ruleForm.yaoqingriqi" label="录取日期" prop="yaoqingriqi">
-					<el-input v-model="ruleForm.yaoqingriqi" placeholder="录取日期" readonly></el-input>
-				</el-form-item>
+<!--				<el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' class="input" v-if="type!='info'"  label="手机号码" prop="shoujihaoma">-->
+<!--					<el-input v-model="ruleForm.shoujihaoma" placeholder="手机号码" clearable  :readonly="ro.shoujihaoma"></el-input>-->
+<!--				</el-form-item>-->
+<!--				<el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' v-else class="input" label="手机号码" prop="shoujihaoma">-->
+<!--					<el-input v-model="ruleForm.shoujihaoma" placeholder="手机号码" readonly></el-input>-->
+<!--				</el-form-item>-->
+<!--				<el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' class="input" v-if="type!='info'"  label="录取内容" prop="yaoqingneirong">-->
+<!--					<el-input v-model="ruleForm.yaoqingneirong" placeholder="录取内容" clearable  :readonly="ro.yaoqingneirong"></el-input>-->
+<!--				</el-form-item>-->
+<!--				<el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' v-else class="input" label="录取内容" prop="yaoqingneirong">-->
+<!--					<el-input v-model="ruleForm.yaoqingneirong" placeholder="录取内容" readonly></el-input>-->
+<!--				</el-form-item>-->
+
+        <el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' class="input"   label="录取类型" prop="luquleixing">
+          <el-select v-model="ruleForm.offerType" placeholder="请选择">
+            <el-option
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value">
+            </el-option>
+          </el-select>
+        </el-form-item>
+
+<!--				<el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' class="date" v-if="type!='info'" label="录取日期" prop="yaoqingriqi">-->
+<!--					<el-date-picker-->
+<!--						format="yyyy 年 MM 月 dd 日"-->
+<!--						value-format="yyyy-MM-dd"-->
+<!--						v-model="ruleForm.yaoqingriqi"-->
+<!--						type="date"-->
+<!--						:readonly="ro.yaoqingriqi"-->
+<!--						placeholder="录取日期"-->
+<!--					></el-date-picker>-->
+<!--				</el-form-item>-->
+<!--				<el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' class="input" v-else-if="ruleForm.yaoqingriqi" label="录取日期" prop="yaoqingriqi">-->
+<!--					<el-input v-model="ruleForm.yaoqingriqi" placeholder="录取日期" readonly></el-input>-->
+<!--				</el-form-item>-->
+
 				<el-form-item :style='{"width":"100%","margin":"0 0 20px","display":"inline-block"}' class="input" v-if="type!='info'"  label="企业账号" prop="qiyezhanghao">
 					<el-input v-model="ruleForm.qiyezhanghao" placeholder="企业账号" clearable  :readonly="ro.qiyezhanghao"></el-input>
 				</el-form-item>
@@ -71,7 +84,7 @@
 				<el-button :style='{"border":"1px solid rgba(135, 154, 108, 1)","cursor":"pointer","padding":"0","margin":"0","outline":"none","color":"rgba(135, 154, 108, 1)","borderRadius":"4px","background":"rgba(255, 255, 255, 1)","width":"128px","lineHeight":"40px","fontSize":"14px","height":"40px"}' v-if="type=='info'" class="btn-close" @click="back()">返回</el-button>
 			</el-form-item>
 		</el-form>
-    
+
 
   </div>
 </template>
@@ -79,6 +92,8 @@
 // 数字，邮件，手机，url，身份证校验
 import { isNumber,isIntNumer,isEmail,isPhone, isMobile,isURL,checkIdCard } from "@/utils/validate";
 export default {
+
+
 	data() {
 		let self = this
 		var validateIdCard = (rule, value, callback) => {
@@ -145,10 +160,17 @@ export default {
 			}
 		};
 		return {
+      options: [{
+        value: '1',
+        label: '通知信息'
+      }, {
+        value: '2',
+        label: '邀请面试'
+      }],
 			id: '',
 			type: '',
-			
-			
+
+
 			ro:{
 				zhanghao : false,
 				xingming : false,
@@ -160,8 +182,8 @@ export default {
 				lianxishouji : false,
 				shhf : false,
 			},
-			
-			
+
+
 			ruleForm: {
 				zhanghao: '',
 				xingming: '',
@@ -173,8 +195,8 @@ export default {
 				lianxishouji: '',
 				shhf: '',
 			},
-		
-			
+
+
 			rules: {
 				zhanghao: [
 				],
@@ -208,7 +230,7 @@ export default {
 	created() {
 	},
 	methods: {
-		
+
 		// 下载
 		download(file){
 			window.open(`${file}`)
@@ -268,7 +290,7 @@ export default {
 							continue;
 						}
 				}
-				
+
 
 
 
@@ -279,15 +301,15 @@ export default {
 
 
 			}
-			
-			
+
+
 			// 获取用户信息
 			this.$http({
 				url: `${this.$storage.get('sessionTable')}/session`,
 				method: "get"
 			}).then(({ data }) => {
 				if (data && data.code === 0) {
-					
+
 					var json = data.data;
 					if(((json.qiyezhanghao!=''&&json.qiyezhanghao) || json.qiyezhanghao==0) && this.$storage.get("role")!="管理员"){
 						this.ruleForm.qiyezhanghao = json.qiyezhanghao
@@ -305,8 +327,14 @@ export default {
 					this.$message.error(data.msg);
 				}
 			});
-			
-			
+
+
+
+
+      this.ruleForm =  this.parent.oneData
+      this.ruleForm.id = ''
+
+
 		},
     // 多级联动参数
 
@@ -383,20 +411,20 @@ var objcross = this.$storage.getObj('crossObj');
 		 if(crossrefid && crossuserid) {
 			 this.ruleForm.crossuserid = crossuserid;
 			 this.ruleForm.crossrefid = crossrefid;
-			let params = { 
-				page: 1, 
-				limit: 10, 
+			let params = {
+				page: 1,
+				limit: 10,
 				crossuserid:this.ruleForm.crossuserid,
 				crossrefid:this.ruleForm.crossrefid,
-			} 
-			this.$http({ 
+			}
+			this.$http({
 				url: "luqutongzhi/page",
-				method: "get", 
-				params: params 
-			}).then(({ 
-				data 
-			}) => { 
-				if (data && data.code === 0) { 
+				method: "get",
+				params: params
+			}).then(({
+				data
+			}) => {
+				if (data && data.code === 0) {
 				       if(data.data.total>=crossoptnum) {
 					     this.$message.error(this.$storage.get('tips'));
 					       return false;
@@ -425,8 +453,8 @@ var objcross = this.$storage.getObj('crossObj');
 					 });
 
 				       }
-				} else { 
-				} 
+				} else {
+				}
 			});
 		 } else {
 			 this.$http({
@@ -474,15 +502,15 @@ var objcross = this.$storage.getObj('crossObj');
 		width: 100%;
 		height: 500px;
 	}
-	
+
 	.search-box {
 		position: absolute;
 	}
-	
+
 	.el-date-editor.el-input {
 		width: auto;
 	}
-	
+
 	.add-update-preview .el-form-item /deep/ .el-form-item__label {
 	  	  padding: 0 10px 0 0;
 	  	  color: #333;
@@ -492,11 +520,11 @@ var objcross = this.$storage.getObj('crossObj');
 	  	  line-height: 40px;
 	  	  text-align: right;
 	  	}
-	
+
 	.add-update-preview .el-form-item /deep/ .el-form-item__content {
 	  margin-left: 140px;
 	}
-	
+
 	.add-update-preview .el-input /deep/ .el-input__inner {
 	  	  border: 2px solid #797979;
 	  	  border-radius: 4px;
@@ -508,7 +536,7 @@ var objcross = this.$storage.getObj('crossObj');
 	  	  min-width: 400px;
 	  	  height: 40px;
 	  	}
-	
+
 	.add-update-preview .el-select /deep/ .el-input__inner {
 	  	  border: 2px solid #797979;
 	  	  border-radius: 4px;
@@ -520,7 +548,7 @@ var objcross = this.$storage.getObj('crossObj');
 	  	  min-width: 300px;
 	  	  height: 40px;
 	  	}
-	
+
 	.add-update-preview .el-date-editor /deep/ .el-input__inner {
 	  	  border: 2px solid #797979;
 	  	  border-radius: 4px;
@@ -532,7 +560,7 @@ var objcross = this.$storage.getObj('crossObj');
 	  	  min-width: 300px;
 	  	  height: 40px;
 	  	}
-	
+
 	.add-update-preview /deep/ .el-upload--picture-card {
 		background: transparent;
 		border: 0;
@@ -542,7 +570,7 @@ var objcross = this.$storage.getObj('crossObj');
 		line-height: initial;
 		vertical-align: middle;
 	}
-	
+
 	.add-update-preview /deep/ .upload .upload-img {
 	  	  border: 2px dashed #797979;
 	  	  cursor: pointer;
@@ -554,7 +582,7 @@ var objcross = this.$storage.getObj('crossObj');
 	  	  text-align: center;
 	  	  height: 100px;
 	  	}
-	
+
 	.add-update-preview /deep/ .el-upload-list .el-upload-list__item {
 	  	  border: 2px dashed #797979;
 	  	  cursor: pointer;
@@ -566,7 +594,7 @@ var objcross = this.$storage.getObj('crossObj');
 	  	  text-align: center;
 	  	  height: 100px;
 	  	}
-	
+
 	.add-update-preview /deep/ .el-upload .el-icon-plus {
 	  	  border: 2px dashed #797979;
 	  	  cursor: pointer;
@@ -578,7 +606,7 @@ var objcross = this.$storage.getObj('crossObj');
 	  	  text-align: center;
 	  	  height: 100px;
 	  	}
-	
+
 	.add-update-preview .el-textarea /deep/ .el-textarea__inner {
 	  	  border: 2px solid #797979;
 	  	  border-radius: 4px;

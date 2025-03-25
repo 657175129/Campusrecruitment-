@@ -7,9 +7,9 @@
       :rules="rules"
       label-width="80px"
     >
-          <el-form-item :style='{"border":"0px solid #dfdfdf","padding":"10px","boxShadow":"0px 0px 0px #eee","margin":"0 0 8px 0","borderRadius":"8px","background":"none"}' label="职位名称" prop="zhiweimingcheng">
+          <el-form-item :style='{"border":"0px solid #dfdfdf","padding":"10px","boxShadow":"0px 0px 0px #eee","margin":"0 0 8px 0","borderRadius":"8px","background":"none"}' label="岗位分类" prop="zhiweimingcheng">
             <el-input v-model="ruleForm.zhiweimingcheng" 
-                placeholder="职位名称" clearable ></el-input>
+                placeholder="岗位分类" clearable ></el-input>
           </el-form-item>
 
       <el-form-item :style='{"padding":"0","margin":"20px 0 20px 0"}'>
@@ -36,7 +36,7 @@
         },
         rules: {
           zhiweimingcheng: [
-            { required: true, message: '职位名称不能为空', trigger: 'blur' },
+            { required: true, message: '岗位分类不能为空', trigger: 'blur' },
           ],
         },
       };

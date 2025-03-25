@@ -10,19 +10,19 @@ import java.lang.reflect.InvocationTargetException;
 
 /**
  * 招聘意愿
- * 后端返回视图实体辅助类   
+ * 后端返回视图实体辅助类
  * （通常后端关联的表或者自定义的字段需要返回使用）
- * @author 
- * @email 
+ * @author
+ * @email
  * @date 2023-04-08 13:45:44
  */
-@TableName("luqutongzhi")
+@TableName("offers")
 public class LuqutongzhiView extends LuqutongzhiEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	public LuqutongzhiView(){
 	}
- 
+
  	public LuqutongzhiView(LuqutongzhiEntity luqutongzhiEntity){
  	try {
 			BeanUtils.copyProperties(this, luqutongzhiEntity);
@@ -30,6 +30,6 @@ public class LuqutongzhiView extends LuqutongzhiEntity implements Serializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
- 		
+
 	}
 }

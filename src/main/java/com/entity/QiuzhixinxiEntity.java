@@ -24,19 +24,19 @@ import com.baomidou.mybatisplus.enums.IdType;
 /**
  * 求职信息
  * 数据库通用操作实体类（普通增删改查）
- * @author 
- * @email 
+ * @author
+ * @email
  * @date 2023-04-08 13:45:44
  */
-@TableName("qiuzhixinxi")
+@TableName("search")
 public class QiuzhixinxiEntity<T> implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 
 	public QiuzhixinxiEntity() {
-		
+
 	}
-	
+
 	public QiuzhixinxiEntity(T t) {
 		try {
 			BeanUtils.copyProperties(this, t);
@@ -45,7 +45,30 @@ public class QiuzhixinxiEntity<T> implements Serializable {
 			e.printStackTrace();
 		}
 	}
-	
+
+	/**
+	 * 学生外键
+	 * */
+	private String studentId;
+
+	private String classificationId;
+
+	public String getClassificationId() {
+		return classificationId;
+	}
+
+	public void setClassificationId(String classificationId) {
+		this.classificationId = classificationId;
+	}
+
+	public String getStudentId() {
+		return studentId;
+	}
+
+	public void setStudentId(String studentId) {
+		this.studentId = studentId;
+	}
+
 	/**
 	 * 主键id
 	 */
@@ -54,63 +77,75 @@ public class QiuzhixinxiEntity<T> implements Serializable {
 	/**
 	 * 账号
 	 */
-					
+	@TableField("account")
 	private String zhanghao;
-	
+
+	private String account;
+
+	public String getAccount() {
+		return account;
+	}
+
+	public void setAccount(String account) {
+		this.account = account;
+	}
+
 	/**
 	 * 姓名
 	 */
-					
+	@TableField("name")
 	private String xingming;
-	
+
 	/**
 	 * 性别
 	 */
-					
+	@TableField("sex")
 	private String xingbie;
-	
+
 	/**
 	 * 手机号码
 	 */
-					
+	@TableField("phone")
 	private String shoujihaoma;
-	
+
 	/**
 	 * 头像
 	 */
-					
+	@TableField("avator")
 	private String touxiang;
-	
+
 	/**
 	 * 年龄
 	 */
-					
+	@TableField("age")
 	private Integer nianling;
-	
+
 	/**
 	 * 学历
 	 */
-					
+	@TableField("education")
 	private String xueli;
-	
+
 	/**
 	 * 毕业学校
 	 */
-					
+	@TableField("gra_schcool")
 	private String biyexuexiao;
-	
+
 	/**
 	 * 工作经历
 	 */
-					
+	@TableField("work_experience")
 	private String gongzuojingli;
-	
+
 	/**
 	 * 擅长
 	 */
-					
+	@TableField("skill")
 	private String shanzhang;
+	@TableField("work_status")
 	private String qzzt;
+	@TableField("place")
 	private String gzdd;
 
 	public String getQzzt() {
@@ -132,32 +167,34 @@ public class QiuzhixinxiEntity<T> implements Serializable {
 	/**
 	 * 简历附件
 	 */
-					
+	@TableField("resume")
 	private String jianlifujian;
-	
+
 	/**
 	 * 寻找职位
 	 */
-					
+	@TableField("find_position")
 	private String xunzhaozhiwei;
-	
+
 	/**
 	 * 待遇薪酬
 	 */
-					
+	@TableField("salary")
 	private String daiyuxinchou;
-	
+
 	/**
 	 * 发布日期
 	 */
-				
+
 	@JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd")
-	@DateTimeFormat 		
+	@DateTimeFormat
+	@TableField("publish_time")
 	private Date faburiqi;
-	
-	
+
+
 	@JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
 	@DateTimeFormat
+
 	private Date addtime;
 
 	public Date getAddtime() {

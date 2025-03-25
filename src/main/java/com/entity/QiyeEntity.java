@@ -24,19 +24,19 @@ import com.baomidou.mybatisplus.enums.IdType;
 /**
  * 企业
  * 数据库通用操作实体类（普通增删改查）
- * @author 
- * @email 
+ * @author
+ * @email
  * @date 2023-04-08 13:45:44
  */
-@TableName("qiye")
+@TableName("enterprises")
 public class QiyeEntity<T> implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 
 	public QiyeEntity() {
-		
+
 	}
-	
+
 	public QiyeEntity(T t) {
 		try {
 			BeanUtils.copyProperties(this, t);
@@ -45,7 +45,7 @@ public class QiyeEntity<T> implements Serializable {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * 主键id
 	 */
@@ -54,52 +54,52 @@ public class QiyeEntity<T> implements Serializable {
 	/**
 	 * 企业账号
 	 */
-					
+	@TableField("number")
 	private String qiyezhanghao;
-	
+
 	/**
 	 * 密码
 	 */
-					
+	@TableField("password")
 	private String mima;
-	
+
 	/**
 	 * 企业名称
 	 */
-					
+	@TableField("name")
 	private String qiyemingcheng;
-	
+
 	/**
 	 * 负责人
 	 */
-					
+	@TableField("contact")
 	private String fuzeren;
-	
+
 	/**
 	 * 性别
 	 */
-					
+	@TableField("sex")
 	private String xingbie;
-	
+
 	/**
 	 * 邮箱
 	 */
-					
+	@TableField("e_mail")
 	private String youxiang;
-	
+
 	/**
 	 * 联系手机
 	 */
-					
+	@TableField("phone")
 	private String lianxishouji;
-	
+
 	/**
 	 * 营业执照
 	 */
-					
+	@TableField("logo")
 	private String yingyezhizhao;
-	
-	
+
+
 	@JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
 	@DateTimeFormat
 	private Date addtime;

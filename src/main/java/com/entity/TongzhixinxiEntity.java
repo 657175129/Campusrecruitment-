@@ -24,19 +24,19 @@ import com.baomidou.mybatisplus.enums.IdType;
 /**
  * 通知信息
  * 数据库通用操作实体类（普通增删改查）
- * @author 
- * @email 
+ * @author
+ * @email
  * @date 2023-04-08 13:45:44
  */
-@TableName("tongzhixinxi")
+@TableName("informs")
 public class TongzhixinxiEntity<T> implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 
 	public TongzhixinxiEntity() {
-		
+
 	}
-	
+
 	public TongzhixinxiEntity(T t) {
 		try {
 			BeanUtils.copyProperties(this, t);
@@ -45,7 +45,7 @@ public class TongzhixinxiEntity<T> implements Serializable {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * 主键id
 	 */
@@ -54,54 +54,136 @@ public class TongzhixinxiEntity<T> implements Serializable {
 	/**
 	 * 通知名称
 	 */
-					
+	@TableField("title")
 	private String tongzhimingcheng;
-	
+
 	/**
 	 * 账号
 	 */
-					
+	@TableField("account")
 	private String zhanghao;
-	
+
+	private String account;
+
+	public String getAccount() {
+		return account;
+	}
+
+	public void setAccount(String account) {
+		this.account = account;
+	}
+
 	/**
 	 * 姓名
 	 */
-					
+	@TableField("name")
 	private String xingming;
-	
+
 	/**
 	 * 通知内容
 	 */
-					
+	@TableField("content")
 	private String tongzhineirong;
-	
+
 	/**
 	 * 企业账号
 	 */
-					
+	@TableField("enterprse_account")
 	private String qiyezhanghao;
-	
+
+	private String enterprseAccount;
+
+	public String getEnterprseAccount() {
+		return enterprseAccount;
+	}
+
+	public void setEnterprseAccount(String enterprseAccount) {
+		this.enterprseAccount = enterprseAccount;
+	}
+
 	/**
 	 * 企业名称
 	 */
-					
+	@TableField("enterprise_name")
 	private String qiyemingcheng;
-	
+
 	/**
 	 * 通知日期
 	 */
-				
+
 	@JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd")
-	@DateTimeFormat 		
+	@DateTimeFormat
+	@TableField("data")
 	private Date tongzhiriqi;
-	
+
 	/**
 	 * 回复内容
 	 */
-					
+	@TableField("details")
 	private String shhf;
-	
-	
+//
+//	//回复时间
+//	private String replaytime;
+	//面试时间
+	private  String interviewtime;
+	//面试结果
+	private String result;
+
+	// 状态
+	private String status;
+	// 薪资待遇
+	private String salary;
+	// 工作地点
+	private String place;
+
+//	public String getReplaytime() {
+//		return replaytime;
+//	}
+//
+//	public void setReplaytime(String replaytime) {
+//		this.replaytime = replaytime;
+//	}
+
+	public String getInterviewtime() {
+		return interviewtime;
+	}
+
+	public void setInterviewtime(String interviewtime) {
+		this.interviewtime = interviewtime;
+	}
+
+	public String getResult() {
+		return result;
+	}
+
+	public void setResult(String result) {
+		this.result = result;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getSalary() {
+		return salary;
+	}
+
+	public void setSalary(String salary) {
+		this.salary = salary;
+	}
+
+	public String getPlace() {
+		return place;
+	}
+
+	public void setPlace(String place) {
+		this.place = place;
+	}
+
 	@JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
 	@DateTimeFormat
 	private Date addtime;

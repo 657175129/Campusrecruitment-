@@ -7,23 +7,23 @@ import org.apache.commons.beanutils.BeanUtils;
 import java.lang.reflect.InvocationTargetException;
 
 import java.io.Serializable;
- 
+
 
 /**
  * 在线咨询
- * 后端返回视图实体辅助类   
+ * 后端返回视图实体辅助类
  * （通常后端关联的表或者自定义的字段需要返回使用）
- * @author 
- * @email 
+ * @author
+ * @email
  * @date 2023-04-08 13:45:44
  */
-@TableName("zaixianzixun")
+@TableName("consult")
 public class ZaixianzixunView  extends ZaixianzixunEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	public ZaixianzixunView(){
 	}
- 
+
  	public ZaixianzixunView(ZaixianzixunEntity zaixianzixunEntity){
  	try {
 			BeanUtils.copyProperties(this, zaixianzixunEntity);
@@ -31,6 +31,6 @@ public class ZaixianzixunView  extends ZaixianzixunEntity implements Serializabl
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
- 		
+
 	}
 }

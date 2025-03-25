@@ -14,22 +14,22 @@ import com.entity.view.DiscusszhaopinxinxiView;
 
 /**
  * 招聘信息评论表
- * 
- * @author 
- * @email 
+ *
+ * @author
+ * @email
  * @date 2023-04-08 13:45:44
  */
 public interface DiscusszhaopinxinxiDao extends BaseMapper<DiscusszhaopinxinxiEntity> {
-	
+
 	List<DiscusszhaopinxinxiVO> selectListVO(@Param("ew") Wrapper<DiscusszhaopinxinxiEntity> wrapper);
-	
+
 	DiscusszhaopinxinxiVO selectVO(@Param("ew") Wrapper<DiscusszhaopinxinxiEntity> wrapper);
-	
+
 	List<DiscusszhaopinxinxiView> selectListView(@Param("ew") Wrapper<DiscusszhaopinxinxiEntity> wrapper);
 
-	List<DiscusszhaopinxinxiView> selectListView(Pagination page,@Param("ew") Wrapper<DiscusszhaopinxinxiEntity> wrapper);
-	
+	List<Map<String,String>> selectListView(Pagination page,@Param("ew") Wrapper<DiscusszhaopinxinxiEntity> wrapper);
+
 	DiscusszhaopinxinxiView selectView(@Param("ew") Wrapper<DiscusszhaopinxinxiEntity> wrapper);
-	
+
 
 }

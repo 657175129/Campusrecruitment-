@@ -5,44 +5,44 @@
 
 	<!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="com.entity.ZhaopinxinxiEntity" id="zhaopinxinxiMap">
-        <result property="zhaopinmingcheng" column="zhaopinmingcheng"/>
-        <result property="zhaopintupian" column="zhaopintupian"/>
-        <result property="zhiweimingcheng" column="zhiweimingcheng"/>
-        <result property="xinchoudaiyu" column="xinchoudaiyu"/>
-        <result property="zhaopinjianjie" column="zhaopinjianjie"/>
-        <result property="zhaopinneirong" column="zhaopinneirong"/>
-        <result property="zhaopinyaoqiu" column="zhaopinyaoqiu"/>
-        <result property="qiyezhanghao" column="qiyezhanghao"/>
-        <result property="qiyemingcheng" column="qiyemingcheng"/>
-        <result property="lianxishouji" column="lianxishouji"/>
-        <result property="faburiqi" column="faburiqi"/>
+        <result property="zhaopinmingcheng" column="enterprise_name"/>
+        <result property="zhaopintupian" column="job_pic"/>
+        <result property="zhiweimingcheng" column="postion_name"/>
+        <result property="xinchoudaiyu" column="salary"/>
+        <result property="zhaopinjianjie" column="introduction"/>
+        <result property="zhaopinneirong" column="recruit_content"/>
+        <result property="zhaopinyaoqiu" column="requirement"/>
+        <result property="qiyezhanghao" column="enterprise_account"/>
+        <result property="qiyemingcheng" column="enterprise_name"/>
+        <result property="lianxishouji" column="phone"/>
+        <result property="faburiqi" column="publish_time"/>
         <result property="clicktime" column="clicktime"/>
     </resultMap>
 
 	<select id="selectListVO"
 		resultType="com.entity.vo.ZhaopinxinxiVO" >
-		SELECT * FROM zhaopinxinxi  zhaopinxinxi         
+		SELECT * FROM zhaopinxinxi  zhaopinxinxi
         <where> 1=1 ${ew.sqlSegment}</where>
 	</select>
-	
+
 	<select id="selectVO"
 		resultType="com.entity.vo.ZhaopinxinxiVO" >
-		SELECT  zhaopinxinxi.* FROM zhaopinxinxi  zhaopinxinxi 	
+		SELECT  zhaopinxinxi.* FROM zhaopinxinxi  zhaopinxinxi
  		<where> 1=1 ${ew.sqlSegment}</where>
 	</select>
 
     <select id="selectListView"
-		resultType="com.entity.view.ZhaopinxinxiView" >
+		resultMap="zhaopinxinxiMap" >
 
-		SELECT  zhaopinxinxi.* FROM zhaopinxinxi  zhaopinxinxi 	        
+		SELECT  employments.* FROM employments  employments
         <where> 1=1 ${ew.sqlSegment}</where>
 	</select>
-	
+
 	<select id="selectView"
 		resultType="com.entity.view.ZhaopinxinxiView" >
 		SELECT * FROM zhaopinxinxi  zhaopinxinxi <where> 1=1 ${ew.sqlSegment}</where>
 	</select>
-	
+
 
     <select id="selectValue" resultType="map" >
         SELECT ${params.xColumn}, sum(${params.yColumn}) total FROM zhaopinxinxi
@@ -70,7 +70,7 @@
     </select>
 
     <select id="selectGroup" resultType="map" >
-        SELECT ${params.column} , count(1) total FROM zhaopinxinxi
+        SELECT ${params.column} as zhiweimingcheng , count(1) total FROM employments
         <where> 1=1 ${ew.sqlSegment}</where>
         group by ${params.column}
         limit 10

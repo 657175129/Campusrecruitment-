@@ -13,6 +13,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import org.omg.CORBA.PRIVATE_MEMBER;
 import org.springframework.format.annotation.DateTimeFormat;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.apache.commons.beanutils.BeanUtils;
@@ -24,19 +25,19 @@ import com.baomidou.mybatisplus.enums.IdType;
 /**
  * 在线咨询
  * 数据库通用操作实体类（普通增删改查）
- * @author 
- * @email 
+ * @author
+ * @email
  * @date 2023-04-08 13:45:44
  */
-@TableName("zaixianzixun")
+@TableName("consult")
 public class ZaixianzixunEntity<T> implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 
 	public ZaixianzixunEntity() {
-		
+
 	}
-	
+
 	public ZaixianzixunEntity(T t) {
 		try {
 			BeanUtils.copyProperties(this, t);
@@ -45,7 +46,25 @@ public class ZaixianzixunEntity<T> implements Serializable {
 			e.printStackTrace();
 		}
 	}
-	
+	private String studentId;
+	private String enterpriseId;
+
+	public String getStudentId() {
+		return studentId;
+	}
+
+	public void setStudentId(String studentId) {
+		this.studentId = studentId;
+	}
+
+	public String getEnterpriseId() {
+		return enterpriseId;
+	}
+
+	public void setEnterpriseId(String enterpriseId) {
+		this.enterpriseId = enterpriseId;
+	}
+
 	/**
 	 * 主键id
 	 */
@@ -54,54 +73,74 @@ public class ZaixianzixunEntity<T> implements Serializable {
 	/**
 	 * 咨询编号
 	 */
-					
+	@TableField("number")
 	private String zixunbianhao;
-	
+
 	/**
 	 * 企业账号
 	 */
-					
+	@TableField("enterprise_account")
 	private String qiyezhanghao;
-	
+
+	private String enterpriseAccount;
+
+	public String getEnterpriseAccount() {
+		return enterpriseAccount;
+	}
+
+	public void setEnterpriseAccount(String enterpriseAccount) {
+		this.enterpriseAccount = enterpriseAccount;
+	}
+
 	/**
 	 * 企业名称
 	 */
-					
+	@TableField("enterprise_name")
 	private String qiyemingcheng;
-	
+
 	/**
 	 * 咨询内容
 	 */
-					
+	@TableField("content")
 	private String zixunneirong;
-	
+
 	/**
 	 * 账号
 	 */
-					
+	@TableField("account")
 	private String zhanghao;
-	
+
+	private String account;
+
+	public String getAccount() {
+		return account;
+	}
+
+	public void setAccount(String account) {
+		this.account = account;
+	}
+
 	/**
 	 * 姓名
 	 */
-					
+	@TableField("name")
 	private String xingming;
-	
+
 	/**
 	 * 咨询日期
 	 */
-				
+	@TableField("date")
 	@JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd")
-	@DateTimeFormat 		
+	@DateTimeFormat
 	private Date zixunriqi;
-	
+
 	/**
 	 * 回复内容
 	 */
-					
+	@TableField("detail")
 	private String shhf;
-	
-	
+
+	@TableField("addtime")
 	@JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
 	@DateTimeFormat
 	private Date addtime;

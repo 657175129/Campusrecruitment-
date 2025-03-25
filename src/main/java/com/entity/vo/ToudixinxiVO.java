@@ -23,7 +23,7 @@ public class ToudixinxiVO  implements Serializable {
 
 	 			
 	/**
-	 * 职位名称
+	 * 岗位分类
 	 */
 	
 	private String zhiweimingcheng;

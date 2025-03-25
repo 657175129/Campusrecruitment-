@@ -44,8 +44,8 @@ import com.entity.StoreupEntity;
 /**
  * 招聘信息
  * 后端接口
- * @author 
- * @email 
+ * @author
+ * @email
  * @date 2023-04-08 13:45:44
  */
 @RestController
@@ -57,7 +57,7 @@ public class ZhaopinxinxiController {
     @Autowired
     private StoreupService storeupService;
 
-    
+
 
 
     /**
@@ -70,23 +70,24 @@ public class ZhaopinxinxiController {
 		HttpServletRequest request){
 		String tableName = request.getSession().getAttribute("tableName").toString();
 		if(tableName.equals("qiye")) {
-			zhaopinxinxi.setQiyezhanghao((String)request.getSession().getAttribute("username"));
+//			zhaopinxinxi.setQiyezhanghao((String)request.getSession().getAttribute("username"));
+            zhaopinxinxi.setEnterpriseAccount((String)request.getSession().getAttribute("username"));
 		}
         EntityWrapper<ZhaopinxinxiEntity> ew = new EntityWrapper<ZhaopinxinxiEntity>();
-                if(faburiqistart!=null) ew.ge("faburiqi", faburiqistart);
-                if(faburiqiend!=null) ew.le("faburiqi", faburiqiend);
+                if(faburiqistart!=null) ew.ge("publish_time", faburiqistart);
+                if(faburiqiend!=null) ew.le("publish_time", faburiqiend);
 
 		PageUtils page = zhaopinxinxiService.queryPage(params, MPUtil.sort(MPUtil.between(MPUtil.likeOrEq(ew, zhaopinxinxi), params), params));
 
         return R.ok().put("data", page);
     }
-    
+
     /**
      * 前端列表
      */
 	@IgnoreAuth
     @RequestMapping("/list")
-    public R list(@RequestParam Map<String, Object> params,ZhaopinxinxiEntity zhaopinxinxi, 
+    public R list(@RequestParam Map<String, Object> params,ZhaopinxinxiEntity zhaopinxinxi,
                 @RequestParam(required = false) @DateTimeFormat(pattern="yyyy-MM-dd") Date faburiqistart,
                 @RequestParam(required = false) @DateTimeFormat(pattern="yyyy-MM-dd") Date faburiqiend,
 		HttpServletRequest request){
@@ -104,7 +105,7 @@ public class ZhaopinxinxiController {
     @RequestMapping("/lists")
     public R list( ZhaopinxinxiEntity zhaopinxinxi){
        	EntityWrapper<ZhaopinxinxiEntity> ew = new EntityWrapper<ZhaopinxinxiEntity>();
-      	ew.allEq(MPUtil.allEQMapPre( zhaopinxinxi, "zhaopinxinxi")); 
+      	ew.allEq(MPUtil.allEQMapPre( zhaopinxinxi, "zhaopinxinxi"));
         return R.ok().put("data", zhaopinxinxiService.selectListView(ew));
     }
 
@@ -114,11 +115,11 @@ public class ZhaopinxinxiController {
     @RequestMapping("/query")
     public R query(ZhaopinxinxiEntity zhaopinxinxi){
         EntityWrapper< ZhaopinxinxiEntity> ew = new EntityWrapper< ZhaopinxinxiEntity>();
- 		ew.allEq(MPUtil.allEQMapPre( zhaopinxinxi, "zhaopinxinxi")); 
+ 		ew.allEq(MPUtil.allEQMapPre( zhaopinxinxi, "zhaopinxinxi"));
 		ZhaopinxinxiView zhaopinxinxiView =  zhaopinxinxiService.selectView(ew);
 		return R.ok("查询招聘信息成功").put("data", zhaopinxinxiView);
     }
-	
+
     /**
      * 后端详情
      */
@@ -141,7 +142,7 @@ public class ZhaopinxinxiController {
 		zhaopinxinxiService.updateById(zhaopinxinxi);
         return R.ok().put("data", zhaopinxinxi);
     }
-    
+
 
 
 
@@ -152,10 +153,12 @@ public class ZhaopinxinxiController {
     public R save(@RequestBody ZhaopinxinxiEntity zhaopinxinxi, HttpServletRequest request){
     	zhaopinxinxi.setId(new Date().getTime()+new Double(Math.floor(Math.random()*1000)).longValue());
     	//ValidatorUtils.validateEntity(zhaopinxinxi);
+        zhaopinxinxi.setEnterpriseId("5");
+        zhaopinxinxi.setClassificationId("2");
         zhaopinxinxiService.insert(zhaopinxinxi);
         return R.ok();
     }
-    
+
     /**
      * 前端保存
      */
@@ -163,6 +166,7 @@ public class ZhaopinxinxiController {
     public R add(@RequestBody ZhaopinxinxiEntity zhaopinxinxi, HttpServletRequest request){
     	zhaopinxinxi.setId(new Date().getTime()+new Double(Math.floor(Math.random()*1000)).longValue());
     	//ValidatorUtils.validateEntity(zhaopinxinxi);
+        zhaopinxinxi.setEnterpriseId("5");
         zhaopinxinxiService.insert(zhaopinxinxi);
         return R.ok();
     }
@@ -181,7 +185,7 @@ public class ZhaopinxinxiController {
     }
 
 
-    
+
 
     /**
      * 删除
@@ -191,16 +195,16 @@ public class ZhaopinxinxiController {
         zhaopinxinxiService.deleteBatchIds(Arrays.asList(ids));
         return R.ok();
     }
-    
+
     /**
      * 提醒接口
      */
 	@RequestMapping("/remind/{columnName}/{type}")
-	public R remindCount(@PathVariable("columnName") String columnName, HttpServletRequest request, 
+	public R remindCount(@PathVariable("columnName") String columnName, HttpServletRequest request,
 						 @PathVariable("type") String type,@RequestParam Map<String, Object> map) {
 		map.put("column", columnName);
 		map.put("type", type);
-		
+
 		if(type.equals("2")) {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			Calendar c = Calendar.getInstance();
@@ -208,7 +212,7 @@ public class ZhaopinxinxiController {
 			Date remindEndDate = null;
 			if(map.get("remindstart")!=null) {
 				Integer remindStart = Integer.parseInt(map.get("remindstart").toString());
-				c.setTime(new Date()); 
+				c.setTime(new Date());
 				c.add(Calendar.DAY_OF_MONTH,remindStart);
 				remindStartDate = c.getTime();
 				map.put("remindstart", sdf.format(remindStartDate));
@@ -221,7 +225,7 @@ public class ZhaopinxinxiController {
 				map.put("remindend", sdf.format(remindEndDate));
 			}
 		}
-		
+
 		Wrapper<ZhaopinxinxiEntity> wrapper = new EntityWrapper<ZhaopinxinxiEntity>();
 		if(map.get("remindstart")!=null) {
 			wrapper.ge(columnName, map.get("remindstart"));
@@ -238,7 +242,7 @@ public class ZhaopinxinxiController {
 		int count = zhaopinxinxiService.selectCount(wrapper);
 		return R.ok().put("count", count);
 	}
-	
+
 	/**
      * 前端智能排序
      */
@@ -324,12 +328,16 @@ public class ZhaopinxinxiController {
     }
 
     /**
-     * 分组统计
+     * 分组统计招聘信息
      */
     @RequestMapping("/group/{columnName}")
     public R group(@PathVariable("columnName") String columnName,HttpServletRequest request) {
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("column", columnName);
+        if (StringUtils.equals(columnName,"zhiweimingcheng")){
+            params.put("column","job_name");
+        }
+
         EntityWrapper<ZhaopinxinxiEntity> ew = new EntityWrapper<ZhaopinxinxiEntity>();
         String tableName = request.getSession().getAttribute("tableName").toString();
         if(tableName.equals("qiye")) {

@@ -44,9 +44,9 @@ public class CommonController{
 	private CommonService commonService;
 
     private static AipFace client = null;
-    
+
     @Autowired
-    private ConfigService configService;    
+    private ConfigService configService;
 	/**
 	 * 获取table表中的column列表(联动接口)
 	 * @param table
@@ -71,10 +71,14 @@ public class CommonController{
         if(StringUtils.isNotBlank(conditionValue)) {
             params.put("conditionValue", conditionValue);
         }
+		if (StringUtils.equals(params.get("column").toString(),"zhiweimingcheng")){
+			params.put("column","position_name");
+			params.put("table","position");
+		}
 		List<String> data = commonService.getOption(params);
 		return R.ok().put("data", data);
 	}
-	
+
 	/**
 	 * 根据table中的column获取单条记录
 	 * @param table
@@ -91,7 +95,7 @@ public class CommonController{
 		Map<String, Object> result = commonService.getFollowByOption(params);
 		return R.ok().put("data", result);
 	}
-	
+
 	/**
 	 * 修改table表的sfsh状态
 	 * @param table
@@ -104,7 +108,7 @@ public class CommonController{
 		commonService.sh(map);
 		return R.ok();
 	}
-	
+
 	/**
 	 * 获取需要提醒的记录数
 	 * @param tableName
@@ -115,12 +119,12 @@ public class CommonController{
 	 */
 	@IgnoreAuth
 	@RequestMapping("/remind/{tableName}/{columnName}/{type}")
-	public R remindCount(@PathVariable("tableName") String tableName, @PathVariable("columnName") String columnName, 
+	public R remindCount(@PathVariable("tableName") String tableName, @PathVariable("columnName") String columnName,
 						 @PathVariable("type") String type,@RequestParam Map<String, Object> map) {
 		map.put("table", tableName);
 		map.put("column", columnName);
 		map.put("type", type);
-		
+
 		if(type.equals("2")) {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			Calendar c = Calendar.getInstance();
@@ -128,7 +132,7 @@ public class CommonController{
 			Date remindEndDate = null;
 			if(map.get("remindstart")!=null) {
 				Integer remindStart = Integer.parseInt(map.get("remindstart").toString());
-				c.setTime(new Date()); 
+				c.setTime(new Date());
 				c.add(Calendar.DAY_OF_MONTH,remindStart);
 				remindStartDate = c.getTime();
 				map.put("remindstart", sdf.format(remindStartDate));
@@ -141,11 +145,11 @@ public class CommonController{
 				map.put("remindend", sdf.format(remindEndDate));
 			}
 		}
-		
+
 		int count = commonService.remindCount(map);
 		return R.ok().put("count", count);
 	}
-	
+
 	/**
 	 * 单列求和
 	 */
@@ -158,7 +162,7 @@ public class CommonController{
 		Map<String, Object> result = commonService.selectCal(params);
 		return R.ok().put("data", result);
 	}
-	
+
 	/**
 	 * 分组统计
 	 */
@@ -179,7 +183,7 @@ public class CommonController{
 		}
 		return R.ok().put("data", result);
 	}
-	
+
 	/**
 	 * （按值统计）
 	 */
@@ -224,7 +228,7 @@ public class CommonController{
 		}
 		return R.ok().put("data", result);
 	}
-	
+
 
 
 }

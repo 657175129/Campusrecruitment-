@@ -13,9 +13,11 @@ import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
+import com.dao.XueshengDao;
 import com.utils.ValidatorUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.Printer;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,8 +44,8 @@ import java.io.IOException;
 /**
  * 通知信息
  * 后端接口
- * @author 
- * @email 
+ * @author
+ * @email
  * @date 2023-04-08 13:45:44
  */
 @RestController
@@ -53,7 +55,9 @@ public class TongzhixinxiController {
     private TongzhixinxiService tongzhixinxiService;
 
 
-    
+
+    @Autowired
+    private XueshengDao xueshengDao;
 
 
     /**
@@ -66,10 +70,14 @@ public class TongzhixinxiController {
 		HttpServletRequest request){
 		String tableName = request.getSession().getAttribute("tableName").toString();
 		if(tableName.equals("xuesheng")) {
-			tongzhixinxi.setZhanghao((String)request.getSession().getAttribute("username"));
+            Map<String, String> stringStringMap = xueshengDao.selectSpecialStudet((Long) request.getSession().getAttribute("userId"));
+
+			tongzhixinxi.setAccount(stringStringMap.get("number"));
+
 		}
 		if(tableName.equals("qiye")) {
-			tongzhixinxi.setQiyezhanghao((String)request.getSession().getAttribute("username"));
+//			tongzhixinxi.setQiyezhanghao((String)request.getSession().getAttribute("username"));
+            tongzhixinxi.setEnterprseAccount((String)request.getSession().getAttribute("username"));
 		}
         EntityWrapper<TongzhixinxiEntity> ew = new EntityWrapper<TongzhixinxiEntity>();
                 if(tongzhiriqistart!=null) ew.ge("tongzhiriqi", tongzhiriqistart);
@@ -79,13 +87,13 @@ public class TongzhixinxiController {
 
         return R.ok().put("data", page);
     }
-    
+
     /**
      * 前端列表
      */
 	@IgnoreAuth
     @RequestMapping("/list")
-    public R list(@RequestParam Map<String, Object> params,TongzhixinxiEntity tongzhixinxi, 
+    public R list(@RequestParam Map<String, Object> params,TongzhixinxiEntity tongzhixinxi,
                 @RequestParam(required = false) @DateTimeFormat(pattern="yyyy-MM-dd") Date tongzhiriqistart,
                 @RequestParam(required = false) @DateTimeFormat(pattern="yyyy-MM-dd") Date tongzhiriqiend,
 		HttpServletRequest request){
@@ -103,7 +111,7 @@ public class TongzhixinxiController {
     @RequestMapping("/lists")
     public R list( TongzhixinxiEntity tongzhixinxi){
        	EntityWrapper<TongzhixinxiEntity> ew = new EntityWrapper<TongzhixinxiEntity>();
-      	ew.allEq(MPUtil.allEQMapPre( tongzhixinxi, "tongzhixinxi")); 
+      	ew.allEq(MPUtil.allEQMapPre( tongzhixinxi, "tongzhixinxi"));
         return R.ok().put("data", tongzhixinxiService.selectListView(ew));
     }
 
@@ -113,11 +121,11 @@ public class TongzhixinxiController {
     @RequestMapping("/query")
     public R query(TongzhixinxiEntity tongzhixinxi){
         EntityWrapper< TongzhixinxiEntity> ew = new EntityWrapper< TongzhixinxiEntity>();
- 		ew.allEq(MPUtil.allEQMapPre( tongzhixinxi, "tongzhixinxi")); 
+ 		ew.allEq(MPUtil.allEQMapPre( tongzhixinxi, "tongzhixinxi"));
 		TongzhixinxiView tongzhixinxiView =  tongzhixinxiService.selectView(ew);
 		return R.ok("查询通知信息成功").put("data", tongzhixinxiView);
     }
-	
+
     /**
      * 后端详情
      */
@@ -136,7 +144,7 @@ public class TongzhixinxiController {
         TongzhixinxiEntity tongzhixinxi = tongzhixinxiService.selectById(id);
         return R.ok().put("data", tongzhixinxi);
     }
-    
+
 
 
 
@@ -150,7 +158,7 @@ public class TongzhixinxiController {
         tongzhixinxiService.insert(tongzhixinxi);
         return R.ok();
     }
-    
+
     /**
      * 前端保存
      */
@@ -176,7 +184,7 @@ public class TongzhixinxiController {
     }
 
 
-    
+
 
     /**
      * 删除
@@ -186,16 +194,16 @@ public class TongzhixinxiController {
         tongzhixinxiService.deleteBatchIds(Arrays.asList(ids));
         return R.ok();
     }
-    
+
     /**
      * 提醒接口
      */
 	@RequestMapping("/remind/{columnName}/{type}")
-	public R remindCount(@PathVariable("columnName") String columnName, HttpServletRequest request, 
+	public R remindCount(@PathVariable("columnName") String columnName, HttpServletRequest request,
 						 @PathVariable("type") String type,@RequestParam Map<String, Object> map) {
 		map.put("column", columnName);
 		map.put("type", type);
-		
+
 		if(type.equals("2")) {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			Calendar c = Calendar.getInstance();
@@ -203,7 +211,7 @@ public class TongzhixinxiController {
 			Date remindEndDate = null;
 			if(map.get("remindstart")!=null) {
 				Integer remindStart = Integer.parseInt(map.get("remindstart").toString());
-				c.setTime(new Date()); 
+				c.setTime(new Date());
 				c.add(Calendar.DAY_OF_MONTH,remindStart);
 				remindStartDate = c.getTime();
 				map.put("remindstart", sdf.format(remindStartDate));
@@ -216,7 +224,7 @@ public class TongzhixinxiController {
 				map.put("remindend", sdf.format(remindEndDate));
 			}
 		}
-		
+
 		Wrapper<TongzhixinxiEntity> wrapper = new EntityWrapper<TongzhixinxiEntity>();
 		if(map.get("remindstart")!=null) {
 			wrapper.ge(columnName, map.get("remindstart"));
@@ -236,7 +244,7 @@ public class TongzhixinxiController {
 		int count = tongzhixinxiService.selectCount(wrapper);
 		return R.ok().put("count", count);
 	}
-	
+
 
 
 

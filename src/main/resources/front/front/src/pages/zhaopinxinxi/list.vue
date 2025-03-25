@@ -21,8 +21,8 @@
         <el-input v-model="formSearch.zhaopinmingcheng" placeholder="招聘企业" clearable></el-input>
       </el-form-item>
       <el-form-item :style='{"margin":"0 10px"}'>
-		<div class="lable" v-if="true" :style='{"width":"auto","padding":"0 10px","lineHeight":"42px","display":"inline-block"}'>职位名称</div>
-        <el-select v-model="formSearch.zhiweimingcheng" placeholder="请选择职位名称" :clearable="true">
+		<div class="lable" v-if="true" :style='{"width":"auto","padding":"0 10px","lineHeight":"42px","display":"inline-block"}'>岗位分类</div>
+        <el-select v-model="formSearch.zhiweimingcheng" placeholder="请选择岗位分类" :clearable="true">
           <el-option v-for="(item, index) in zhiweimingchengOptions" :key="index" :label="item" :value="item"></el-option>
         </el-select>
       </el-form-item>
